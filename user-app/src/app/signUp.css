@@ -1,0 +1,66 @@
+
+.signUp{
+    width: 50%;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.signUp .tiltle{
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signUp .content input{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    border: 1px solid brown;
+    border-radius: 5px;
+}
+
+.signUp .content .other a{
+    list-style-type: none;
+    color: brown;
+    float: left;
+}
+
+.signUp .content .SU{
+    width: 100%;
+    height: auto;
+    background-color: brown;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+}
+
+.signUp .content .or{
+    text-align: center;
+    margin: 5px 0px;
+}
+
+.signUp .content .google{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid brown;
+    border-radius: 5px;
+    color: black;
+    text-align: center;
+}
+
+.signUp .content .suggest{
+    text-align: center;
+    margin: 5px 0px;
+}
+.signUp .content .suggest a{
+    list-style-type: none;
+    color: brown;
+}
