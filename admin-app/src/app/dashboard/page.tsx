@@ -2,8 +2,8 @@
 'use client';
 
 import React from 'react';
-import Sidebar from '@/components/sidebar';
-import Header from '@/components/header';
+import Sidebar from '../../components/sidebar';
+import Header from '../../components/header';
 
 export default function dashboard(): JSX.Element {
   return (
