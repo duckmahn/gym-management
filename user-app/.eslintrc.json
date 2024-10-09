@@ -1,0 +1,28 @@
+{
+  "extends": ["next", "prettier"],
+  "plugins": ["unicorn"],
+  "rules": {
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "args": "after-used",
+        "caughtErrors": "none",
+        "ignoreRestSiblings": true,
+        "vars": "all"
+      }
+    ],
+    "@next/next/no-img-element": "off",
+    "prefer-const": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "no-console": "warn",
+    "no-useless-catch": "off",
+    "semi": ["error", "never"]
+    // "unicorn/filename-case": [
+    //   "error",
+    //   {
+    //     "case": "kebabCase"
+    //   }
+    // ]
+  }
+}
