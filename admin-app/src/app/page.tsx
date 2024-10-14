@@ -18,3 +18,4 @@ export default function dashboard(): JSX.Element {
     </div>
   );
 }
+
