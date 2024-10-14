@@ -39,7 +39,7 @@ export default function CSVCVaThietBi(): JSX.Element {
                 </div>
               </div>
             </div>
-            {/* Thêm nhiều thẻ nếu cần */}
+            
           </div>
         </div>
       </main>

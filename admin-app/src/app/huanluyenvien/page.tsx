@@ -42,7 +42,7 @@ export default function HuanLuyenVien(): JSX.Element {
                   <i className="fas fa-trash text-red-600 cursor-pointer"></i>
                 </td>
               </tr>
-              {/* Add more rows as needed */}
+              
             </tbody>
           </table>
         </div>
