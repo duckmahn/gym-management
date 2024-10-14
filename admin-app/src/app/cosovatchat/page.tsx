@@ -1,4 +1,3 @@
-// CSVC.tsx
 'use client';
 
 import React from 'react';
@@ -7,143 +6,43 @@ import Header from '../../components/header';
 
 export default function CSVCVaThietBi(): JSX.Element {
   return (
-    <div style={styles.container}>
+    <div className="flex h-screen bg-gray-100">
       <Sidebar active="csvc-va-thiet-bi" />
-      <main style={styles.mainContent}>
+      <main className="flex-grow p-5">
         <Header />
-        <div style={styles.content}>
-          <div style={styles.headerSection}>
-            <h2 style={styles.title}>Danh sách thiết bị và csvc</h2>
-            <button style={styles.addButton}>Thêm CSVC và thiết bị</button>
+        <div className="p-5 bg-white rounded-lg shadow-md">
+          <div className="flex justify-between items-center mb-5">
+            <h2 className="text-2xl font-semibold text-gray-800">Danh sách thiết bị và CSVC</h2>
+            <button className="px-5 py-2 bg-red-600 text-white rounded-lg">
+              Thêm CSVC và thiết bị
+            </button>
           </div>
-          <div style={styles.cardContainer}>
-            <div style={styles.card}>
-              <h3 style={styles.cardTitle}>Máy Chạy 1</h3>
-              <hr style={styles.divider} />
-              <div style={styles.cardDetails}>
-                <p style={styles.detailText}>Thiết Bị Tập</p>
-                <p style={styles.detailTextGray}>Loại</p>
-                <p style={styles.detailText}><strong>$25000</strong></p>
-                <p style={styles.detailTextGray}>Giá</p>
+          <div className="flex gap-5">
+            <div className="bg-white p-5 rounded-lg shadow-md text-left min-w-[250px]">
+              <h3 className="text-lg font-semibold text-gray-600 mb-2">Máy Chạy 1</h3>
+              <hr className="border-t border-gray-300 my-2" />
+              <div className="mb-5">
+                <p className="text-base text-black mb-1">Thiết Bị Tập</p>
+                <p className="text-sm text-gray-500 mb-1">Loại</p>
+                <p className="text-base text-black">
+                  <strong>$25000</strong>
+                </p>
+                <p className="text-sm text-gray-500">Giá</p>
               </div>
-              <div style={styles.cardActions}>
-                <button style={styles.detailButton}>
-                  Chi Tiết <span style={styles.arrow}>→</span>
+              <div className="flex justify-between items-center">
+                <button className="px-3 py-1 bg-red-600 text-white rounded-lg">
+                  Chi Tiết <span className="ml-1 text-base">→</span>
                 </button>
-                <div style={styles.iconGroup}>
-                  <i className="fas fa-edit" style={styles.iconEdit}></i>
-                  <i className="fas fa-trash" style={styles.iconDelete}></i>
+                <div className="flex items-center">
+                  <i className="fas fa-edit text-red-600 cursor-pointer mr-2"></i>
+                  <i className="fas fa-trash text-red-600 cursor-pointer"></i>
                 </div>
               </div>
             </div>
-            {/* More cards can be added here */}
+            {/* Thêm nhiều thẻ nếu cần */}
           </div>
         </div>
       </main>
     </div>
   );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-  container: {
-    display: 'flex',
-    height: '100vh',
-    backgroundColor: '#f4f4f4',
-  },
-  mainContent: {
-    flexGrow: 1,
-    padding: '20px',
-  },
-  content: {
-    padding: '20px',
-    backgroundColor: 'white',
-    borderRadius: '8px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-  headerSection: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '20px',
-  },
-  title: {
-    fontSize: '24px',
-    fontWeight: '600',
-    color: '#333',
-  },
-  addButton: {
-    padding: '10px 20px',
-    backgroundColor: '#c21f37',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '8px',
-    cursor: 'pointer',
-  },
-  cardContainer: {
-    display: 'flex',
-    gap: '20px',
-  },
-  card: {
-    backgroundColor: '#fff',
-    padding: '20px',
-    borderRadius: '12px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    textAlign: 'left',
-    minWidth: '250px',
-  },
-  cardTitle: {
-    fontSize: '18px',
-    fontWeight: '600',
-    marginBottom: '10px',
-    color: '#666',
-  },
-  divider: {
-    border: 'none',
-    borderTop: '1px solid #ccc',
-    margin: '10px 0',
-  },
-  cardDetails: {
-    marginBottom: '20px',
-  },
-  detailText: {
-    fontSize: '16px',
-    color: '#000',
-    margin: '5px 0',
-  },
-  detailTextGray: {
-    fontSize: '14px',
-    color: '#999',
-    marginBottom: '5px',
-  },
-  cardActions: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  detailButton: {
-    padding: '10px 15px',
-    backgroundColor: '#c21f37',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '8px',
-    cursor: 'pointer',
-  },
-  arrow: {
-    marginLeft: '5px',
-    fontSize: '16px',
-  },
-  iconGroup: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  iconEdit: {
-    color: '#c21f37',
-    cursor: 'pointer',
-    marginRight: '10px',
-  },
-  iconDelete: {
-    color: 'red',
-    cursor: 'pointer',
-  },
-};
-
