@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DFN9SimqesX9pDammSTh22zZx6VoK1LCex21+pcBvevnxAv/WkeD4wYg9EJZvOk0dSiPJHHEbLmkqWx/Uht8nw==",
+  "dgSpecHash": "dmtwWdc3aVx84FWKhp+8nG1+ZlbciDdn/wzWQOchAYNcGQvxqdRJbevx8eUwbTSATb4DQPKhExBbOEuJsd1Q8w==",
   "success": true,
-  "projectFilePath": "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\GymManagement_API\\GymManagement_API\\GymManagement_API.csproj",
+  "projectFilePath": "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\gym-management-api\\GymManagement_API\\GymManagement_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

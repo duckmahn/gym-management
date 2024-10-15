@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\GymManagement_API\\GymManagement_API\\GymManagement_API.csproj": {}
+    "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\gym-management-api\\GymManagement_API\\GymManagement_API.csproj": {}
   },
   "projects": {
-    "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\GymManagement_API\\GymManagement_API\\GymManagement_API.csproj": {
+    "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\gym-management-api\\GymManagement_API\\GymManagement_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\GymManagement_API\\GymManagement_API\\GymManagement_API.csproj",
+        "projectUniqueName": "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\gym-management-api\\GymManagement_API\\GymManagement_API.csproj",
         "projectName": "GymManagement_API",
-        "projectPath": "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\GymManagement_API\\GymManagement_API\\GymManagement_API.csproj",
+        "projectPath": "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\gym-management-api\\GymManagement_API\\GymManagement_API.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\GymManagement_API\\GymManagement_API\\obj\\",
+        "outputPath": "C:\\sv\\nam3hk3\\CNPMNC\\gym-management\\api\\gym-management-api\\GymManagement_API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
