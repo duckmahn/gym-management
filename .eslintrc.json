@@ -16,7 +16,8 @@
     "prefer-const": "error",
     "react-hooks/exhaustive-deps": "error",
     "no-console": "warn",
-    "no-useless-catch": "off"
+    "no-useless-catch": "off",
+    "semi": ["error", "never"]
     // "unicorn/filename-case": [
     //   "error",
     //   {

@@ -1,0 +1,72 @@
+.landingpage{
+    padding: 20px 40px;
+}
+.landingpage .tiltle{
+    display: inline-block;
+    margin: 0 5px;
+}
+.landingpage .tiltle h2{
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+.landingpage button{
+    display: inline-block;
+    margin: 0 5px;
+}
+.landingpage .search{
+    display: inline-block;
+}
+.landingpage .authencation{
+    border: 1px solid orangered;
+    border-radius: 5px;
+    padding: 5px;
+    color: orangered;
+}
+.landingpage .authencation:hover{
+    background-color: orangered;
+    color: white;
+}
+.landingpage ul{
+    display: inline-block;
+    list-style-type: none;
+}
+.landingpage ul li{
+    display: inline-block;
+    padding: 5px;
+    margin: 10px;
+}
+.landingpage ul li:hover{
+    border-bottom: 2px solid orangered; 
+}
+.landingpage .second{
+    width: 100%;
+}
+.landingpage .left{
+    width: 50%;
+    padding: 40px 0px;
+}
+.landingpage .left p{
+   text-align: center;
+   font-size: 30px
+}
+.landingpage .left .outstanding{
+    font-size: 50px;
+    font-weight: bolder;
+    color: orangered;
+ }
+ .landingpage .left .describe{
+    margin: 5px 0px;
+ }
+ .landingpage .left button{
+    margin: 5px 0px;
+    width: 50%;
+    border: 1px solid orangered;
+    border-radius: 5px;
+    padding: 5px;
+    color: orangered;
+ }
+ .landingpage .left button:hover{
+    background-color: orangered;
+    color: white;
+ }
