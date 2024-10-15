@@ -70,3 +70,68 @@
     background-color: orangered;
     color: white;
  }
+ .landingpage .third{
+    width: 100%;
+    margin: 20px 0px;
+ }
+ .landingpage .item{
+    display: inline-block;
+    width: 25%;
+    padding: 5px 10px;
+    border-right: 2px solid orangered;
+ } 
+ .landingpage .item span{
+    font-size: 30px;
+    font-weight: bolder;
+    color: orangered;
+ }
+ .landingpage .item .tiltle{
+    display: inline;
+ }
+ .landingpage .item .summary{
+    font-size: 10px;
+    text-align: center;
+ }
+
+
+ .landingpage .four{
+    background-color: green;
+ }
+ .landingpage .four .four1{
+    text-align: center;
+    padding: 10px 0px;
+    font-size: larger;
+    color: white;
+ }
+ .landingpage .four .four3{
+    text-align: center;
+    padding: 10px 0px;
+    font-size: large;
+    color: white;
+ }
+ .landingpage .four .four2{
+    display: inline-block;
+    width: 25%;
+    margin: 0px 10px;
+    border-radius: 5px;
+    padding: 10px;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), black);
+    z-index: 1;
+ }
+ .landingpage .four .four2 .four21{
+    font-size: 30;
+    font-weight: 900;
+    color: orangered;
+ }
+ .landingpage .four .four2 .four22{
+    font-size: 15px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 30px;
+ }
+ .landingpage .four .four2 a{
+    z-index: 2;
+    font-size: 20px;
+    font-weight: 0900;
+    color: white;
+ }
