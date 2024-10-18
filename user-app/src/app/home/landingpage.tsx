@@ -155,26 +155,27 @@ export default function LandingPage() {
       <div className="five">
         <div className="first">
           <div className="first1">Our Plans</div>
-          <div>
+          <div className="first2">
             Select The Plan That Suits Your Fitness Goals And Let Our Expert
             Coaches Guide You Every Step Of The Way
           </div>
-          <div className="first2">
-            <button>Mounthly</button>
-            <button>Annauly</button>
+          <div className="first3">
+            <label>
+              <input type="checkbox" />
+            </label>
           </div>
         </div>
         <div className="second">
           <div className="item">
-            <div>Package</div>
-            <div>PRO PLAN</div>
-            <div>Description</div>
+            <div className="item1">Package</div>
+            <div className="item2">PRO PLAN</div>
+            <div className="item3">Description</div>
             <div>
               Our Pro Plan Offers Advanced Workouts And Personalized Nutrition
               Coaching To Help You Reach Your Goals Faster. Sign Up Right Now
             </div>
-            <div>Features</div>
-            <div>
+            <div className="item3">Features</div>
+            <div className="item4">
               <ul>
                 <li>Access To All Of Our Exercise Videos</li>
                 <li>Progress Tracking</li>
@@ -185,7 +186,8 @@ export default function LandingPage() {
                 <li>Body Composition Analysis</li>
               </ul>
             </div>
-            <div>99$/USTD</div>
+            <button>Choose This Plan</button>
+            <div className="item5">99$/USTD</div>
           </div>
           <div className="item">
             <div>Package</div>

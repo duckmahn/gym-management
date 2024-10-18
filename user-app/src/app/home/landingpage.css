@@ -137,47 +137,78 @@
  }
 
  .landingpage .five{
-   padding: 0px 20px;
+   padding: 0px 40px;
  }
  .landingpage .five .first{
    width: 100%;
-   position: relative;     
+   height: auto;
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
  }
  .landingpage .five .first .first1{
    font-size: 30px;
-   position: absolute;            /* Để căn giữa */
-    top: 50%;                      /* Di chuyển xuống 50% */
-    left: 50%;                     /* Di chuyển sang phải 50% */
-    transform: translate(-50%, -50%); /* Căn giữa chính xác */
  }
  .landingpage .five .first .first2{
+   padding: 10px 0px;;
+ }
+ .landingpage .five .first .first3{
    width: fit-content;
    border: 1px solid orangered;
    border-radius: 5px;
-   position: absolute;            /* Để căn giữa */
-    top: 50%;                      /* Di chuyển xuống 50% */
-    left: 50%;                     /* Di chuyển sang phải 50% */
-    transform: translate(-50%, -50%); /* Căn giữa chính xác */
  }
- .landingpage .five .first .first2 button{
+ .landingpage .five .first .first3 button{
+   position: relative;
    display: inline-block;
+   width: 100px;
+   height: 20px;
  }
- .landingpage .five .first .first2 button:focus{
-   background-color: orangered;
-   color: white;
+ .landingpage .five .first .first3 input{
+   background-color: black;
+   border: 1px solid orangered;
+   border-radius: 5px;
  }
  .landingpage .five .second{
+   display: flex;
+    flex-direction: row;
    width: 100%;
    margin-top: 20px;
  }
  .landingpage .five .second .item{
-   display: inline-block;
    width: calc(100% / 3);
-   border: 1px solid orangered;
+   height: auto;
+   border: 3px solid orangered;
    border-radius: 5px;
-   padding: 5px;
+   padding: 10px;
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
  }
- .landingpage .five .second .item .div{
+ .landingpage .five .second .item1{
+   font-size: 15px;
+   color: orangered;
+ }
+ .landingpage .five .second .item2{
+   font-size: 30px;
+   font-weight: 900;
+ } 
+ .landingpage .five .second .item3{
+   font-size: 10px;
+   color: orangered;
+ } 
+ .landingpage .five .second .item4{
+   color: orangered;
+ }
+ .landingpage .five .second .item4{
+   font-size: 20px;
+ }
+ .landingpage .five .second button{
+   width: 100%;
+   background-color: orangered;
+   border-radius: 10px;
+   padding: 5px 0px;
    text-align: center;
+   color: white;
  }
- 
