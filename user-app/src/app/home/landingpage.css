@@ -135,3 +135,49 @@
     font-weight: 0900;
     color: white;
  }
+
+ .landingpage .five{
+   padding: 0px 20px;
+ }
+ .landingpage .five .first{
+   width: 100%;
+   position: relative;     
+ }
+ .landingpage .five .first .first1{
+   font-size: 30px;
+   position: absolute;            /* Để căn giữa */
+    top: 50%;                      /* Di chuyển xuống 50% */
+    left: 50%;                     /* Di chuyển sang phải 50% */
+    transform: translate(-50%, -50%); /* Căn giữa chính xác */
+ }
+ .landingpage .five .first .first2{
+   width: fit-content;
+   border: 1px solid orangered;
+   border-radius: 5px;
+   position: absolute;            /* Để căn giữa */
+    top: 50%;                      /* Di chuyển xuống 50% */
+    left: 50%;                     /* Di chuyển sang phải 50% */
+    transform: translate(-50%, -50%); /* Căn giữa chính xác */
+ }
+ .landingpage .five .first .first2 button{
+   display: inline-block;
+ }
+ .landingpage .five .first .first2 button:focus{
+   background-color: orangered;
+   color: white;
+ }
+ .landingpage .five .second{
+   width: 100%;
+   margin-top: 20px;
+ }
+ .landingpage .five .second .item{
+   display: inline-block;
+   width: calc(100% / 3);
+   border: 1px solid orangered;
+   border-radius: 5px;
+   padding: 5px;
+ }
+ .landingpage .five .second .item .div{
+   text-align: center;
+ }
+ 

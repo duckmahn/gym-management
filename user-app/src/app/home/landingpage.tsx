@@ -152,6 +152,87 @@ export default function LandingPage() {
           <a href="#">Learn More</a>
         </div>
       </div>
+      <div className="five">
+        <div className="first">
+          <div className="first1">Our Plans</div>
+          <div>
+            Select The Plan That Suits Your Fitness Goals And Let Our Expert
+            Coaches Guide You Every Step Of The Way
+          </div>
+          <div className="first2">
+            <button>Mounthly</button>
+            <button>Annauly</button>
+          </div>
+        </div>
+        <div className="second">
+          <div className="item">
+            <div>Package</div>
+            <div>PRO PLAN</div>
+            <div>Description</div>
+            <div>
+              Our Pro Plan Offers Advanced Workouts And Personalized Nutrition
+              Coaching To Help You Reach Your Goals Faster. Sign Up Right Now
+            </div>
+            <div>Features</div>
+            <div>
+              <ul>
+                <li>Access To All Of Our Exercise Videos</li>
+                <li>Progress Tracking</li>
+                <li>Supportive Online Community</li>
+                <li>Advanced, Personalized Workout Plans</li>
+                <li>Comprehensive Nutrition Coaching</li>
+                <li>Access To Advanced Workout Programs</li>
+                <li>Body Composition Analysis</li>
+              </ul>
+            </div>
+            <div>99$/USTD</div>
+          </div>
+          <div className="item">
+            <div>Package</div>
+            <div>PRO PLAN</div>
+            <div>Description</div>
+            <div>
+              Our Pro Plan Offers Advanced Workouts And Personalized Nutrition
+              Coaching To Help You Reach Your Goals Faster. Sign Up Right Now
+            </div>
+            <div>Features</div>
+            <div>
+              <ul>
+                <li>Access To All Of Our Exercise Videos</li>
+                <li>Progress Tracking</li>
+                <li>Supportive Online Community</li>
+                <li>Advanced, Personalized Workout Plans</li>
+                <li>Comprehensive Nutrition Coaching</li>
+                <li>Access To Advanced Workout Programs</li>
+                <li>Body Composition Analysis</li>
+              </ul>
+            </div>
+            <div>99$/USTD</div>
+          </div>
+          <div className="item">
+            <div>Package</div>
+            <div>PRO PLAN</div>
+            <div>Description</div>
+            <div>
+              Our Pro Plan Offers Advanced Workouts And Personalized Nutrition
+              Coaching To Help You Reach Your Goals Faster. Sign Up Right Now
+            </div>
+            <div>Features</div>
+            <div>
+              <ul>
+                <li>Access To All Of Our Exercise Videos</li>
+                <li>Progress Tracking</li>
+                <li>Supportive Online Community</li>
+                <li>Advanced, Personalized Workout Plans</li>
+                <li>Comprehensive Nutrition Coaching</li>
+                <li>Access To Advanced Workout Programs</li>
+                <li>Body Composition Analysis</li>
+              </ul>
+            </div>
+            <div>99$/USTD</div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
