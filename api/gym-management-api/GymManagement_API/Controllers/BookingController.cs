@@ -27,12 +27,7 @@ namespace GymManagement_API.Controllers
         {
             var token = Request.Headers["Authorization"].ToString();
             var userId = _service.GetUserId(token);
-            var bookings = await _context.Bookings
-                .Include(b => b.User)
-                .Include(b => b.Room)
-                .Include(b => b.Schedule)
-                .Where(b => b.UserId == new Guid(userId)) // Get bookings for the current user
-                .ToListAsync();
+            var bookings = await _context.Bookings.ToListAsync();
             return Ok(bookings);
         }
         [HttpGet("{id}")]
@@ -40,11 +35,7 @@ namespace GymManagement_API.Controllers
         {
             var token = Request.Headers["Authorization"].ToString();
             var userId = _service.GetUserId(token); // Get user ID from token
-            var booking = await _context.Bookings
-            .Include(b => b.User)
-            .Include(b => b.Room)
-            .Include(b => b.Schedule)
-            .FirstOrDefaultAsync(b => b.Id == id && b.UserId == new Guid(userId)); // Only allow access to user's bookings
+            var booking = await _context.Bookings.FirstOrDefaultAsync(b => b.Id == id); // Only allow access to user's bookings
             if (booking == null)
             {
                 return NotFound();
@@ -59,15 +50,15 @@ namespace GymManagement_API.Controllers
             var booking = new Booking
             {
                 Id = Guid.NewGuid(),
-                UserId = bookingDTO.UserId,
-                RoomId = bookingDTO.RoomId,
-                ScheduleId = bookingDTO.ScheduleId,
+                //UserId = bookingDTO.UserId,
+                //RoomId = bookingDTO.RoomId,
+                //ScheduleId = bookingDTO.ScheduleId,
                 BookingDate = bookingDTO.BookingDate,
                 Status = bookingDTO.Status
             };
             _context.Bookings.Add(booking);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetBooking), new { id = booking.Id }, booking);
+            return Ok(booking);
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBooking(Guid id, BookingDTO bookingDTO)
@@ -83,8 +74,8 @@ namespace GymManagement_API.Controllers
             }
 
             // Update the booking entity with values from BookingDto
-            booking.RoomId = bookingDTO.RoomId;
-            booking.ScheduleId = bookingDTO.ScheduleId;
+            //booking.RoomId = bookingDTO.RoomId;
+            //booking.ScheduleId = bookingDTO.ScheduleId;
             booking.BookingDate = bookingDTO.BookingDate;
             booking.Status = bookingDTO.Status;
 

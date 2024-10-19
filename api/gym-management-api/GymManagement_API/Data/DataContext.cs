@@ -18,5 +18,6 @@ namespace GymManagement_API.Data
         public DbSet<Healinfo> HealInfos { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Facilities> Facilities { get; set; }
     }
 }

@@ -23,7 +23,9 @@ namespace GymManagement_API.Service.Implement
                 Id = Guid.Parse(jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "Id")?.Value),
                 Email = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "Email")?.Value,
                 Username = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "Username")?.Value,
-            };
+                IsAdmin = bool.Parse(jwtSecurityToken.Claims.FirstOrDefault(clainm => clainm.Type == "IsAdmin")?.Value)
+            
+        };  
             TokenSingletonService.Instance.TokenData = tokenData;
             return tokenData;
         }
@@ -40,7 +42,7 @@ namespace GymManagement_API.Service.Implement
                 Id = Guid.Parse(jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "Id")?.Value),
                 Email = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "Email")?.Value,
                 Username = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "Username")?.Value,
-            };
+                IsAdmin = bool.Parse( jwtSecurityToken.Claims.FirstOrDefault(clainm => clainm.Type == "IsAdmin")?.Value)            };
             TokenSingletonService.Instance.TokenData = tokenData;
             return tokenData;
         }

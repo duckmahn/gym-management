@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System.Configuration;
 using System.Text;
 
 namespace GymManagement_API
@@ -28,9 +29,14 @@ namespace GymManagement_API
             builder.Services.AddScoped<DbContext, DataContext>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IDataService, DataService>();
+            //builder.Services.AddDbContext<DataContext>(options =>
+            //{
+            //    options.UseNpgsql(builder.Configuration.GetConnectionString("DefautConnection"));
+            //}
+            //);
             builder.Services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
             });
 
             builder.Services.AddSwaggerGen(options =>

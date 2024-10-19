@@ -9,6 +9,6 @@
         public string Goal { get; set; }
         public string ProgressNote { get; set; }
 
-        public ICollection<Users> Users { get; set; }
+        public Guid UsersId { get; set; }
     }
 }

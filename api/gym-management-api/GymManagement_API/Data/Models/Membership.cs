@@ -8,6 +8,6 @@
         public int Duration { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public ICollection<Users> Users { get; set; }
+        public Guid UserId { get; set; }
     }
 }

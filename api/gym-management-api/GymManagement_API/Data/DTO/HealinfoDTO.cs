@@ -7,5 +7,7 @@
         public double Bmi { get; set; }
         public string Goal { get; set; }
         public string ProgressNote { get; set; }
+
+        public Guid UsersId { get; set; }
     }
 }

@@ -25,21 +25,22 @@ namespace GymManagement_API.Controllers
         {
             //var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
             //var currentUserId = _dataService.GetUserId(token);
-            var classes = await _context.Rooms
-                .Include(r => r.Trainer)
-                .Include(r => r.Schedules)
-                .ToListAsync();
+            if(_context.Rooms == null)
+            {
+                return NotFound();
+            }
+            var classes = await _context.Rooms.ToListAsync();
             return Ok(classes);
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Rooms>>> GetClassById(Guid id)
         {
-            //var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-            //var currentUserId = _dataService.GetUserId(token);
-            var rooms = await _context.Rooms
-                .Include(r => r.Trainer)
-                .Include(r => r.Schedules)
-                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (_context.Rooms == null)
+            {
+                return NotFound();
+            }
+            var rooms = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == id);
             if(rooms == null)
             {
                 return NotFound();
@@ -47,30 +48,25 @@ namespace GymManagement_API.Controllers
             return Ok(rooms);
         }
         [HttpPost()]
-        public async Task<ActionResult<Rooms>> CreateClass(RoomDTO roomDTO)
+        public async Task<ActionResult<Rooms>> AddClass(RoomDTO roomDTO, Guid scheduleId, Guid trainerId)
         {
-            //var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-            //var currentUserId = _dataService.GetUserId(token);
-            var trainer = await _context.Trainers.FindAsync(roomDTO.TrainerId);
-            var schedule = await _context.Schedules.FindAsync(roomDTO.ScheduleId);
-            if (trainer == null || schedule == null)
+            if(roomDTO == null || scheduleId == null || trainerId == null)
             {
-                return BadRequest("Invalid TrainerId or ScheduleId.");
+                return BadRequest();
             }
             var rooms = new Rooms
             {
                 Id = Guid.NewGuid(),
                 Name = roomDTO.Name,
                 Description = roomDTO.Description,
-                TrainerId = roomDTO.TrainerId,
-                Trainer = trainer,
-                ScheduleId = roomDTO.ScheduleId,
-                Schedules = schedule,
+                
+                ScheduleId = scheduleId,
+                TrainerId = trainerId,
                 MaxParticipants = roomDTO.MaxParticipants,
             };
             _context.Rooms.Add(rooms);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetClassById), new { id = rooms.Id }, rooms);
+            return Ok(rooms);
         }
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateClass(Guid id, RoomDTO roomDTO)
@@ -80,20 +76,13 @@ namespace GymManagement_API.Controllers
             var room = await _context.Rooms.FindAsync(id);
             if (room == null)
             {
-                return NotFound();
+                return BadRequest();
             }
-            var trainer = await _context.Trainers.FindAsync(roomDTO.TrainerId);
-            var schedule = await _context.Schedules.FindAsync(roomDTO.ScheduleId);
 
-            if (trainer == null || schedule == null)
-            {
-                return BadRequest("Invalid TrainerId or ScheduleId.");
-            }
+
             room.Name = roomDTO.Name;
             room.Description = roomDTO.Description;
             room.TrainerId = roomDTO.TrainerId;
-            room.Trainer = trainer;
-            room.Schedules = schedule;
             room.ScheduleId = roomDTO.ScheduleId;
             room.MaxParticipants = roomDTO.MaxParticipants;
             try

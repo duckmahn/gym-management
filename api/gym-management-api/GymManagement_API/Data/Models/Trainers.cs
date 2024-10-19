@@ -8,7 +8,5 @@
         public int Phone {  get; set; }
         public string Specialty { get; set; }
         public string Experience { get; set; }
-        public ICollection<Rooms> Rooms { get; set; }
-        public ICollection<Schedule> Schedules { get; set; }
     }
 }

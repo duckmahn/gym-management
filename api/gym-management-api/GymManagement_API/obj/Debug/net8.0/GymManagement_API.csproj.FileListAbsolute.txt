@@ -376,7 +376,6 @@ C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin
 C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\System.Runtime.Caching.dll
 C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\System.Security.Permissions.dll
-C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\System.Text.Json.dll
 C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\System.Windows.Extensions.dll
 C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\af\Humanizer.resources.dll
 C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\ar\Humanizer.resources.dll
@@ -550,3 +549,7 @@ C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\obj
 C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\obj\Debug\net8.0\GymManagement_API.pdb
 C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\obj\Debug\net8.0\GymManagement_API.genruntimeconfig.cache
 C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\obj\Debug\net8.0\ref\GymManagement_API.dll
+C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\System.Formats.Asn1.dll
+C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\Npgsql.dll
+C:\sv\nam3hk3\CNPMNC\gym-management\api\gym-management-api\GymManagement_API\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
