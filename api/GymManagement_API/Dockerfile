@@ -10,10 +10,10 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["GymManagement_API/GymManagement_API.csproj", "GymManagement_API/"]
-WORKDIR "/src/GymManagement_API"
-RUN dotnet restore "GymManagement_API.csproj"
+RUN dotnet restore "./GymManagement_API.csproj"
 COPY . .
-RUN dotnet build "GymManagement_API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/."
+RUN dotnet build "./GymManagement_API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Publish the compiled project
 FROM build AS publish
