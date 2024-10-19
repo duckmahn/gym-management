@@ -29,16 +29,16 @@ namespace GymManagement_API
             builder.Services.AddScoped<DbContext, DataContext>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IDataService, DataService>();
-                // builder.Services.AddDbContext<DataContext>(options =>
-                // {
-                //     options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
-                // });
-            
-                builder.Services.AddDbContext<DataContext>(options =>
-                {
-                    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
-                });
-            
+            // builder.Services.AddDbContext<DataContext>(options =>
+            // {
+            //     options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
+            // });
+
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
+            });
+
             builder.Services.AddSwaggerGen(options =>
             {
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
