@@ -12,7 +12,7 @@ WORKDIR /src
 COPY ["GymManagement_API/GymManagement_API.csproj", "."]
 RUN dotnet restore "./GymManagement_API.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/GymManagement_API"
 RUN dotnet build "./GymManagement_API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Publish the compiled project
