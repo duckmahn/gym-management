@@ -29,10 +29,20 @@ namespace GymManagement_API
             builder.Services.AddScoped<DbContext, DataContext>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IDataService, DataService>();
-            builder.Services.AddDbContext<DataContext>(options =>
+            if (builder.Environment.IsDevelopment())
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
-            });
+                builder.Services.AddDbContext<DataContext>(options =>
+                {
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
+                });
+            }
+            if (builder.Environment.IsProduction())
+            {
+                builder.Services.AddDbContext<DataContext>(options =>
+                {
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
+                });
+            }
 
             builder.Services.AddSwaggerGen(options =>
             {
@@ -72,8 +82,8 @@ namespace GymManagement_API
             // Configure the HTTP request pipeline.
             //if (app.Environment.IsDevelopment())
             //{
-                app.UseSwagger();
-                app.UseSwaggerUI();
+            app.UseSwagger();
+            app.UseSwaggerUI();
             //}
 
             app.UseHttpsRedirection();
