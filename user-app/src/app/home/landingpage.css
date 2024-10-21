@@ -1,89 +1,124 @@
 .landingpage{
-   background-color: black;
-    padding: 20px 40px;
+  padding: 20px 40px;
+  background-color: black;
 }
 .landingpage .first{
-   background-color: black;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
 }
-.landingpage .itemf1{
-    display: inline-block;
-    margin: 0 5px;
-}
-.landingpage .itemf1 h2{
-    margin: 0 5px;
-    font-weight: bold;
-    color: white;
-}
+  .landingpage .first .once{
+      margin: 0px 5px;
+  }
+    .landingpage .first .once .top{
+      font-size: 20px;
+      font-weight: 70;
+      color: orangered;
+    }
+    .landingpage .first .once .bot{
+      font-size: 10px;
+      color: white;
+    }
 
-.landingpage button{
-    display: inline-block;
-    margin: 0 5px;
-}
-.landingpage .search{
-    display: inline-block;
-    color: white;
-}
-.landingpage .authencation{
-    border: 1px solid orangered;
-    border-radius: 5px;
-    padding: 5px;
-    color: orangered;
-}
-.landingpage .authencation:hover{
-    background-color: orangered;
-    color: white;
-}
-.landingpage .itemf2{
-    display: inline-block;
-    list-style-type: none;
-}
-.landingpage .itemf2 li{
-    display: inline-block;
-    padding: 5px;
-    margin: 10px;
-    color: white;
-}
-.landingpage ul li:hover{
-    border-bottom: 2px solid orangered; 
-}
+  .landingpage .first .two{
+    margin: 0px 5px;
+  }
+    .landingpage .first .two button{
+      padding: 5px;
+      color: orangered;
+    }
+    .landingpage .first .two button:hover{
+      color: orange;
+    }
+  .landingpage .first .three{
+    margin: 0px 5px;
+  }
+    .landingpage .first .three ul{
+      list-style-type: none;
+    }
+      .landingpage .first .three ul li{
+        display: inline-block;
+        margin: 10px;
+        padding: 5px;
+        color: white;
+        font-weight: 50;
+      }
+      .landingpage .first .three ul li:hover{
+        border-bottom: 3px solid orangered; 
+      }
+  .landingpage .first .four{
+    margin: 0px 5px;
+    float: right;
+  }
+    .landingpage .first .four button{
+      margin: 0px 10px;
+      border: 1px solid orangered;
+      border-radius: 5px;
+      padding: 5px;
+      color: orangered;
+    }
+    .landingpage .first .four button:hover{
+        background-color: orangered;
+        color: white;
+    }
+
+
+
+
+
 .landingpage .second{
     width: 100%;
     height: auto;
-    background-color: black;
 }
-.landingpage .left{
+.landingpage .second .left{
     width: 50%;
-    padding: 50px 0px;
+    height: auto;
+    padding: 40px 20px;
 }
-.landingpage .left .itemsl1{
-   text-align: center;
-   font-size: 40px;
-   font-weight: 700;
-   color: white;
+.landingpage .second .left .top{
+  width: 100%;
+  height: auto;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
 }
-.landingpage .left .itemsl2{
-    font-size: 50px;
-    font-weight: 900;
-    text-align: center;
-    color: orangered;
- }
- .landingpage .left .itemsl3{
-    margin: 5px 0px;
-    font-size: 10px;
+.landingpage .second .left .top .false{
+  color: white;
+  font-size: 20px;
+  font-weight: 70;
+}
+.landingpage .second .left .top .true{
+  color: orangered;
+  font-size: 30px;
+  font-weight: 90;
+}
+.landingpage .second .left .mid{
     color: white;
  }
- .landingpage .left button{
-    margin: 5px 0px;
-    width: 50%;
-    border: 1px solid orangered;
-    border-radius: 20px;
-    padding: 5px;
-    color: orangered;
+ .landingpage .second .left .bot{
+  width: 100%;
+  height: auto;
  }
- .landingpage .left button:hover{
+ .landingpage .second .left .bot button{
+  width: 40%;
+  height: auto;
+  margin: 0px 10px;
+  border: 1px solid orangered;
+  border-radius: 15px;
+  padding: 5px 0px;
+  color: orangered;
+  font-size: 20px;
+  font-weight: 70;
+}
+.landingpage .second .left .bot button:hover{
     background-color: orangered;
     color: white;
  }
+
+
+
  .landingpage .third{
    display: flex;
    flex-direction: row;
@@ -297,3 +332,97 @@
    font-size: 15px;
    color: white;
  }
+
+ .landingpage .seven{
+  margin: 20px 0px;
+}
+
+.landingpage .seven .se1{
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.landingpage .seven .se11{
+  margin-bottom: 5px;
+}
+.landingpage .seven .se1 .se11 div{
+  display: inline;
+  font-size: 30px;
+  font-weight: 900;
+}
+.landingpage .seven .se1 .se11 .se111{
+  color: white;
+}
+.landingpage .seven .se1 .se11 .se112{
+  color: orangered;
+}
+.landingpage .seven .se12{
+  margin-bottom: 5px;
+  font-size: 15px;
+  color: white;
+}
+
+.landingpage .ten{
+  margin: 40px 0px;
+  width: 100%;
+  height: auto;
+}
+.landingpage .ten .ten-left{
+  width: 50%;
+  height: auto;
+}
+.landingpage .ten .ten-left .left-top{
+  margin-bottom: 5px;
+}
+.landingpage .ten .ten-left .left-top div{
+  font-size: 30px;
+  font-weight: 900;
+  display: inline-block;
+}
+.landingpage .ten .ten-left .left-top .top-1{
+  color: white;
+}
+.landingpage .ten .ten-left .left-top .top-2{
+  color: orangered;
+}
+.landingpage .ten .ten-left .left-mid{
+  margin: 5px 0px;
+  font-size: 15px;
+  color: white;
+}
+.landingpage .ten .ten-left .left-bot{
+  margin-top: 5px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+}
+.landingpage .ten .ten-left .left-bot .bot-item{
+  width: auto;
+  height: auto;
+  border: 1px solid orangered;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: black;
+}
+.landingpage .ten .ten-left .left-bot .bot-item .item-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+.landingpage .ten .ten-left .left-bot .bot-item .item-top div{
+  font-size: 20px;
+  font-weight: 700;
+}
+.landingpage .ten .ten-left .left-bot .bot-item .item-top .top-left{
+  color: orangered;
+}
+.landingpage .ten .ten-left .left-bot .bot-item .item-top .top-right{
+  color: white;
+}
+.landingpage .ten .ten-left .left-bot .bot-item .item-bot{
+  margin-top: 5px;
+  font-size: 10px;
+  color: orangered;
+}
