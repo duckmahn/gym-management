@@ -1,13 +1,18 @@
 .landingpage{
+   background-color: black;
     padding: 20px 40px;
 }
-.landingpage .tiltle{
+.landingpage .first{
+   background-color: black;
+}
+.landingpage .itemf1{
     display: inline-block;
     margin: 0 5px;
 }
-.landingpage .tiltle h2{
+.landingpage .itemf1 h2{
     margin: 0 5px;
     font-weight: bold;
+    color: white;
 }
 
 .landingpage button{
@@ -16,6 +21,7 @@
 }
 .landingpage .search{
     display: inline-block;
+    color: white;
 }
 .landingpage .authencation{
     border: 1px solid orangered;
@@ -27,42 +33,50 @@
     background-color: orangered;
     color: white;
 }
-.landingpage ul{
+.landingpage .itemf2{
     display: inline-block;
     list-style-type: none;
 }
-.landingpage ul li{
+.landingpage .itemf2 li{
     display: inline-block;
     padding: 5px;
     margin: 10px;
+    color: white;
 }
 .landingpage ul li:hover{
     border-bottom: 2px solid orangered; 
 }
 .landingpage .second{
     width: 100%;
+    height: auto;
+    background-color: black;
 }
 .landingpage .left{
     width: 50%;
-    padding: 40px 0px;
+    padding: 50px 0px;
 }
-.landingpage .left p{
+.landingpage .left .itemsl1{
    text-align: center;
-   font-size: 30px
+   font-size: 40px;
+   font-weight: 700;
+   color: white;
 }
-.landingpage .left .outstanding{
+.landingpage .left .itemsl2{
     font-size: 50px;
-    font-weight: bolder;
+    font-weight: 900;
+    text-align: center;
     color: orangered;
  }
- .landingpage .left .describe{
+ .landingpage .left .itemsl3{
     margin: 5px 0px;
+    font-size: 10px;
+    color: white;
  }
  .landingpage .left button{
     margin: 5px 0px;
     width: 50%;
     border: 1px solid orangered;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 5px;
     color: orangered;
  }
@@ -71,6 +85,8 @@
     color: white;
  }
  .landingpage .third{
+   display: flex;
+   flex-direction: row;
     width: 100%;
     margin: 20px 0px;
  }
@@ -95,7 +111,7 @@
 
 
  .landingpage .four{
-    background-color: green;
+    background-color: black;
  }
  .landingpage .four .four1{
     text-align: center;
@@ -138,6 +154,7 @@
 
  .landingpage .five{
    padding: 0px 40px;
+   background-color: black;
  }
  .landingpage .five .first{
    width: 100%;
@@ -149,9 +166,12 @@
  }
  .landingpage .five .first .first1{
    font-size: 30px;
+   font-weight: 700;
+   color: white;
  }
  .landingpage .five .first .first2{
-   padding: 10px 0px;;
+   margin: 10px 0px;
+   color: white;
  }
  .landingpage .five .first .first3{
    width: fit-content;
@@ -193,6 +213,7 @@
  .landingpage .five .second .item2{
    font-size: 30px;
    font-weight: 900;
+   color: white;
  } 
  .landingpage .five .second .item3{
    font-size: 10px;
@@ -201,14 +222,78 @@
  .landingpage .five .second .item4{
    color: orangered;
  }
- .landingpage .five .second .item4{
+ .landingpage .five .second .item5{
+   margin: 10px 0px;
    font-size: 20px;
+   font-weight: 700;
+   color: white;
+ }
+ .landingpage .five .second .item{
+   color: white;
  }
  .landingpage .five .second button{
    width: 100%;
    background-color: orangered;
-   border-radius: 10px;
+   border-radius: 20px;
    padding: 5px 0px;
    text-align: center;
+   color: white;
+ }
+
+ .landingpage .six{
+   background-color: black;
+   margin: 30px 0px;
+ }
+ .landingpage .six .items1{
+   width: 100%;
+ }
+ .landingpage .six .items1 .items11{
+   float: left;
+ }
+ .landingpage .six .items1 .items11 div{
+   display: inline;
+   font-size: 30px;
+   font-weight: 900;
+ }
+ .landingpage .six .items1 .items11 .items111{
+   color: white;
+ }
+ .landingpage .six .items1 .items11 .items112{
+   color: orangered;
+ }
+ .landingpage .six .items1 .items12{
+   float: right;
+ }
+ .landingpage .six .items1 .items12 button{
+   display: inline-block;
+   border: 1px solid orangered;
+   border-radius: 5px;
+   padding: 5px;
+   color: orangered;
+ }
+ .landingpage .six .items2{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   font-size: 10px;
+   color: white;
+   margin: 20px 0px;
+ }
+ .landingpage .six .items3{
+   display: flex;
+   flex-direction: row;
+ }
+ .landingpage .six .items31{
+   width: 20%;
+   height: auto;
+   padding: 0px 10px;
+ }
+ .landingpage .six .items31 img{
+   width: 100%;
+   height: 100%;
+   border-radius: 5px;
+ }
+ .landingpage .six .items31 a{
+   font-size: 15px;
    color: white;
  }
