@@ -55,6 +55,8 @@ namespace GymManagement_API.Controllers
                 Phone = trainerDTO.Phone,
                 Specialty = trainerDTO.Specialty,
                 Experience = trainerDTO.Experience,
+                Type = trainerDTO.Type,
+                Avatar = trainerDTO.Avatar,
             };
 
             _context.Trainers.Add(trainers);
@@ -74,6 +76,7 @@ namespace GymManagement_API.Controllers
             trainer.Phone = trainerDTO.Phone;
             trainer.Specialty = trainerDTO.Specialty;
             trainer.Experience = trainerDTO.Experience;
+            trainer.Avatar = trainerDTO.Avatar;
             _context.Entry(trainer).State = EntityState.Modified;
 
             try

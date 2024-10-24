@@ -23,8 +23,6 @@ namespace GymManagement_API.Controllers
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<Rooms>>> GetAllClasses()
         {
-            //var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-            //var currentUserId = _dataService.GetUserId(token);
             if(_context.Rooms == null)
             {
                 return NotFound();
@@ -32,6 +30,7 @@ namespace GymManagement_API.Controllers
             var classes = await _context.Rooms.ToListAsync();
             return Ok(classes);
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Rooms>>> GetClassById(Guid id)
         {
@@ -47,32 +46,30 @@ namespace GymManagement_API.Controllers
             }    
             return Ok(rooms);
         }
+
         [HttpPost()]
-        public async Task<ActionResult<Rooms>> AddClass(RoomDTO roomDTO, Guid scheduleId, Guid trainerId)
+        public async Task<ActionResult<Rooms>> AddClass(RoomDTO roomDTO)
         {
-            if(roomDTO == null || scheduleId == null || trainerId == null)
-            {
-                return BadRequest();
-            }
             var rooms = new Rooms
             {
                 Id = Guid.NewGuid(),
                 Name = roomDTO.Name,
                 Description = roomDTO.Description,
-                
-                ScheduleId = scheduleId,
-                TrainerId = trainerId,
                 MaxParticipants = roomDTO.MaxParticipants,
+                RoomType = roomDTO.RoomType,
             };
+            if(rooms.MaxParticipants < 1 ||  rooms.MaxParticipants > 50)
+            {
+                return BadRequest();
+            }
             _context.Rooms.Add(rooms);
             await _context.SaveChangesAsync();
             return Ok(rooms);
         }
+
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateClass(Guid id, RoomDTO roomDTO)
         {
-            //var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-            //var currentUserId = _dataService.GetUserId(token);
             var room = await _context.Rooms.FindAsync(id);
             if (room == null)
             {
@@ -82,11 +79,15 @@ namespace GymManagement_API.Controllers
 
             room.Name = roomDTO.Name;
             room.Description = roomDTO.Description;
-            room.TrainerId = roomDTO.TrainerId;
-            room.ScheduleId = roomDTO.ScheduleId;
             room.MaxParticipants = roomDTO.MaxParticipants;
+            room.RoomType = roomDTO.RoomType;
+            if (room.MaxParticipants < 1 || room.MaxParticipants > 50)
+            {
+                return BadRequest();
+            }
             try
             {
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -107,7 +108,7 @@ namespace GymManagement_API.Controllers
             return _context.Rooms.Any(e => e.Id == id);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRoom(Guid id, RoomDTO roomDTO)
+        public async Task<IActionResult> DeleteRoom(Guid id)
         {
             var room = await _context.Rooms.FindAsync(id);
             if(room == null)
