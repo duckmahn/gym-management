@@ -11,13 +11,13 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 # Correct the path to the .csproj file
-COPY ["./GymManagement_API.csproj", "./GymManagement_API/"]
+COPY ["./GymManagement_API.csproj", "."]
 RUN dotnet restore "./GymManagement_API/GymManagement_API.csproj"
 
 # Copy the rest of the project files
 COPY . .
 WORKDIR "/src/GymManagement_API"
-RUN dotnet build "./GymManagement_API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./GymManagement_API/GymManagement_API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Publish the compiled project
 FROM build AS publish
