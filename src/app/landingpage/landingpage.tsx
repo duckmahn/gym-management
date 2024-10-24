@@ -1,10 +1,53 @@
 import React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 import { getToken, setToken } from "./localStorage"
 import "./landingpage.css"
 
 export default function LandingPage() {
+  const navigate = useNavigate()
+  const [Name, setName] = useState("")
+  const [Email, setEmail] = useState("")
+
+  function SignUp(e: MouseEvent) {
+    e.preventDefault()
+    fetch("/...", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: Name,
+        email: Email,
+      }),
+    }).then((response) => {
+      return response.json()
+    })
+  }
+
+  async function LogIn(e: MouseEvent) {
+    e.preventDefault()
+    const request = await axios
+      .post("/...", { name: Name, email: Email })
+      .then((response) => {
+        return response.data
+      })
+      .then((data) => {
+        if (data.code !== 1000) {
+          console.error("Failed")
+        }
+        setToken(data.result.token)
+      })
+  }
+
+  useEffect(() => {
+    const accessToken = getToken()
+    if (accessToken) {
+      navigate("/")
+    }
+  }, [navigate])
+
   return (
     <div className="landingpage">
       <div className="first">
@@ -132,7 +175,7 @@ export default function LandingPage() {
               <img src="/images/four/four4.png" />
             </div>
             <div className="foabove">
-              <a href="#">Learn More</a>
+              <a href="#">Learn More </a>
             </div>
           </div>
         </div>
@@ -374,7 +417,7 @@ export default function LandingPage() {
           Your Fitness Goals Faster.
         </div>
         <div className="nbot">
-          <img src="/images/night/night1.png" />
+          <img src="/images/nine/nine1.png" />
         </div>
       </div>
 
@@ -436,19 +479,29 @@ export default function LandingPage() {
           <div className="tnleft3">
             <div className="tntop2">Sign Up</div>
             <div className="tnmid1">
-              <form>
+              <form onSubmit={SignUp}>
                 <label>Name:</label>
                 <br />
-                <input type="text" placeholder="Enter Your Name" />
+                <input
+                  type="text"
+                  placeholder="Enter Your Name"
+                  value={Name}
+                  onChange={(e) => setName(e.target.value)}
+                />
                 <br />
                 <label>Email:</label>
                 <br />
-                <input type="text" placeholder="Enter Your Email" />
+                <input
+                  type="text"
+                  placeholder="Enter Your Email"
+                  value={Email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
                 <br />
               </form>
             </div>
             <div className="tnbot2">
-              <button>Sign Up</button>
+              <button onClick={SignUp}>Sign Up</button>
               <p>or</p>
               <button>Sign up with Google</button>
             </div>
@@ -456,22 +509,49 @@ export default function LandingPage() {
           <div className="tnright3">
             <div className="tntop3">Log In</div>
             <div className="tnmid2">
-              <form>
+              <form onSubmit={LogIn}>
                 <label>Name:</label>
                 <br />
-                <input type="text" placeholder="Enter Your Name" />
+                <input
+                  type="text"
+                  placeholder="Enter Your Name"
+                  value={Name}
+                  onChange={(e) => setName(e.target.value)}
+                />
                 <br />
                 <label>Email:</label>
                 <br />
-                <input type="text" placeholder="Enter Your Email" />
+                <input
+                  type="text"
+                  placeholder="Enter Your Email"
+                  value={Email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
                 <br />
               </form>
             </div>
             <div className="tnbot3">
-              <button>Log In</button>
+              <button onClick={LogIn}>Log In</button>
               <p>or</p>
               <button>Log in with Google</button>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="eleven">
+        <div className="eltop">FAQ</div>
+        <div className="elbot">
+          <div className="elonce">
+            What Is Fitmaker And How Can It Help Me Reach My Fitness Goal?
+          </div>
+          <div className="eltwo">
+            How Do I Get Started With A Workout Plan On Maker?
+          </div>
+          <div className="elthree">What Is Included In The Custom Plan?</div>
+          <div className="elfour">Can I Change My Plan After Signing Up?</div>
+          <div className="elfive">
+            What Kind Of Support Can I Expect From My Trainer?
           </div>
         </div>
       </div>
