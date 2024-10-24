@@ -1,0 +1,863 @@
+.landingpage{
+  padding: 25px 50px;
+  background-color: black;
+}
+.landingpage .first{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+  .landingpage .first .fivar{
+    width: 50px;
+    height: 50px;
+  }
+  .landingpage .first .fionce{
+      margin: 0px 10px;
+  }
+    .landingpage .first .fionce .fitop{
+      font-size: 20px;
+      font-weight: 700;
+      color: orangered;
+    }
+    .landingpage .first .fionce .fibot{
+      color: white;
+    }
+  .landingpage .first .fitwo{
+    width: 50px;
+    height: 50px;
+    margin: 0px 10px;
+  }
+    .landingpage .first .fitwo button{
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      padding: 5px;
+      background-color: gray;
+    }
+      .landingpage .first .fitwo button img{
+        width: 100%;
+        height: 100%;
+      }
+  .landingpage .first .fithree{
+    margin: 0px 10px;
+  }
+    .landingpage .first .fithree ul{
+      list-style-type: none;
+    }
+      .landingpage .first .fithree ul li{
+        display: inline-block;
+        margin: 10px;
+        padding: 5px;
+        color: white;
+        font-weight: 500;
+      }
+      .landingpage .first .fithree ul li:hover{
+        border-bottom: 3px solid orangered; 
+      }
+  .landingpage .first .fifour{
+    margin: 0px 10px;
+    float: right;
+  }
+    .landingpage .first .fifour button{
+      margin: 0px 10px;
+      border: 1px solid orangered;
+      border-radius: 5px;
+      padding: 5px;
+      color: orangered;
+    }
+    .landingpage .first .fifour button:hover{
+        background-color: orangered;
+        color: white;
+    }
+
+
+
+
+
+.landingpage .second{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+}
+.landingpage .second .sleft{
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.landingpage .second .sleft .stop{
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.landingpage .second .sleft .stop .sfalse{
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+}
+.landingpage .second .sleft .stop .strue{
+  margin: 10px 0px;
+  font-size: 50px;
+  font-weight: 900;
+  color: orangered;
+}
+.landingpage .second .sleft .smid{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: white;
+ }
+ .landingpage .second .sleft .sbot{
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+ }
+ .landingpage .second .sleft .sbot button{
+  width: 40%;
+  height: auto;
+  margin: 0px 10px;
+  border: 1px solid orangered;
+  border-radius: 15px;
+  padding: 5px 0px;
+  color: orangered;
+  font-size: 20px;
+  font-weight: 700;
+}
+.landingpage .second .sleft .sbot button:hover{
+    background-color: orangered;
+    color: white;
+ }
+ .landingpage .second .sright{
+    width: 50%;
+    height: auto;
+ }
+ .landingpage .second .sright img{
+    width: 100%;
+    height: auto;
+ }
+
+
+
+
+
+ .landingpage .third{
+    width: 100%;
+    height: auto;
+    margin: 50px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+ }
+ .landingpage .third .thzero{
+    width: 25%;
+    height: auto;
+    border-right: 3px solid orangered;
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+  .landingpage .third .thzero .thtop{
+    margin-bottom: 5px;
+  }
+ .landingpage .third .thzero .thtop .thleft{
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 900;
+    color: orangered;
+ }
+ .landingpage .third .thzero .thtop .thright{
+    display: inline-block;
+    font-weight: 500;
+    color: white;
+}
+ .landingpage .third .thzero .thbot{
+    margin-top: 5px;
+    color: grey;
+ }
+
+
+
+
+
+ .landingpage .four{
+    width: 100%;
+    height: auto;
+    margin: 50px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+ .landingpage .four .fotop{
+    margin-bottom: 10px;
+ }
+ .landingpage .four .fotop .foleft{
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+ }
+ .landingpage .four .fotop .foright{
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 900;
+  color: orangered;
+}
+ .landingpage .four .fomid{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: white;
+ }
+ .landingpage .four .fobot{
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+ }
+ .landingpage .four .fobot .fozero{
+    width: 24%;
+    height: auto;
+    margin: 0px 10px;
+    border-radius: 5px;
+ }
+ .landingpage .four .fobot .fozero .fobelow img{
+    width: 100%;
+    height: auto;
+}
+ .landingpage .four .fobot .fozero .foabove a{
+    list-style-type: none;
+    font-weight: 300;
+    color: white;
+ }
+
+
+
+
+
+ .landingpage .five{
+  margin: 50px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ }
+ .landingpage .five .fvtop{
+  margin-bottom: 10px;
+ }
+ .landingpage .five .fvtop .fvleft{
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+ }
+ .landingpage .five .fvtop .fvright{
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 900;
+  color: orangered;
+ }
+ .landingpage .five .fvmid{
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: white;
+ }
+ .landingpage .five .fvbot{
+  width: 100%;
+  height: auto;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+ }
+ .landingpage .five .fvbot .fvzero{
+   width: 30%;
+   height: auto;
+   margin: 0px 10px;
+   border: 3px solid orangered;
+   border-radius: 5px;
+   padding: 10px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+ }
+ .landingpage .five .fvbot .fvzero .fvonce{
+   margin-bottom: 10px;
+   font-size: 15px;
+   color: orangered;
+ }
+ .landingpage .five .fvbot .fvzero .fvtwo{
+   margin-bottom: 10px;
+   font-size: 30px;
+   font-weight: 900;
+   color: white;
+ } 
+ .landingpage .five .fvbot .fvzero .fvthree{
+   margin-bottom: 10px;
+   font-size: 10px;
+   color: orangered;
+ } 
+ .landingpage .five .fvbot .fvzero .fvfour{
+   margin-bottom: 10px;
+   color: white;
+ }
+ .landingpage .five .fvbot .fvzero .fvfive{
+  margin-bottom: 10px;
+  font-size: 10px;
+  color: orangered;
+} 
+.landingpage .five .fvbot .fvzero .fvsix{
+  margin-bottom: 10px;
+}
+ .landingpage .five .fvbot .fvzero .fvsix ul,li{
+   color: white;
+ }
+ .landingpage .five .fvbot .fvzero .fvseven{
+   margin-bottom: 10px;
+ }
+ .landingpage .five .fvbot .fvzero .fvseven .fvleft1{
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+}
+.landingpage .five .fvbot .fvzero .fvseven .fvright1{
+  display: inline-block;
+  font-weight: 300;
+  color: grey;
+}
+.landingpage .five .fvbot .fvzero .fveight{
+  width: 100%;
+  height: auto;
+}
+.landingpage .five .fvbot .fvzero .fveight button{
+   width: 100%;
+   height: auto;
+   border-radius: 15px;
+   padding: 10px 0px;
+   background-color: orangered;
+   text-align: center;
+   color: white;
+ }
+ .landingpage .five .fvbot .fvzero .fveight button:hover{
+  opacity: 0.5;
+}
+
+
+
+
+
+ .landingpage .six{
+   margin: 50px 0px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+ }
+ .landingpage .six .sitop{
+   width: 100%;
+   height: auto;
+   margin-bottom: 10px;
+ }
+ .landingpage .six .sitop .siroot{
+   float: left;
+ }
+ .landingpage .six .sitop .siroot .sileft{
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+ }
+ .landingpage .six .sitop .siroot .siright{
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 900;
+  color: orangered;
+ }
+ .landingpage .six .sitop .silast{
+   float: right;
+ }
+ .landingpage .six .sitop .silast button{
+   display: inline-block;
+   margin: 0px 5px;
+   border: 1px solid orangered;
+   border-radius: 5px;
+   padding: 5px;
+   color: orangered;
+ }
+ .landingpage .six .sitop .silast button:hover{
+  background-color: orangered;  
+  color: white;
+}
+ .landingpage .six .simid{
+   margin-top: 10px;
+   margin-bottom: 5px;
+   color: white;
+ }
+ .landingpage .six .sibot{
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;  
+ }
+ .landingpage .six .sizero{
+    width: 19%;
+    height: auto;
+    border-radius: 5px;
+    margin: 0px 5px;
+ }
+ .landingpage .six .sizero .sibelow img{
+    width: 100%;
+    height: auto;
+ }
+ .landingpage .six .sizero .siabove a{
+    list-style-type: none;
+    font-weight: 300;
+    color: white;
+ }
+
+
+
+
+
+ .landingpage .seven{
+    width: 100%;
+    height: auto;
+    margin: 50px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .landingpage .seven .svtop{
+    margin-bottom: 10px;
+  }
+  .landingpage .seven .svtop .svleft{
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+  }
+  .landingpage .seven .svtop .svright{
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 900;
+    color: orangered;
+  }
+  .landingpage .seven .svmid{
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .landingpage .seven .svbot{
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+ }
+.landingpage .seven .svbot img{
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+.landingpage .eight{
+    margin: 50px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+.landingpage .eight .etop{
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.landingpage .eight .etop .eroot{
+  float: left;
+}
+.landingpage .eight .etop .eroot .eleft{
+ display: inline-block;
+ font-size: 30px;
+ font-weight: 900;
+ color: white;
+}
+.landingpage .eight .etop .eroot .eright{
+ display: inline-block;
+ font-size: 30px;
+ font-weight: 900;
+ color: orangered;
+}
+.landingpage .eight .etop .elast{
+  float: right;
+}
+.landingpage .eight .etop .elast button{
+  display: inline-block;
+  margin: 0px 5px;
+  border: 1px solid orangered;
+  border-radius: 5px;
+  padding: 5px;
+  color: orangered;
+}
+.landingpage .eight .etop .elast button:hover{
+ background-color: orangered;  
+ color: white;
+}
+.landingpage .eight .emid{
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.landingpage .eight .ebot{
+  width: 100%;
+  height: auto;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.landingpage .eight .ezero{
+  width: 24%;
+  height: auto;
+  border-radius: 5px;
+  margin: 0px 10px;
+}
+.landingpage .eight .ezero .ebelow img{
+  width: 100%;
+  height: auto;
+}
+.landingpage .eight .ezero .eabove a{
+  list-style-type: none;
+  font-weight: 300;
+  color: white;
+}
+
+
+
+
+
+.landingpage .nine{
+  margin: 50px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.landingpage .nine .ntop{
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+.landingpage .nine .ntop .nroot{
+float: left;
+}
+.landingpage .nine .ntop .nroot .nleft{
+display: inline-block;
+font-size: 30px;
+font-weight: 900;
+color: white;
+}
+.landingpage .nine .ntop .nroot .nright{
+display: inline-block;
+font-size: 30px;
+font-weight: 900;
+color: orangered;
+}
+.landingpage .nine .ntop .nlast{
+float: right;
+}
+.landingpage .nine .ntop .nlast button{
+display: inline-block;
+margin: 0px 5px;
+border: 1px solid orangered;
+border-radius: 5px;
+padding: 5px;
+color: orangered;
+}
+.landingpage .nine .ntop .nlast button:hover{
+background-color: orangered;  
+color: white;
+}
+.landingpage .nine .nmid{
+color: white;
+margin-top: 10px;
+margin-bottom: 5px;
+}
+.landingpage .nine .nbot{
+width: 100%;
+height: auto;
+margin-top: 5px;
+}
+.landingpage .nine .nbot img{
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+.landingpage .ten{
+  width: 100%;
+  height: auto;
+  margin: 50px 0px;
+  display: flex;
+  flex-direction: row;
+}
+.landingpage .ten .tnleft{
+  width: 50%;
+  height: auto;
+  margin-right: 5px;
+}
+.landingpage .ten .tnleft .tntop{
+  margin-bottom: 10px;
+}
+.landingpage .ten .tnleft .tntop .tnleft1{
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+}
+.landingpage .ten .tnleft .tntop .tnright1{
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 900;
+  color: orangered;
+}
+.landingpage .ten .tnleft .tnmid{
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: white;
+}
+.landingpage .ten .tnleft .tnbot{
+  margin-top: 5px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+}
+.landingpage .ten .tnleft .tnbot .tnzero{
+  width: auto;
+  height: auto;
+  border: 1px solid orangered;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.landingpage .ten .tnleft .tnbot .tnzero .tntop1{
+  margin: 10px 0px;
+}
+.landingpage .ten .tnleft .tnbot .tnzero .tntop1 .tnleft2{
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+}
+.landingpage .ten .tnleft .tnbot .tnzero .tntop1 .tnright2{
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  color: orangered;
+}
+.landingpage .ten .tnleft .tnbot .tnzero .tnbot1{
+  color: white;
+}
+.landingpage .ten .tnright{
+  width: 50%;
+  height: auto;
+  margin-left: 5px;
+  border: 1px solid orangered;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.landingpage .ten .tnright .tnleft3{
+  width: 50%;
+  height: auto;
+  border-right: 1px solid orangered;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.landingpage .ten .tnright .tnleft3 .tntop2{
+  font-size: 20px;
+  font-weight: 700;
+  color: orangered;
+}
+.landingpage .ten .tnright .tnleft3 .tnmid1{
+  width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+}
+.landingpage .ten .tnright .tnleft3 .tnmid1 label{
+  color: orangered;
+}
+.landingpage .ten .tnright .tnleft3 .tnmid1 input{
+  width: 100%;
+  height: auto;
+  border: 1px solid orangered;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: black;
+  color: white;
+}
+.landingpage .ten .tnright .tnleft3 .tnbot2{
+  width: 100%;
+  height: auto;
+  margin-top: 5px;
+}
+.landingpage .ten .tnright .tnleft3 .tnbot2 button{
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  padding: 10px;
+  background-color:orangered;
+  text-align: center;
+  color: white;
+}
+.landingpage .ten .tnright .tnleft3 .tnbot2 p{
+  color: white;
+  text-align: center;
+}
+.landingpage .ten .tnright .tnright3{
+  width: 50%;
+  height: auto;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.landingpage .ten .tnright .tnright3 .tntop3{
+  font-size: 20px;
+  font-weight: 700;
+  color: orangered;
+}
+.landingpage .ten .tnright .tnright3 .tnmid2{
+  width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+}
+.landingpage .ten .tnright .tnright3 .tnmid2 label{
+  color: orangered;
+}
+.landingpage .ten .tnright .tnright3 .tnmid2 input{
+  width: 100%;
+  height: auto;
+  border: 1px solid orangered;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: black;
+  color: white;
+}
+.landingpage .ten .tnright .tnright3 .tnbot3{
+  width: 100%;
+  height: auto;
+  margin-top: 5px;
+}
+.landingpage .ten .tnright .tnright3 .tnbot3 button{
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  padding: 10px;
+  background-color:orangered;
+  text-align: center;
+  color: white;
+}
+.landingpage .ten .tnright .tnright3 .tnbot3 p{
+  color: white;
+  text-align: center;
+}
+
+
+
+
+.landingpage .twelve{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+.landingpage .twelve .twleft{
+  width: 40%;
+  height: auto;
+}
+.landingpage .twelve .twleft .twtop{
+  margin-bottom: 10px;
+}
+.landingpage .twelve .twleft .twtop .twleft1{
+  font-size: 30px;
+  font-weight: 900;
+  color: orangered;
+}
+.landingpage .twelve .twleft .twtop .twright1{
+  color: white;
+}
+.landingpage .twelve .twleft .twmid{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: grey;
+}
+.landingpage .twelve .twleft .twbot{
+  width: 100%;
+  height: auto;
+}
+.landingpage .twelve .twleft .twbot img{
+  width: 100%;
+  height: auto;
+}
+.landingpage .twelve .twright{
+  width: 60%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+.landingpage .twelve .twright .twzero{
+  width: 24%;
+  height: auto;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.landingpage .twelve .twright .twzero .twtop1{
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 700;
+  color: orangered;
+}
+.landingpage .twelve .twright .twzero .twbot1{
+  margin: 10px 0px;
+}
+.landingpage .twelve .twright .twzero .twbot1 a{
+  display: inline-block;
+  list-style-type: none;
+  color: grey;
+}
+.landingpage .twelve .twright .twzero .twbot1 img{
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}
