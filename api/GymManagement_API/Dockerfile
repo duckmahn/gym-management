@@ -11,7 +11,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 # Correct the path to the .csproj file
-COPY ["api/GymManagement_API/GymManagement_API.csproj", "./GymManagement_API/"]
+COPY ["./GymManagement_API.csproj", "./GymManagement_API/"]
 RUN dotnet restore "./GymManagement_API/GymManagement_API.csproj"
 
 # Copy the rest of the project files
