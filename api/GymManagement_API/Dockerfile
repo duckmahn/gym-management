@@ -12,7 +12,7 @@ WORKDIR /src
 
 # Correct the path to the .csproj file
 COPY ["./GymManagement_API.csproj", "."]
-RUN dotnet restore "./GymManagement_API/GymManagement_API.csproj"
+RUN dotnet restore "./GymManagement_API.csproj"
 
 # Copy the rest of the project files
 COPY . .
