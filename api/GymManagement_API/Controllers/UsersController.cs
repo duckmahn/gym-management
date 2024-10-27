@@ -21,12 +21,18 @@ namespace GymManagement_API.Controllers
             _dataContext = dataContext;
             _dataService = dataService;
         }
+
         [HttpGet]
         public async Task<ActionResult<List<Users>>> GetAllUser()
         {
-            var users = await _dataContext.Users.FindAsync();
+            var users = await _dataContext.Users.ToListAsync();
+            if (users == null)
+            {
+                return BadRequest();
+            }
             return Ok(users);
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Users>>> GetUserById(Guid id)
         {
@@ -37,12 +43,13 @@ namespace GymManagement_API.Controllers
             }
             return Ok(users);
         }
+
         [HttpPost("addUser")]
         public async Task<ActionResult<List<Users>>> AddUser(Users users)
         {
             var newUsers = new Users
             {
-                Id = users.Id,
+                Id = Guid.NewGuid(),
                 Username = users.Username,
                 Email = users.Email,
                 Firstname = users.Firstname,

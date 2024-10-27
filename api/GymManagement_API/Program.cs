@@ -49,6 +49,11 @@ namespace GymManagement_API
             //    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
             //});
 
+            //builder.Services.AddDbContext<DataContext>(options =>
+            //{
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
+            //});
+
             builder.Services.AddSwaggerGen(options =>
             {
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
