@@ -29,10 +29,10 @@ namespace GymManagement_API
             builder.Services.AddScoped<DbContext, DataContext>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IDataService, DataService>();
-            // builder.Services.AddDbContext<DataContext>(options =>
-            // {
-            //     options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
-            // });
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
+            });
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
@@ -44,10 +44,10 @@ namespace GymManagement_API
             });
 
 
-            builder.Services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
-            });
+            //builder.Services.AddDbContext<DataContext>(options =>
+            //{
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
+            //});
 
             builder.Services.AddSwaggerGen(options =>
             {
