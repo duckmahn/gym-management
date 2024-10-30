@@ -10,6 +10,6 @@ namespace GymManagement_API.Data.Models
         public DateTime BookingDate { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public bool IsConfirmed { get; set; }
+        public bool? IsConfirmed { get; set; }
     }
 }

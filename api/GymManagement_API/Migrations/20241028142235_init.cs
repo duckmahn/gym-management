@@ -46,15 +46,36 @@ namespace GymManagement_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Facilities",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LastMaintenanceDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Facilities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HealInfos",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Weight = table.Column<double>(type: "float", nullable: false),
-                    Height = table.Column<double>(type: "float", nullable: false),
-                    Bmi = table.Column<double>(type: "float", nullable: false),
-                    Goal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProgressNote = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Height = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Weight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    BloodType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BodyFatPercentage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    BMI = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MedicalConditions = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Allergies = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastHealthCheckDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -162,34 +183,6 @@ namespace GymManagement_API.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Facilities",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoomsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LastMaintenanceDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Facilities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Facilities_Rooms_RoomsId",
-                        column: x => x.RoomsId,
-                        principalTable: "Rooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Facilities_RoomsId",
-                table: "Facilities",
-                column: "RoomsId");
         }
 
         /// <inheritdoc />
@@ -211,6 +204,9 @@ namespace GymManagement_API.Migrations
                 name: "Memberships");
 
             migrationBuilder.DropTable(
+                name: "Rooms");
+
+            migrationBuilder.DropTable(
                 name: "Schedules");
 
             migrationBuilder.DropTable(
@@ -221,9 +217,6 @@ namespace GymManagement_API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Rooms");
         }
     }
 }

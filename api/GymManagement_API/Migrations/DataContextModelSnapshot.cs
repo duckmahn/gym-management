@@ -100,16 +100,11 @@ namespace GymManagement_API.Migrations
                     b.Property<Guid>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RoomsId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoomsId");
 
                     b.ToTable("Facilities");
                 });
@@ -120,25 +115,42 @@ namespace GymManagement_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Bmi")
-                        .HasColumnType("float");
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Goal")
+                    b.Property<string>("Allergies")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Height")
-                        .HasColumnType("float");
+                    b.Property<decimal>("BMI")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ProgressNote")
+                    b.Property<string>("BloodType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("BodyFatPercentage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Height")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("LastHealthCheckDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MedicalConditions")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UsersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -331,17 +343,6 @@ namespace GymManagement_API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("GymManagement_API.Data.Models.Facilities", b =>
-                {
-                    b.HasOne("GymManagement_API.Data.Models.Rooms", "Rooms")
-                        .WithMany()
-                        .HasForeignKey("RoomsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Rooms");
                 });
 #pragma warning restore 612, 618
         }

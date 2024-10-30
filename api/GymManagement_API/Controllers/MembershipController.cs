@@ -1,6 +1,8 @@
 ﻿using GymManagement_API.Data;
 using GymManagement_API.Data.DTO;
 using GymManagement_API.Data.Models;
+using GymManagement_API.Service.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +11,11 @@ namespace GymManagement_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MembershipController : ControllerBase
     {
         private readonly DataContext _context;
-
+        private readonly IDataService _service;
         public MembershipController(DataContext context)
         {
             _context = context;
@@ -52,23 +55,19 @@ namespace GymManagement_API.Controllers
             return Ok(membership);
         }
         [HttpPost]
-        public async Task<ActionResult<Membership>> CreateMembership(MembershipDTO membershipDTO, Guid userId)
+        public async Task<ActionResult<Membership>> CreateMembership(MembershipDTO membershipDTO)
         { 
             if (membershipDTO == null)
             {
                 return BadRequest("Membership data cannot be null.");
             }
 
-            if (userId == Guid.Empty)
+            var tokenData = _service.GetTokenData();
+            if (tokenData == null)
             {
-                return BadRequest("UserId is required.");
+                return Unauthorized("User is not authenticated.");
             }
-
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-            {
-                return NotFound("User not found.");
-            }
+            var userId = tokenData.Id;
 
             var membership = new Membership
             {
