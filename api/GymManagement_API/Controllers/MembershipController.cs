@@ -68,6 +68,10 @@ namespace GymManagement_API.Controllers
                 return Unauthorized("User is not authenticated.");
             }
             var userId = tokenData.Id;
+            if (userId == Guid.Empty)
+            {
+                return BadRequest("UserId is required.");
+            }
 
             var membership = new Membership
             {

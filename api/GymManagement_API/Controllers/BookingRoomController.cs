@@ -27,7 +27,7 @@ namespace GymManagement_API.Controllers
         public async Task<ActionResult<IEnumerable<BookingRoom>>> GetBookingRooms()
         {
             // Lấy danh sách tất cả các bookings
-            var bookings =await _context.BookingRooms.ToListAsync();
+            var bookings =await _context.BookingRooms.ToListAsync() ;
 
             return Ok(bookings);
         }
@@ -96,14 +96,14 @@ namespace GymManagement_API.Controllers
                 return NotFound("Room not found.");
             }
 
-            var conflictingBooking = await _context.BookingRooms
-                .Where(b => b.RoomId == room.Id && b.Id != id)
-                .FirstOrDefaultAsync(b => b.StartTime < bookingDTO.EndTime && b.EndTime > bookingDTO.StartTime);
+            //var conflictingBooking = await _context.BookingRooms
+            //    .Where(b => b.RoomId == room.Id && b.Id != id)
+            //    .FirstOrDefaultAsync(b => b.StartTime < bookingDTO.EndTime && b.EndTime > bookingDTO.StartTime);
 
-            if (conflictingBooking != null)
-            {
-                return Conflict("Room is already booked for the requested time.");
-            }
+            //if (conflictingBooking != null)
+            //{
+            //    return Conflict("Room is already booked for the requested time.");
+            //}
 
 
             if (bookingDTO.NumberOfParticipants > room.MaxParticipants)

@@ -68,7 +68,9 @@ namespace GymManagement_API.Controllers
                 Lastname = userDTO.Lastname,
                 Email = userDTO.Email,
                 Password = userDTO.Password,
-                IsAdmin = true
+                IsAdmin = true,
+
+
             };
             var userLogin = new UserLogin
             {
