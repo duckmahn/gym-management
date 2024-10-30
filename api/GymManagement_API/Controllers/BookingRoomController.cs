@@ -1,9 +1,11 @@
 ﻿using GymManagement_API.Data;
 using GymManagement_API.Data.DTO;
 using GymManagement_API.Data.Models;
+
 using GymManagement_API.Service.Implement;
 using GymManagement_API.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,7 @@ namespace GymManagement_API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+
     public class BookingRoomController : ControllerBase
     {
         private readonly DataContext _context;
@@ -58,6 +61,15 @@ namespace GymManagement_API.Controllers
                 return NotFound("Room not found.");
             }
 
+
+            //var existingBooking = await _context.BookingRooms
+            //    .FirstOrDefaultAsync(b => b.RoomId == room.Id &&
+            //                               (b.StartTime < bookingDTO.EndTime && b.EndTime > bookingDTO.StartTime));
+
+            //if (existingBooking != null)
+            //{
+            //    return Conflict("Room is already booked for the requested time.");
+            //}
 
             if (bookingDTO.NumberOfParticipants > room.MaxParticipants)
             {

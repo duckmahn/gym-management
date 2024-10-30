@@ -11,6 +11,7 @@ namespace GymManagement_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     [Authorize]
     public class MembershipController : ControllerBase
     {
@@ -61,13 +62,22 @@ namespace GymManagement_API.Controllers
             {
                 return BadRequest("Membership data cannot be null.");
             }
-
             var tokenData = _service.GetTokenData();
             if (tokenData == null)
             {
                 return Unauthorized("User is not authenticated.");
             }
             var userId = tokenData.Id;
+            if (userId == Guid.Empty)
+            {
+                return BadRequest("UserId is required.");
+            }
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
 
             var membership = new Membership
             {

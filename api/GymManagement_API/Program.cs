@@ -33,6 +33,26 @@ namespace GymManagement_API
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
             });
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            });
+
+
+            //builder.Services.AddDbContext<DataContext>(options =>
+            //{
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
+            //});
+
+            //builder.Services.AddDbContext<DataContext>(options =>
+            //{
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
+            //});
 
             //builder.Services.AddDbContext<DataContext>(options =>
             //{
@@ -86,13 +106,13 @@ namespace GymManagement_API
 
             var app = builder.Build();
 
+            app.UseCors("AllowAll");
             // Configure the HTTP request pipeline.
             //if (app.Environment.IsDevelopment())
             //{
             app.UseSwagger();
             app.UseSwaggerUI();
             //}
-
             app.UseHttpsRedirection();
 
             app.UseAuthentication();

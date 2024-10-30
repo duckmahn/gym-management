@@ -18,6 +18,7 @@ namespace GymManagement_API.Controllers
     {
         private readonly DataContext _context;
         private readonly IDataService _service;
+
         public BookingTrainerController(DataContext context)
         {
             _context = context;
@@ -57,7 +58,6 @@ namespace GymManagement_API.Controllers
                 return Unauthorized("User is not authenticated.");
             }
             var userId = tokenData.Id;
-
             //var existingBooking = await _context.BookingTrainers
             //    .FirstOrDefaultAsync(b => b.TrainerId == trainer.Id &&
             //                              b.BookingDate == bookingDTO.BookingDate &&
@@ -67,7 +67,6 @@ namespace GymManagement_API.Controllers
             //{
             //    return Conflict("Trainer is already booked for the requested time.");
             //}
-
             var booking = new BookingTrainer
             {
                 Id = Guid.NewGuid(),
