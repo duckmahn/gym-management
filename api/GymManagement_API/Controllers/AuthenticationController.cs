@@ -19,6 +19,7 @@ namespace GymManagement_API.Controllers
             _context = dataContext;
             _tokenService = tokenService;
         }
+
         [HttpPost("Login")]
         public async Task<ActionResult<List<UserLogin>>> Login([FromBody] LoginDTO request)
         {
@@ -66,7 +67,8 @@ namespace GymManagement_API.Controllers
                 Firstname = userDTO.Firstname,
                 Lastname = userDTO.Lastname,
                 Email = userDTO.Email,
-                Password = userDTO.Password
+                Password = userDTO.Password,
+                IsAdmin = true
             };
             var userLogin = new UserLogin
             {
