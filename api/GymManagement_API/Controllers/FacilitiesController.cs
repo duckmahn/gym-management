@@ -1,6 +1,8 @@
 ﻿using GymManagement_API.Data;
 using GymManagement_API.Data.DTO;
 using GymManagement_API.Data.Models;
+using GymManagement_API.Service.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +11,11 @@ namespace GymManagement_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FacilitiesController : ControllerBase
     {
         private readonly DataContext _context;
-
+        private readonly IDataService _service;
         public FacilitiesController(DataContext context)
         {
             _context = context;
@@ -30,6 +33,12 @@ namespace GymManagement_API.Controllers
         [HttpPost()]
         public async Task<ActionResult<Facilities>> AddFacility(FacilitiesDTO facilityDTO)
         {
+            var tokenData = _service.GetTokenData();
+            if (tokenData == null)
+            {
+                return Unauthorized("User is not authenticated.");
+            }
+            var userId = tokenData.Id;
             var facility = new Facilities
             {
                 Id = Guid.NewGuid(),

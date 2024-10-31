@@ -45,7 +45,7 @@ namespace GymManagement_API.Controllers
         }
 
         [HttpPost("addUser")]
-        public async Task<ActionResult<List<Users>>> AddUser(Users users)
+        public async Task<ActionResult<List<Users>>> AddUser(UserDTO users)
         {
             var newUsers = new Users
             {
@@ -54,7 +54,6 @@ namespace GymManagement_API.Controllers
                 Email = users.Email,
                 Firstname = users.Firstname,
                 Lastname = users.Lastname,
-                Avatar = users.Avatar,
                 Phone = users.Phone,
                 Password = users.Password,
                 IsAdmin = false

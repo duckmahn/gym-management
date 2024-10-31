@@ -1,7 +1,11 @@
 ﻿using GymManagement_API.Data;
 using GymManagement_API.Data.DTO;
 using GymManagement_API.Data.Models;
+
+using GymManagement_API.Service.Implement;
 using GymManagement_API.Service.Interface;
+using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +13,8 @@ namespace GymManagement_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class BookingRoomController : ControllerBase
     {
         private readonly DataContext _context;
@@ -32,7 +38,7 @@ namespace GymManagement_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<BookingRoom>>> GetBooking(Guid id)
         {
-            var booking = await _context.BookingRooms.FirstOrDefaultAsync(b => b.Id == id); // Only allow access to user's bookings
+            var booking = await _context.BookingRooms.FirstOrDefaultAsync(b => b.Id == id);
             if (booking == null)
             {
                 return NotFound();
@@ -41,14 +47,20 @@ namespace GymManagement_API.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult<BookingRoom>> BookRoom(Guid roomId, [FromBody] BookingRoomDTO bookingDTO, Guid userId)
+        public async Task<ActionResult<BookingRoom>> BookRoom(Guid roomId, [FromBody] BookingRoomDTO bookingDTO)
         {
-
+            var tokenData = _service.GetTokenData();
+            if (tokenData == null)
+            {
+                return Unauthorized("User is not authenticated.");
+            }
+            var userId = tokenData.Id;
             var room = await _context.Rooms.FindAsync(roomId);
             if (room == null)
             {
                 return NotFound("Room not found.");
             }
+
 
             //var existingBooking = await _context.BookingRooms
             //    .FirstOrDefaultAsync(b => b.RoomId == room.Id &&
@@ -67,7 +79,7 @@ namespace GymManagement_API.Controllers
             var booking = new BookingRoom
             {
                 Id = Guid.NewGuid(),
-                RoomId = roomId, 
+                RoomId = roomId,
                 UserId = userId,
                 StartTime = bookingDTO.StartTime,
                 EndTime = bookingDTO.EndTime,
