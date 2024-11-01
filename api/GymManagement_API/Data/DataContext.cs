@@ -1,6 +1,5 @@
 ﻿using GymManagement_API.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using NuGet.DependencyResolver;
 
 namespace GymManagement_API.Data
 {
@@ -20,5 +19,25 @@ namespace GymManagement_API.Data
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Facilities> Facilities { get; set; }
         public DbSet<BookingTrainer> BookingTrainers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Seed an admin user
+            modelBuilder.Entity<Users>().HasData(new Users
+            {
+                Id = Guid.NewGuid(),
+                Email = "admin@gym.com",
+                Username = "admin",
+                Firstname = "Admin",
+                Lastname = "User",
+                Password = "Admin@123", // Note: In a real application, ensure passwords are hashed
+                IsAdmin = true,
+            });
+        }
     }
+
+
+
 }

@@ -11,6 +11,6 @@
         public string? Phone { get; set; }
         public string Password { get; set; }
         public Boolean? IsAdmin {  get; set; }
-        public Guid MembershipId { get; set; }
+        public Guid? MembershipId { get; set; }
     }
 }

@@ -75,6 +75,7 @@ namespace GymManagement_API.Controllers
             user.Firstname = updateUserDTO.Firstname;
             user.Lastname = updateUserDTO.Lastname;
             user.Password = updateUserDTO.Password;
+            user.IsAdmin = updateUserDTO.IsAdmin;
             await _dataContext.SaveChangesAsync();
             return Ok(await _dataContext.Users.FindAsync(user.Id));
         }

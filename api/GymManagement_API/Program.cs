@@ -58,6 +58,8 @@ namespace GymManagement_API
                         .AllowAnyHeader();
                 });
             });
+
+            
             builder.Services.AddSwaggerGen(options =>
             {
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
