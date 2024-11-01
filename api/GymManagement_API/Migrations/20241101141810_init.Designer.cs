@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymManagement_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241030121246_init")]
+    [Migration("20241101141810_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -112,29 +112,29 @@ namespace GymManagement_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ActivityLevel")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Age")
                         .HasColumnType("int");
-
-                    b.Property<string>("Allergies")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("BMI")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("BloodType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CaloriesAvg")
+                        .HasColumnType("int");
 
-                    b.Property<decimal?>("BodyFatPercentage")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int?>("DailyCalories")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Height")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("LastHealthCheckDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("MedicalConditions")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -294,8 +294,10 @@ namespace GymManagement_API.Migrations
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Firstname")
@@ -307,7 +309,7 @@ namespace GymManagement_API.Migrations
                     b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("MembershipId")
+                    b.Property<Guid?>("MembershipId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Password")
@@ -318,7 +320,6 @@ namespace GymManagement_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

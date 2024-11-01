@@ -68,14 +68,14 @@ namespace GymManagement_API.Migrations
                     Height = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Weight = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: true),
-                    BloodType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BodyFatPercentage = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     BMI = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    MedicalConditions = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Allergies = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CaloriesAvg = table.Column<int>(type: "int", nullable: true),
+                    DailyCalories = table.Column<int>(type: "int", nullable: true),
                     LastHealthCheckDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ActivityLevel = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -168,15 +168,16 @@ namespace GymManagement_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: true),
-                    MembershipId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    MembershipId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
