@@ -36,7 +36,26 @@ namespace GymManagement_API.Data
                 Password = "Admin@123", // Note: In a real application, ensure passwords are hashed
                 IsAdmin = true,
             });
+
+            modelBuilder.Entity<Courses>()
+                .Property(c => c.Price)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Healinfo>(entity =>
+            {
+                entity.Property(e => e.BMI).HasPrecision(5, 2);      
+                entity.Property(e => e.Height).HasPrecision(5, 2);  
+                entity.Property(e => e.Weight).HasPrecision(5, 2);  
+            });
+
+            modelBuilder.Entity<Membership>(entity =>
+            {
+                entity.Property(e => e.Price).HasPrecision(8, 2);
+            });
+
         }
+
+
     }
 
 
