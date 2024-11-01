@@ -27,7 +27,7 @@ namespace GymManagement_API.Controllers
             var membership = await _context.Memberships.FindAsync();
             if (membership == null)
             {
-                return NotFound("Membership not found.");
+                return BadRequest();
             }
 
             if (membership.EndDate < DateTime.Now)
@@ -44,7 +44,7 @@ namespace GymManagement_API.Controllers
             var membership = await _context.Memberships.FindAsync(id);
             if (membership == null)
             {
-                return NotFound("Membership not found.");
+                return BadRequest();
             }
 
             if (membership.EndDate < DateTime.Now)
@@ -55,7 +55,7 @@ namespace GymManagement_API.Controllers
             return Ok(membership);
         }
         [HttpPost]
-        public async Task<ActionResult<Membership>> CreateMembership(MembershipDTO membershipDTO)
+        public async Task<ActionResult<List<Membership>>> CreateMembership(MembershipDTO membershipDTO)
         { 
             if (membershipDTO == null)
             {

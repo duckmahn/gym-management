@@ -28,17 +28,20 @@ namespace GymManagement_API.Controllers
         {
             // Lấy danh sách tất cả các bookings
             var bookings = await _context.BookingTrainers.ToListAsync();
-
+            if (bookings == null)
+            {
+                return BadRequest();
+            }
             return Ok(bookings);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<BookingTrainer>>> GetBookingTrainerById(Guid id)
         {
-            var booking = await _context.BookingRooms.FirstOrDefaultAsync(b => b.Id == id); // Only allow access to user's bookings
+            var booking = await _context.BookingRooms.FindAsync(id);
             if (booking == null)
             {
-                return NotFound();
+                return BadRequest();
             }
             return Ok(booking);
         }
@@ -82,13 +85,13 @@ namespace GymManagement_API.Controllers
             var booking = await _context.BookingTrainers.FindAsync(id);
             if (booking == null)
             {
-                return NotFound("Booking not found.");
+                return BadRequest();
             }
 
             var trainer = await _context.Trainers.FindAsync(trainerId);
             if (trainer == null)
             {
-                return NotFound("Trainer not found.");
+                return BadRequest();
             }
 
 
@@ -117,7 +120,10 @@ namespace GymManagement_API.Controllers
         {
 
             var booking = await _context.BookingTrainers.FindAsync(id);
-
+            if (booking == null)
+            {
+                return BadRequest();
+            }
             _context.BookingTrainers.Remove(booking);
             await _context.SaveChangesAsync();
 

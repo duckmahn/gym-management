@@ -28,23 +28,26 @@ namespace GymManagement_API.Controllers
         {
             // Lấy danh sách tất cả các bookings
             var bookings =await _context.BookingRooms.ToListAsync() ;
-
+            if(bookings == null)
+            {
+                return BadRequest();
+            }
             return Ok(bookings);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<BookingRoom>>> GetBooking(Guid id)
         {
-            var booking = await _context.BookingRooms.FirstOrDefaultAsync(b => b.Id == id);
+            var booking = await _context.BookingRooms.FindAsync(id);
             if (booking == null)
             {
-                return NotFound();
+                return BadRequest();
             }
             return Ok(booking);
         }
 
         [HttpPost()]
-        public async Task<ActionResult<BookingRoom>> BookRoom(Guid roomId, [FromBody] BookingRoomDTO bookingDTO)
+        public async Task<ActionResult<List<BookingRoom>>> BookRoom(Guid roomId, [FromBody] BookingRoomDTO bookingDTO)
         {
             var tokenData = _service.GetTokenData();
             if (tokenData == null)
@@ -87,13 +90,13 @@ namespace GymManagement_API.Controllers
             var booking = await _context.BookingRooms.FindAsync(id);
             if (booking == null)
             {
-                return NotFound("Booking not found.");
+                return BadRequest();
             }
 
             var room = await _context.Rooms.FindAsync(roomId);
             if (room == null)
             {
-                return NotFound("Room not found.");
+                return BadRequest();
             }
 
             //var conflictingBooking = await _context.BookingRooms
@@ -126,7 +129,10 @@ namespace GymManagement_API.Controllers
         {
 
             var booking = await _context.BookingRooms.FindAsync(id);
-
+            if(booking == null)
+            {
+                return BadRequest();
+            }
             _context.BookingRooms.Remove(booking);
             await _context.SaveChangesAsync();
 

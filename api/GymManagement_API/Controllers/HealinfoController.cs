@@ -21,10 +21,15 @@ namespace GymManagement_API.Controllers
             _context = context;
             _service = service;
         }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Healinfo>>> GetHealinfo()
         {
             var healinfos = await _context.HealInfos.ToListAsync();
+            if(healinfos == null)
+            {
+                return BadRequest();
+            }
             return Ok(healinfos);
         }
 
@@ -45,7 +50,7 @@ namespace GymManagement_API.Controllers
             var healinfo = await _context.HealInfos.FindAsync(id);
             if (healinfo == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             string suggestion = SuggestFood(healinfo.DailyCalories ?? 0);
@@ -53,7 +58,7 @@ namespace GymManagement_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<HealinfoDTO>> PostHealinfo(HealinfoDTO healinfoDto)
+        public async Task<ActionResult<List<Healinfo>>> PostHealinfo(HealinfoDTO healinfoDto)
         {
             var tokenData = _service.GetTokenData();
             if (tokenData == null)
@@ -97,7 +102,7 @@ namespace GymManagement_API.Controllers
             var healinfo = await _context.HealInfos.FindAsync(id);
             if (healinfo == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             healinfo.Height = healinfoDto.Height;
@@ -119,6 +124,10 @@ namespace GymManagement_API.Controllers
         {
 
             var healinfos = await _context.HealInfos.FindAsync(id);
+            if (healinfos == null)
+            {
+                return BadRequest();
+            }
 
             _context.HealInfos.Remove(healinfos);
             await _context.SaveChangesAsync();

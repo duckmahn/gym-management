@@ -36,21 +36,16 @@ namespace GymManagement_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Rooms>>> GetClassById(Guid id)
         {
-
-            if (_context.Rooms == null)
-            {
-                return NotFound();
-            }
-            var rooms = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == id);
+            var rooms = await _context.Rooms.FindAsync(id);
             if(rooms == null)
             {
-                return NotFound();
+                return BadRequest();
             }    
             return Ok(rooms);
         }
 
         [HttpPost()]
-        public async Task<ActionResult<Rooms>> AddClass(RoomDTO roomDTO)
+        public async Task<ActionResult<List<Rooms>>> AddClass(RoomDTO roomDTO)
         {
             var rooms = new Rooms
             {
@@ -77,8 +72,6 @@ namespace GymManagement_API.Controllers
             {
                 return BadRequest();
             }
-
-
             room.Name = roomDTO.Name;
             room.Description = roomDTO.Description;
             room.MaxParticipants = roomDTO.MaxParticipants;
@@ -96,7 +89,7 @@ namespace GymManagement_API.Controllers
             {
                 if(!ClassExists(id))
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
                 else
                 {
@@ -112,12 +105,12 @@ namespace GymManagement_API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom(Guid id)
         {
-            var room = await _context.Rooms.FindAsync(id);
-            if(room == null)
+            var rooms = await _context.Rooms.FindAsync(id);
+            if (rooms == null)
             {
-                return NotFound();
+                return BadRequest();
             }
-            _context.Rooms.Remove(room);
+            _context.Rooms.Remove(rooms);
             await _context.SaveChangesAsync();
             return NoContent();
         }
