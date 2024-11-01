@@ -43,7 +43,7 @@ namespace GymManagement_API.Controllers
 
         }
         [HttpPost("Register")]
-        public async Task<ActionResult<List<UserLogin>>> Register([FromBody] UserDTO userDTO)
+        public async Task<ActionResult<List<UserLogin>>> Register([FromBody] RegisterDTO userDTO)
         {
             if (!Regex.IsMatch(userDTO.Email, @"^[^@\s]+@[^@\s]+\."))
             {
@@ -68,7 +68,7 @@ namespace GymManagement_API.Controllers
                 Lastname = userDTO.Lastname,
                 Email = userDTO.Email,
                 Password = userDTO.Password,
-                IsAdmin = true
+                IsAdmin = false,
             };
             var userLogin = new UserLogin
             {

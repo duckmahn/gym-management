@@ -23,13 +23,21 @@ namespace GymManagement_API.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("GymManagement_API.Data.Models.BookingRoom", b =>
+            modelBuilder.Entity("GymManagement_API.Data.Models.BookingRoom", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("EndTime")
+                    b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("NumberOfParticipants")
+                        .HasColumnType("int");
 
                     b.Property<bool?>("IsConfirmed")
                         .HasColumnType("bit");
@@ -40,6 +48,21 @@ namespace GymManagement_API.Migrations
                     b.Property<Guid>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime?>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BookingRooms");
+                });
+
+            modelBuilder.Entity("GymManagement_API.Data.Models.BookingTrainer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                     b.Property<DateTime?>("StartTime")
                         .HasColumnType("datetime2");
 
@@ -68,7 +91,19 @@ namespace GymManagement_API.Migrations
 
                     b.Property<DateTime?>("StartTime")
                         .HasColumnType("datetime2");
+                    b.Property<DateTime?>("BookingDate")
+                        .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("EndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("TrainerId")
                     b.Property<Guid>("TrainerId")
                         .HasColumnType("uniqueidentifier");
 
@@ -77,6 +112,7 @@ namespace GymManagement_API.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("BookingTrainers");
                     b.ToTable("BookingTrainers");
                 });
 
@@ -89,14 +125,11 @@ namespace GymManagement_API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("LastMaintenanceDate")
+                    b.Property<DateTime?>("LastMaintenanceDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("RoomId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -112,20 +145,23 @@ namespace GymManagement_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ActivityLevel")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Age")
                         .HasColumnType("int");
-
-                    b.Property<string>("Allergies")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("BMI")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("BloodType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CaloriesAvg")
+                        .HasColumnType("int");
 
-                    b.Property<decimal?>("BodyFatPercentage")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int?>("DailyCalories")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Height")
                         .HasColumnType("decimal(18,2)");
@@ -133,15 +169,14 @@ namespace GymManagement_API.Migrations
                     b.Property<DateTime?>("LastHealthCheckDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("MedicalConditions")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UsersId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<decimal?>("Weight")
+                        .HasColumnType("decimal(18,2)");
                     b.Property<decimal?>("Weight")
                         .HasColumnType("decimal(18,2)");
 
@@ -158,7 +193,10 @@ namespace GymManagement_API.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("EndDate")
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
@@ -166,8 +204,13 @@ namespace GymManagement_API.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal?>("Price")
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime?>("StartDate")
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -189,18 +232,15 @@ namespace GymManagement_API.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MaxParticipants")
+                    b.Property<int?>("MaxParticipants")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoomType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -214,20 +254,19 @@ namespace GymManagement_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime?>("StartTime")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("TrainerId")
@@ -245,30 +284,24 @@ namespace GymManagement_API.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Avatar")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Experience")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Phone")
+                    b.Property<int?>("Phone")
                         .HasColumnType("int");
 
                     b.Property<string>("Specialty")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -303,6 +336,9 @@ namespace GymManagement_API.Migrations
 
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CourseId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");

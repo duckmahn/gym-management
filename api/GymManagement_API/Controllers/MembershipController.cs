@@ -11,7 +11,6 @@ namespace GymManagement_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     [Authorize]
     public class MembershipController : ControllerBase
     {
@@ -28,7 +27,7 @@ namespace GymManagement_API.Controllers
             var membership = await _context.Memberships.FindAsync();
             if (membership == null)
             {
-                return NotFound("Membership not found.");
+                return BadRequest();
             }
 
             if (membership.EndDate < DateTime.Now)
@@ -45,7 +44,7 @@ namespace GymManagement_API.Controllers
             var membership = await _context.Memberships.FindAsync(id);
             if (membership == null)
             {
-                return NotFound("Membership not found.");
+                return BadRequest();
             }
 
             if (membership.EndDate < DateTime.Now)
@@ -56,7 +55,7 @@ namespace GymManagement_API.Controllers
             return Ok(membership);
         }
         [HttpPost]
-        public async Task<ActionResult<Membership>> CreateMembership(MembershipDTO membershipDTO)
+        public async Task<ActionResult<List<Membership>>> CreateMembership(MembershipDTO membershipDTO)
         { 
             if (membershipDTO == null)
             {
@@ -71,12 +70,6 @@ namespace GymManagement_API.Controllers
             if (userId == Guid.Empty)
             {
                 return BadRequest("UserId is required.");
-            }
-
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-            {
-                return NotFound("User not found.");
             }
 
             var membership = new Membership

@@ -23,15 +23,27 @@ namespace GymManagement_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Facilities>>> GetFacilites()
         {
-            if(_context.Facilities == null)
-            {
-                return NotFound();
-            }
+
             var facilities = await _context.Facilities.ToListAsync();
+            if(facilities == null)
+            {
+                return BadRequest();
+            }
+            return Ok(facilities);
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Facilities>>> GetFacilitesById(Guid id)
+        {
+
+            var facilities = await _context.Facilities.FindAsync(id);
+            if(facilities == null)
+            {
+                return BadRequest();
+            }
             return Ok(facilities);
         }
         [HttpPost()]
-        public async Task<ActionResult<Facilities>> AddFacility(FacilitiesDTO facilityDTO)
+        public async Task<ActionResult<List<Facilities>>> AddFacility(FacilitiesDTO facilityDTO)
         {
             var tokenData = _service.GetTokenData();
             if (tokenData == null)
@@ -60,7 +72,7 @@ namespace GymManagement_API.Controllers
             var facility = await _context.Facilities.FindAsync(id);
             if (facility == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             facility.Name = facilityDTO.Name;
@@ -80,7 +92,7 @@ namespace GymManagement_API.Controllers
             var facility = await _context.Facilities.FindAsync(id);
             if (facility == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             _context.Facilities.Remove(facility);
