@@ -56,7 +56,7 @@ namespace GymManagement_API.Controllers
                 Lastname = users.Lastname,
                 Phone = users.Phone,
                 Password = users.Password,
-                IsAdmin = false
+                IsAdmin = users.IsAdmin,
             };
             _dataContext.Users.Add(newUsers);
             await _dataContext.SaveChangesAsync();

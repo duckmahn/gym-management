@@ -21,31 +21,29 @@ namespace GymManagement_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Trainers>>> GetAllTrainer()
         {
-            if (_context.Trainers == null)
-            {
-                return NotFound();
-            }
+            
             var trainer = await _context.Trainers.ToListAsync();
+            if (trainer == null)
+            {
+                return BadRequest();
+            }
             return Ok(trainer);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Trainers>>> GetTrainerById(Guid id)
         {
-            if (_context.Trainers == null)
-            {
-                return NotFound();
-            }
-            var trainer = await _context.Trainers.FirstOrDefaultAsync(t => t.Id == id);
+
+            var trainer = await _context.Trainers.FindAsync(id);
             if (trainer == null)
             {
-                return NotFound();
+                return BadRequest();
             }
             return Ok(trainer);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Trainers>> AddTrainer(TrainerDTO trainerDTO)
+        public async Task<ActionResult<List<Trainers>>> AddTrainer(TrainerDTO trainerDTO)
         {
             var trainers = new Trainers
             {
@@ -69,7 +67,7 @@ namespace GymManagement_API.Controllers
             var trainer = await _context.Trainers.FindAsync(id);
             if (trainer == null)
             {
-                return NotFound();
+                return BadRequest();
             }
             trainer.Name = trainerDTO.Name;
             trainer.Email = trainerDTO.Email;
@@ -104,7 +102,7 @@ namespace GymManagement_API.Controllers
             var trainer = await _context.Trainers.FindAsync(id);
             if (trainer == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             _context.Trainers.Remove(trainer);
