@@ -61,7 +61,6 @@ namespace GymManagement_API.Controllers
             {
                 return BadRequest("Membership data cannot be null.");
             }
-
             var tokenData = _service.GetTokenData();
             if (tokenData == null)
             {

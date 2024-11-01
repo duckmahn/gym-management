@@ -21,7 +21,6 @@ namespace GymManagement_API.Controllers
             _context = context;
             _service = service;
         }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Healinfo>>> GetHealinfo()
         {

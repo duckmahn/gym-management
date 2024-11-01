@@ -18,6 +18,7 @@ namespace GymManagement_API.Controllers
     {
         private readonly DataContext _context;
         private readonly IDataService _service;
+
         public BookingTrainerController(DataContext context)
         {
             _context = context;
@@ -28,20 +29,17 @@ namespace GymManagement_API.Controllers
         {
             // Lấy danh sách tất cả các bookings
             var bookings = await _context.BookingTrainers.ToListAsync();
-            if (bookings == null)
-            {
-                return BadRequest();
-            }
+
             return Ok(bookings);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<BookingTrainer>>> GetBookingTrainerById(Guid id)
         {
-            var booking = await _context.BookingRooms.FindAsync(id);
+            var booking = await _context.BookingRooms.FirstOrDefaultAsync(b => b.Id == id); // Only allow access to user's bookings
             if (booking == null)
             {
-                return BadRequest();
+                return NotFound();
             }
             return Ok(booking);
         }
@@ -60,7 +58,15 @@ namespace GymManagement_API.Controllers
                 return Unauthorized("User is not authenticated.");
             }
             var userId = tokenData.Id;
+            //var existingBooking = await _context.BookingTrainers
+            //    .FirstOrDefaultAsync(b => b.TrainerId == trainer.Id &&
+            //                              b.BookingDate == bookingDTO.BookingDate &&
+            //                              ((b.StartTime < bookingDTO.EndTime && b.EndTime > bookingDTO.StartTime)));
 
+            //if (existingBooking != null)
+            //{
+            //    return Conflict("Trainer is already booked for the requested time.");
+            //}
             var booking = new BookingTrainer
             {
                 Id = Guid.NewGuid(),
@@ -85,26 +91,26 @@ namespace GymManagement_API.Controllers
             var booking = await _context.BookingTrainers.FindAsync(id);
             if (booking == null)
             {
-                return BadRequest();
+                return NotFound("Booking not found.");
             }
 
             var trainer = await _context.Trainers.FindAsync(trainerId);
             if (trainer == null)
             {
-                return BadRequest();
+                return NotFound("Trainer not found.");
             }
 
 
-            //var existingBooking = await _context.BookingTrainers
-            //    .FirstOrDefaultAsync(b => b.TrainerId == trainer.Id &&
-            //                              b.BookingDate == bookingDTO.BookingDate &&
-            //                              ((b.StartTime < bookingDTO.EndTime && b.EndTime > bookingDTO.StartTime)));
+            var existingBooking = await _context.BookingTrainers
+                .FirstOrDefaultAsync(b => b.TrainerId == trainer.Id &&
+                                          b.BookingDate == bookingDTO.BookingDate &&
+                                          ((b.StartTime < bookingDTO.EndTime && b.EndTime > bookingDTO.StartTime)));
 
 
-            //if (existingBooking != null)
-            //{
-            //    return Conflict("Room is already booked for the requested time.");
-            //}
+            if (existingBooking != null)
+            {
+                return Conflict("Room is already booked for the requested time.");
+            }
 
 
             booking.StartTime = bookingDTO.StartTime;
@@ -120,10 +126,7 @@ namespace GymManagement_API.Controllers
         {
 
             var booking = await _context.BookingTrainers.FindAsync(id);
-            if (booking == null)
-            {
-                return BadRequest();
-            }
+
             _context.BookingTrainers.Remove(booking);
             await _context.SaveChangesAsync();
 
