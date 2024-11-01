@@ -12,12 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymManagement_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.Designer.cs
-    [Migration("20241101141810_init")]
-========
-    [Migration("20241031181546_init")]
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.Designer.cs
-    partial class init
+    [Migration("20241101153857_update-course")]
+    partial class updatecourse
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,6 +83,32 @@ namespace GymManagement_API.Migrations
                     b.ToTable("BookingTrainers");
                 });
 
+            modelBuilder.Entity("GymManagement_API.Data.Models.Courses", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses");
+                });
+
             modelBuilder.Entity("GymManagement_API.Data.Models.Facilities", b =>
                 {
                     b.Property<Guid>("Id")
@@ -102,12 +124,6 @@ namespace GymManagement_API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.Designer.cs
-========
-                    b.Property<Guid>("RoomId")
-                        .HasColumnType("uniqueidentifier");
-
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.Designer.cs
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
@@ -122,7 +138,6 @@ namespace GymManagement_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.Designer.cs
                     b.Property<string>("ActivityLevel")
                         .HasColumnType("nvarchar(max)");
 
@@ -141,35 +156,12 @@ namespace GymManagement_API.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-========
-                    b.Property<int?>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Allergies")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("BMI")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("BloodType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("BodyFatPercentage")
-                        .HasColumnType("decimal(18,2)");
-
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.Designer.cs
                     b.Property<decimal?>("Height")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("LastHealthCheckDate")
                         .HasColumnType("datetime2");
 
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.Designer.cs
-========
-                    b.Property<string>("MedicalConditions")
-                        .HasColumnType("nvarchar(max)");
-
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.Designer.cs
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
@@ -232,10 +224,6 @@ namespace GymManagement_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoomType")
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.Designer.cs
-========
-                        .IsRequired()
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.Designer.cs
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -279,10 +267,6 @@ namespace GymManagement_API.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Avatar")
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.Designer.cs
-========
-                        .IsRequired()
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.Designer.cs
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -301,10 +285,6 @@ namespace GymManagement_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -355,11 +335,7 @@ namespace GymManagement_API.Migrations
                     b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.Designer.cs
                     b.Property<Guid?>("MembershipId")
-========
-                    b.Property<Guid>("MembershipId")
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.Designer.cs
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Password")
@@ -375,6 +351,18 @@ namespace GymManagement_API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d5035bf9-6911-4868-8b2d-011dac827f10"),
+                            Email = "admin@gym.com",
+                            Firstname = "Admin",
+                            IsAdmin = true,
+                            Lastname = "User",
+                            Password = "Admin@123",
+                            Username = "admin"
+                        });
                 });
 #pragma warning restore 612, 618
         }

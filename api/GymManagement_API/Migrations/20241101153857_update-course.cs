@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GymManagement_API.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class updatecourse : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,6 +46,22 @@ namespace GymManagement_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Facilities",
                 columns: table => new
                 {
@@ -53,12 +69,7 @@ namespace GymManagement_API.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.cs
                     LastMaintenanceDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-========
-                    RoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LastMaintenanceDate = table.Column<DateTime>(type: "datetime2", nullable: false)
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.cs
                 },
                 constraints: table =>
                 {
@@ -73,7 +84,6 @@ namespace GymManagement_API.Migrations
                     Height = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Weight = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: true),
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.cs
                     BMI = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     CaloriesAvg = table.Column<int>(type: "int", nullable: true),
                     DailyCalories = table.Column<int>(type: "int", nullable: true),
@@ -82,16 +92,6 @@ namespace GymManagement_API.Migrations
                     UsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ActivityLevel = table.Column<string>(type: "nvarchar(max)", nullable: true)
-========
-                    BloodType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BodyFatPercentage = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    BMI = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    MedicalConditions = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Allergies = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastHealthCheckDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.cs
                 },
                 constraints: table =>
                 {
@@ -121,17 +121,10 @@ namespace GymManagement_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.cs
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MaxParticipants = table.Column<int>(type: "int", nullable: true),
                     RoomType = table.Column<string>(type: "nvarchar(max)", nullable: true)
-========
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaxParticipants = table.Column<int>(type: "int", nullable: false),
-                    RoomType = table.Column<string>(type: "nvarchar(max)", nullable: false)
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.cs
                 },
                 constraints: table =>
                 {
@@ -160,7 +153,6 @@ namespace GymManagement_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.cs
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<int>(type: "int", nullable: true),
@@ -168,15 +160,6 @@ namespace GymManagement_API.Migrations
                     Experience = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
-========
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<int>(type: "int", nullable: false),
-                    Specialty = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Experience = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.cs
                 },
                 constraints: table =>
                 {
@@ -209,17 +192,18 @@ namespace GymManagement_API.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: true),
-<<<<<<<< HEAD:api/GymManagement_API/Migrations/20241101141810_init.cs
                     MembershipId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-========
-                    MembershipId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
->>>>>>>> b5d9a8b55716cdfc8fb8e64d3e5e77f7cfdcb1da:api/GymManagement_API/Migrations/20241031181546_init.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Avatar", "CourseId", "Email", "Firstname", "IsAdmin", "Lastname", "MembershipId", "Password", "Phone", "Username" },
+                values: new object[] { new Guid("d5035bf9-6911-4868-8b2d-011dac827f10"), null, null, "admin@gym.com", "Admin", true, "User", null, "Admin@123", null, "admin" });
         }
 
         /// <inheritdoc />
@@ -230,6 +214,9 @@ namespace GymManagement_API.Migrations
 
             migrationBuilder.DropTable(
                 name: "BookingTrainers");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
 
             migrationBuilder.DropTable(
                 name: "Facilities");
