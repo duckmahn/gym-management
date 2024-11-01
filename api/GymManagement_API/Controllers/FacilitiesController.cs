@@ -31,7 +31,7 @@ namespace GymManagement_API.Controllers
             }
             return Ok(facilities);
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Facilities>>> GetFacilitesById(Guid id)
         {
 
@@ -42,7 +42,7 @@ namespace GymManagement_API.Controllers
             }
             return Ok(facilities);
         }
-        [HttpPost()]
+        [HttpPost]
         public async Task<ActionResult<List<Facilities>>> AddFacility(FacilitiesDTO facilityDTO)
         {
             var tokenData = _service.GetTokenData();

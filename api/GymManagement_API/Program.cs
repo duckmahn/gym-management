@@ -28,15 +28,12 @@ namespace GymManagement_API
             builder.Services.AddScoped<DbContext, DataContext>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IDataService, DataService>();
-            var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
-            var dbName = Environment.GetEnvironmentVariable("DB_NAME");
-            var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
-            var connectionString = $"Server={dbHost};Database={dbName};User=sa;Password={dbPassword};Trusted_Connection=True;TrustServerCertificate=True;";
+            //var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+            //var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+            //var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+            //var connectionString = $"Server={dbHost};Database={dbName};User=sa;Password={dbPassword};Trusted_Connection=True;TrustServerCertificate=True;";
             var connect = "Server=192.168.1.200;Database=gym;User Id=sa;Password=Manhvl231@;TrustServerCertificate=True";
-            //builder.Services.AddDbContext<DataContext>(options =>
-            //{
-            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
-            //});
+
             builder.Services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(connect);
@@ -44,11 +41,6 @@ namespace GymManagement_API
 
             builder.Services.AddCors();
 
-
-            //builder.Services.AddDbContext<DataContext>(options =>
-            //{
-            //    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
-            //});
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>

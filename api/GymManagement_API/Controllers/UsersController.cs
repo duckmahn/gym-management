@@ -11,7 +11,6 @@ namespace GymManagement_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly DataContext _dataContext;
@@ -58,9 +57,15 @@ namespace GymManagement_API.Controllers
                 Password = users.Password,
                 IsAdmin = users.IsAdmin,
             };
+            var login = new UserLogin
+            {
+                Id = newUsers.Id,
+                Email = newUsers.Email,
+                Password = newUsers.Password,
+            };
             _dataContext.Users.Add(newUsers);
             await _dataContext.SaveChangesAsync();
-            return Ok(newUsers);
+            return Ok(login);
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(Guid id, UpdateUserDTO updateUserDTO)
