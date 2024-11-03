@@ -11,26 +11,26 @@
   .landingpage .first .fivar{
     width: 50px;
     height: 50px;
+    margin-right: 20px;
+  }
+  .landingpage .first .fivar img{
+    width: 100%;
+    height: 100%
   }
   .landingpage .first .fionce{
       margin: 0px 10px;
   }
-    .landingpage .first .fionce .fitop{
+    .landingpage .first .fionce .fitop p{
       font-size: 20px;
       font-weight: 700;
       color: orangered;
     }
-    .landingpage .first .fionce .fibot{
+    .landingpage .first .fionce .fibot p{
       color: white;
     }
   .landingpage .first .fitwo{
     margin: 0px 10px;
   }
-    .landingpage .first .fitwo button{
-      border-radius: 5px;
-      padding: 5px;
-      background-color: gray;
-    }
       .landingpage .first .fitwo button img{
         width: 100%;
         height: 100%;
@@ -43,20 +43,26 @@
     }
       .landingpage .first .fithree ul li{
         display: inline-block;
-        margin: 10px;
+        margin: 0px 10px;
         padding: 5px;
-        color: white;
         font-weight: 500;
+        color: white;
       }
       .landingpage .first .fithree ul li:hover{
         border-bottom: 3px solid orangered; 
       }
   .landingpage .first .fifour{
-    margin: 0px 10px;
-    float: right;
+    margin-left: 10px;
   }
-    .landingpage .first .fifour button{
-      margin: 0px 10px;
+    .landingpage .first .fifour .fifour1{
+      margin-left: 10px;
+      border: 1px solid orangered;
+      border-radius: 5px;
+      padding: 5px;
+      color: orangered;
+    }
+    .landingpage .first .fifour .fifour2{
+      margin-left: 10px;
       border: 1px solid orangered;
       border-radius: 5px;
       padding: 5px;
@@ -227,9 +233,19 @@
     margin: 0px 10px;
     border-radius: 5px;
  }
+ .landingpage .four .fobot .fozero .fobelow{
+  position: relative;
+  width: 100%;
+  height: auto;
+}
  .landingpage .four .fobot .fozero .fobelow img{
     width: 100%;
     height: auto;
+}
+.landingpage .four .fobot .fozero .foabove{
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
 }
  .landingpage .four .fobot .fozero .foabove a{
     display: inline-block;

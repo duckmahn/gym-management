@@ -51,8 +51,8 @@ const config: Config = {
   				'5': 'hsl(var(--chart-5))'
   			},
 			brown: {
-				500: '#795548',
-			}
+				500: '#C70039',
+			}			
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
