@@ -1,32 +1,73 @@
-//login
+"use client";
 import Image from 'next/image';
+import { useState } from 'react';
+import axios from 'axios';
+import { FormEvent } from 'react'; 
+import { useRouter } from 'next/navigation';
+import { NEXT_PUBLIC_API_URL } from '../../../apiconfig'; // Đảm bảo rằng đường dẫn này đúng
+
 export default function LoginPage() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault();
+  
+    try {
+      const response = await axios.post(`${NEXT_PUBLIC_API_URL}Login`, {  
+        email: username,
+        password: password
+      });
+      
+      console.log('Phản hồi từ API:', response.data);
+  
+      // Kiểm tra xem phản hồi có phải là chuỗi token không
+      const token = typeof response.data === 'string' ? response.data : response.data.token || response.data.id;
+  
+      if (!token) {
+        throw new Error('Token không tồn tại trong phản hồi');
+      }
+  
+      // Gán token vào header Authorization
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  
+      console.log('Đăng nhập thành công!', token);
+  
+      // Chuyển hướng
+      router.push('/dashboard');
+    } catch (error) {
+      setError('Đăng nhập thất bại, vui lòng thử lại.');
+      console.error(error);
+    }
+  };
+  
+
   return (
     <div
       className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: "url('/backgradmin.png')", 
-        backgroundSize: '100% 100%', 
-        backgroundRepeat: 'no-repeat', 
-        backgroundPosition: 'center', 
-        backgroundAttachment: 'fixed', 
+        backgroundImage: "url('/backgradmin.png')",
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
       }}
     >
-      {/* Form Container */}
       <div className="relative z-10 flex flex-col items-center space-y-8 p-8 rounded-lg pt-40">
-        {/* Logo */}
         <div className="w-32 h-32">
           <Image
-            src="/logo.png" 
+            src="/logo.png"
             alt="Logo"
             width={128}
             height={128}
+            priority
           />
         </div>
 
-        
-        <form className="flex flex-col space-y-4 w-72">
-          
+        <form className="flex flex-col space-y-4 w-72" onSubmit={handleLogin}>
           <div className="relative">
             <span className="absolute inset-y-0 left-3 flex items-center">
               <i className="fas fa-user text-white"></i>
@@ -34,11 +75,12 @@ export default function LoginPage() {
             <input
               type="text"
               placeholder="USERNAME"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white focus:outline-none"
             />
           </div>
 
-          
           <div className="relative">
             <span className="absolute inset-y-0 left-3 flex items-center">
               <i className="fas fa-lock text-white"></i>
@@ -46,11 +88,14 @@ export default function LoginPage() {
             <input
               type="password"
               placeholder="PASSWORD"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white focus:outline-none"
             />
           </div>
 
-          
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+
           <button className="w-full py-2 rounded-lg bg-white text-red-600 font-bold">
             LOGIN
           </button>
@@ -59,3 +104,4 @@ export default function LoginPage() {
     </div>
   );
 }
+  

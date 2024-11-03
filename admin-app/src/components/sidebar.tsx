@@ -1,7 +1,7 @@
 // Sidebar.tsx
 'use client';
 
-import React, { useState, CSSProperties } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 interface SidebarProps {
@@ -21,15 +21,15 @@ export default function Sidebar({ active }: SidebarProps) {
   };
 
   return (
-    <aside style={styles.sidebar}>
-      <div style={styles.logo}>
-        <span style={styles.gymRed}>GYM</span>HUFLIT.
+    <aside className="w-[250px] bg-[#141414] text-white p-5 flex flex-col justify-between items-center">
+      <div className="text-2xl font-bold mb-10 tracking-wide text-center">
+        <span className="text-[#c21f37]">GYM</span>HUFLIT.
       </div>
-      <nav style={styles.navContainer}>
-        <ul style={styles.navList}>
+      <nav className="flex-1 w-full -mt-2.5">
+        <ul className="list-none p-0 w-full">
           <li>
-            <span style={styles.activeItem}>
-              <i className="fas fa-th-large" style={styles.icon}></i> Quản lý
+            <span className="bg-[#c21f37] py-2.5 px-4 rounded-lg block mb-5">
+              <i className="fas fa-th-large"></i> Quản lý
             </span>
           </li>
           {[{ name: 'Lịch Tập', path: 'lichtap' },
@@ -41,10 +41,9 @@ export default function Sidebar({ active }: SidebarProps) {
             <li key={item.name}>
               <Link
                 href={`/${item.path}`}
-                style={{
-                  ...styles.navItem,
-                  ...(activeItem === item.name ? styles.selectedItem : {})
-                }}
+                className={`block mb-5 text-white text-base py-2.5 px-4 rounded-lg transition duration-300 ${
+                  activeItem === item.name ? 'bg-[#c21f37]' : 'hover:bg-gray-700'
+                }`}
                 onClick={() => handleItemClick(item.name)}
               >
                 {item.name}
@@ -53,73 +52,9 @@ export default function Sidebar({ active }: SidebarProps) {
           ))}
         </ul>
       </nav>
-      <button style={styles.logoutButton}>
-        <i className="fas fa-sign-out-alt" style={styles.icon}></i> Đăng xuất
+      <button className="w-full py-2.5 bg-[#c21f37] border-none text-white cursor-pointer rounded-lg">
+        <i className="fas fa-sign-out-alt"></i> Đăng xuất
       </button>
     </aside>
   );
 }
-
-const styles: { [key: string]: CSSProperties } = {
-  
-  sidebar: {
-    width: '250px',
-    backgroundColor: '#141414',
-    color: '#fff',
-    padding: '20px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  logo: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '40px',
-    letterSpacing: '1px',
-    textAlign: 'center',
-  },
-  gymRed: {
-    color: '#c21f37',
-  },
-  navContainer: {
-    flex: 1,
-    width: '100%',
-    marginTop: '-10px',
-  },
-  navList: {
-    listStyleType: 'none',
-    padding: 0,
-    width: '100%',
-  },
-  navItem: {
-    display: 'block',
-    marginBottom: '20px',
-    color: '#fff',
-    textDecoration: 'none',
-    fontSize: '16px',
-    padding: '10px 15px',
-    borderRadius: '8px',
-    transition: 'background 0.3s',
-  },
-  activeItem: {
-    backgroundColor: '#c21f37',
-    padding: '10px 15px',
-    borderRadius: '8px',
-    display: 'block',
-    marginBottom: '20px',
-  },
-  selectedItem: {
-    backgroundColor: '#c21f37',
-    color: '#fff',
-  },
-  logoutButton: {
-    width: '100%',
-    padding: '10px',
-    backgroundColor: '#c21f37',
-    border: 'none',
-    color: 'white',
-    cursor: 'pointer',
-    borderRadius: '8px',
-  },
-};
