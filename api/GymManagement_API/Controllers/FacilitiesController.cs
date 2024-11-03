@@ -21,17 +21,17 @@ namespace GymManagement_API.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Facilities>>> GetFacilites()
+        public async Task<ActionResult<IEnumerable<Facilities>>> GetAllFacilities()
         {
 
             var facilities = await _context.Facilities.ToListAsync();
-            if(facilities == null)
+            if (facilities == null)
             {
                 return BadRequest();
             }
             return Ok(facilities);
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Facilities>>> GetFacilitesById(Guid id)
         {
 
@@ -63,7 +63,7 @@ namespace GymManagement_API.Controllers
             _context.Facilities.Add(facility);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetFacilites), new { id = facility.Id }, facility);
+            return Ok(facility);
         }
 
         [HttpPut("{id}")]
