@@ -33,10 +33,10 @@ namespace GymManagement_API
             var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
             var connectionString = $"Server={dbHost};Database={dbName};User=sa;Password={dbPassword};Trusted_Connection=True;TrustServerCertificate=True;";
             var connect = "Server=192.168.1.200;Database=gym;User Id=sa;Password=Manhvl231@;TrustServerCertificate=True";
-            //builder.Services.AddDbContext<DataContext>(options =>
-            //{
-            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
-            //});
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
+            });
             builder.Services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(connect);
