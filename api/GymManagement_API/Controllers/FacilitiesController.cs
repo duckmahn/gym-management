@@ -42,7 +42,7 @@ namespace GymManagement_API.Controllers
             }
             return Ok(facilities);
         }
-        [HttpPost()]
+        [HttpPost]
         public async Task<ActionResult<List<Facilities>>> AddFacility(FacilitiesDTO facilityDTO)
         {
             var tokenData = _service.GetTokenData();

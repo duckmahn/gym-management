@@ -96,7 +96,23 @@ namespace GymManagement_API.Controllers
             schedule.EndTime = scheduleDTO.EndTime;
             schedule.Date = scheduleDTO.Date;
             await _context.SaveChangesAsync();
-            return Ok(schedule);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ScheduleExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
@@ -110,6 +126,10 @@ namespace GymManagement_API.Controllers
             _context.Schedules.Remove(schedule);
             await _context.SaveChangesAsync();
             return NoContent();
+        }
+        private bool ScheduleExists(Guid id)
+        {
+            return _context.Schedules.Any(e => e.Id == id);
         }
     }
 }
