@@ -58,15 +58,6 @@ namespace GymManagement_API.Controllers
                 return Unauthorized("User is not authenticated.");
             }
             var userId = tokenData.Id;
-            //var existingBooking = await _context.BookingTrainers
-            //    .FirstOrDefaultAsync(b => b.TrainerId == trainer.Id &&
-            //                              b.BookingDate == bookingDTO.BookingDate &&
-            //                              ((b.StartTime < bookingDTO.EndTime && b.EndTime > bookingDTO.StartTime)));
-
-            //if (existingBooking != null)
-            //{
-            //    return Conflict("Trainer is already booked for the requested time.");
-            //}
             var booking = new BookingTrainer
             {
                 Id = Guid.NewGuid(),
@@ -99,19 +90,6 @@ namespace GymManagement_API.Controllers
             {
                 return NotFound("Trainer not found.");
             }
-
-
-            var existingBooking = await _context.BookingTrainers
-                .FirstOrDefaultAsync(b => b.TrainerId == trainer.Id &&
-                                          b.BookingDate == bookingDTO.BookingDate &&
-                                          ((b.StartTime < bookingDTO.EndTime && b.EndTime > bookingDTO.StartTime)));
-
-
-            if (existingBooking != null)
-            {
-                return Conflict("Room is already booked for the requested time.");
-            }
-
 
             booking.StartTime = bookingDTO.StartTime;
             booking.EndTime = bookingDTO.EndTime;
