@@ -1,6 +1,7 @@
 import Image from "next/image"
-import Dashboard from "./home/page"
-import LandingPage from "./home/landingpage"
+import LandingPage from "./landingpage/landingpage"
+import SignUp from "./signup/page"
+import Dashboard from "./dashboard/page"
 
 export default function Home() {
   return <LandingPage />
