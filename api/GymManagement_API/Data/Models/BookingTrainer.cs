@@ -2,14 +2,14 @@
 
 namespace GymManagement_API.Data.Models
 {
-    public class Schedule
+    public class BookingTrainer
     {
         public Guid Id { get; set; }
-        public Guid RoomId { get; set; }
         public Guid TrainerId { get; set; }
-        public DateTime? Date { get; set; }
+        public Guid UserId { get; set; }
+        public DateTime? BookingDate { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
-        public string? Location { get; set; }
+        public bool? IsConfirmed { get; set; }
     }
 }

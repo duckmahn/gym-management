@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using System.Configuration;
 using System.Text;
 
 namespace GymManagement_API
@@ -29,10 +28,22 @@ namespace GymManagement_API
             builder.Services.AddScoped<DbContext, DataContext>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IDataService, DataService>();
-            // builder.Services.AddDbContext<DataContext>(options =>
-            // {
-            //     options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
-            // });
+            //var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+            //var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+            //var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+            //var connectionString = $"Server={dbHost};Database={dbName};User=sa;Password={dbPassword};Trusted_Connection=True;TrustServerCertificate=True;";
+            var connect = "Server=192.168.1.200;Database=gym;User Id=sa;Password=Manhvl231@;TrustServerCertificate=True";
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefautConnection"));
+            });
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(connect);
+            });
+
+            builder.Services.AddCors();
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
@@ -43,12 +54,7 @@ namespace GymManagement_API
                 });
             });
 
-
-            builder.Services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection"));
-            });
-
+            
             builder.Services.AddSwaggerGen(options =>
             {
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
@@ -66,17 +72,21 @@ namespace GymManagement_API
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
             })
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
+
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.
-                       GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+                    GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
                         ValidateIssuer = false,
                         ValidateAudience = false,
                     };
+
+
                 });
 
             builder.Services.AddEndpointsApiExplorer();
@@ -84,7 +94,12 @@ namespace GymManagement_API
 
             var app = builder.Build();
 
-            app.UseCors("AllowAll");
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
+
             // Configure the HTTP request pipeline.
             //if (app.Environment.IsDevelopment())
             //{
@@ -93,9 +108,8 @@ namespace GymManagement_API
             //}
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

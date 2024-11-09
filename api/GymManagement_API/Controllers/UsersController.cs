@@ -11,7 +11,6 @@ namespace GymManagement_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly DataContext _dataContext;
@@ -21,12 +20,18 @@ namespace GymManagement_API.Controllers
             _dataContext = dataContext;
             _dataService = dataService;
         }
+
         [HttpGet]
         public async Task<ActionResult<List<Users>>> GetAllUser()
         {
-            var users = await _dataContext.Users.FindAsync();
+            var users = await _dataContext.Users.ToListAsync();
+            if (users == null)
+            {
+                return BadRequest();
+            }
             return Ok(users);
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Users>>> GetUserById(Guid id)
         {
@@ -37,24 +42,30 @@ namespace GymManagement_API.Controllers
             }
             return Ok(users);
         }
+
         [HttpPost("addUser")]
-        public async Task<ActionResult<List<Users>>> AddUser(Users users)
+        public async Task<ActionResult<List<Users>>> AddUser(UserDTO users)
         {
             var newUsers = new Users
             {
-                Id = users.Id,
+                Id = Guid.NewGuid(),
                 Username = users.Username,
                 Email = users.Email,
                 Firstname = users.Firstname,
                 Lastname = users.Lastname,
-                Avatar = users.Avatar,
                 Phone = users.Phone,
                 Password = users.Password,
-                IsAdmin = false
+                IsAdmin = users.IsAdmin,
+            };
+            var login = new UserLogin
+            {
+                Id = newUsers.Id,
+                Email = newUsers.Email,
+                Password = newUsers.Password,
             };
             _dataContext.Users.Add(newUsers);
             await _dataContext.SaveChangesAsync();
-            return Ok(newUsers);
+            return Ok(login);
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(Guid id, UpdateUserDTO updateUserDTO)
@@ -69,6 +80,7 @@ namespace GymManagement_API.Controllers
             user.Firstname = updateUserDTO.Firstname;
             user.Lastname = updateUserDTO.Lastname;
             user.Password = updateUserDTO.Password;
+            user.IsAdmin = updateUserDTO.IsAdmin;
             await _dataContext.SaveChangesAsync();
             return Ok(await _dataContext.Users.FindAsync(user.Id));
         }

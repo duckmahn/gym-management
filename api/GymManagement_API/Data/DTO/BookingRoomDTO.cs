@@ -2,11 +2,11 @@
 
 namespace GymManagement_API.Data.DTO
 {
-    public class ScheduleDTO
+    public class BookingRoomDTO
     {
-        public DateTime? Date { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
-        public string? Location { get; set; }
+        public int? NumberOfParticipants { get; set; }
+        public bool? IsConfirmed { get; set; }
     }
 }

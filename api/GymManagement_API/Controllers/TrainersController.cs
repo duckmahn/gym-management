@@ -21,31 +21,29 @@ namespace GymManagement_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Trainers>>> GetAllTrainer()
         {
-            if (_context.Trainers == null)
-            {
-                return NotFound();
-            }
+            
             var trainer = await _context.Trainers.ToListAsync();
+            if (trainer == null)
+            {
+                return BadRequest();
+            }
             return Ok(trainer);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Trainers>>> GetTrainerById(Guid id)
         {
-            if (_context.Trainers == null)
-            {
-                return NotFound();
-            }
-            var trainer = await _context.Trainers.FirstOrDefaultAsync(t => t.Id == id);
+
+            var trainer = await _context.Trainers.FindAsync(id);
             if (trainer == null)
             {
-                return NotFound();
+                return BadRequest();
             }
             return Ok(trainer);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Trainers>> AddTrainer(TrainerDTO trainerDTO)
+        public async Task<ActionResult<List<Trainers>>> AddTrainer(TrainerDTO trainerDTO)
         {
             var trainers = new Trainers
             {
@@ -55,6 +53,8 @@ namespace GymManagement_API.Controllers
                 Phone = trainerDTO.Phone,
                 Specialty = trainerDTO.Specialty,
                 Experience = trainerDTO.Experience,
+                Type = trainerDTO.Type,
+                Avatar = trainerDTO.Avatar,
             };
 
             _context.Trainers.Add(trainers);
@@ -67,13 +67,14 @@ namespace GymManagement_API.Controllers
             var trainer = await _context.Trainers.FindAsync(id);
             if (trainer == null)
             {
-                return NotFound();
+                return BadRequest();
             }
             trainer.Name = trainerDTO.Name;
             trainer.Email = trainerDTO.Email;
             trainer.Phone = trainerDTO.Phone;
             trainer.Specialty = trainerDTO.Specialty;
             trainer.Experience = trainerDTO.Experience;
+            trainer.Avatar = trainerDTO.Avatar;
             _context.Entry(trainer).State = EntityState.Modified;
 
             try
@@ -101,7 +102,7 @@ namespace GymManagement_API.Controllers
             var trainer = await _context.Trainers.FindAsync(id);
             if (trainer == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             _context.Trainers.Remove(trainer);
