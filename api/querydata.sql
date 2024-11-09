@@ -66,3 +66,30 @@ VALUES
 (NEWID(), 'Nguyễn Thị Cẩm Tú', 'nguyen.thi.cam.tu@example.com', 789012345, 'Martial Arts', '8 năm kinh nghiệm', 'avatar_tu.png', 'Contract'),
 (NEWID(), 'Hoàng Anh Dũng', 'hoang.anh.dung@example.com', 890123456, 'Personal Training', '10 năm kinh nghiệm', 'avatar_dung.png', 'Full-time'),
 (NEWID(), 'Trịnh Hoài Nam', 'trinh.hoai.nam@example.com', 901234567, 'CrossFit', '6 năm kinh nghiệm', 'avatar_nam.png', 'Part-time');
+
+
+INSERT INTO UserLogin (Id, Email, Password)
+VALUES 
+(NEWID(), 'user1@example.com', 'password1'),
+(NEWID(), 'user2@example.com', 'password2'),
+(NEWID(), 'user3@example.com', 'password3'),
+(NEWID(), 'user4@example.com', 'password4'),
+(NEWID(), 'user5@example.com', 'password5'),
+(NEWID(), 'user6@example.com', 'password6'),
+(NEWID(), 'user7@example.com', 'password7'),
+(NEWID(), 'user8@example.com', 'password8'),
+(NEWID(), 'user9@example.com', 'password9'),
+(NEWID(), 'user10@example.com', 'password10');
+
+INSERT INTO Membership (Id, Type, Price, Description, StartDate, EndDate, IsActive, UserId)
+VALUES 
+(NEWID(), 'Standard', 30.00, 'Gói thành viên tiêu chuẩn với quyền truy cập cơ bản.', '2024-01-01', '2024-12-31', 1, NEWID()),
+(NEWID(), 'Premium', 50.00, 'Gói thành viên cao cấp với quyền truy cập không giới hạn.', '2024-02-01', '2025-01-31', 1, NEWID()),
+(NEWID(), 'VIP', 70.00, 'Gói thành viên VIP bao gồm dịch vụ tư vấn và huấn luyện cá nhân.', '2024-03-01', '2025-02-28', 1, NEWID()),
+(NEWID(), 'Standard', 30.00, 'Gói thành viên tiêu chuẩn với quyền truy cập cơ bản.', '2024-04-01', '2025-03-31', 0, NEWID()),
+(NEWID(), 'Premium', 50.00, 'Gói thành viên cao cấp với quyền truy cập không giới hạn.', '2024-05-01', '2025-04-30', 1, NEWID()),
+(NEWID(), 'VIP', 70.00, 'Gói thành viên VIP bao gồm dịch vụ tư vấn và huấn luyện cá nhân.', '2024-06-01', '2025-05-31', 1, NEWID()),
+(NEWID(), 'Standard', 30.00, 'Gói thành viên tiêu chuẩn với quyền truy cập cơ bản.', '2024-07-01', '2025-06-30', 0, NEWID()),
+(NEWID(), 'Premium', 50.00, 'Gói thành viên cao cấp với quyền truy cập không giới hạn.', '2024-08-01', '2025-07-31', 1, NEWID()),
+(NEWID(), 'VIP', 70.00, 'Gói thành viên VIP bao gồm dịch vụ tư vấn và huấn luyện cá nhân.', '2024-09-01', '2025-08-31', 1, NEWID()),
+(NEWID(), 'Standard', 30.00, 'Gói thành viên tiêu chuẩn với quyền truy cập cơ bản.', '2024-10-01', '2025-09-30', 0, NEWID());
