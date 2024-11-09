@@ -4,7 +4,6 @@ import Sidebar from '../../components/sidebar';
 import Header from '../../components/header';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 interface Trainer {
