@@ -39,11 +39,8 @@ export default function SignUpComponent() {
     try {
       const response = await axios.post(url, data)
       if (response.status === 200) {
-        console.log("Successfully", response.data)
       }
-    } catch (error) {
-      console.error("Failed", error)
-    }
+    } catch (error) {}
   }
 
   return (

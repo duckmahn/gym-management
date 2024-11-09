@@ -21,12 +21,8 @@ export default function SignIn() {
       localStorage.setItem("Token", token)
       setSuccessMessage("Đăng nhập thành công!")
       setError("")
-      console.log("Successfully!", token)
     } catch (error) {
-      console.log("Failed", error)
-      setError(
-        "Đăng nhập thất bại. Vui lòng kiểm tra tên người dùng và mật khẩu."
-      )
+      setError("Fail")
 
       setSuccessMessage("")
     }
@@ -73,7 +69,7 @@ export default function SignIn() {
             Google
           </button>
           <p className="text-center my-1">
-            Don't have an account?
+            Don&lsquo;t have an account?
             <a href="/signup" className="text-brown-500">
               Sign Up
             </a>
