@@ -1,0 +1,165 @@
+.logo-container {
+  position: absolute;
+  top: 70px; /* Khoảng cách từ trên xuống */
+  left: 680px; 
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.colorGym{
+  color:rgb(210, 31, 88);
+  font-style: italic;
+  font-weight: bold;
+  font-size: 28px;
+}
+.colorForgot{
+  color:rgb(210, 31, 88);
+  font-style: italic;
+  font-weight: bold;
+  font-size: 15px;
+}
+.colorHuflit{
+  color:rgb(0, 0, 0);
+  font-style: italic;
+  font-weight: bold;
+  font-size: 28px;
+}
+.titleText{
+  font-size: 28px;
+  font-weight: bold;
+}
+.title {
+  position: absolute;
+  top: 140px; /* Khoảng cách từ trên xuống */
+  left: 650px; 
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.name {
+  position: absolute;
+  top: 210px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.nameBox {
+  position: absolute;
+  top: 230px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.email {
+  position: absolute;
+  top: 280px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.emailBox {
+  position: absolute;
+  top: 290px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+
+.passForgot {
+  position: absolute;
+  top: 350px; /* Khoảng cách từ trên xuống */
+  left: 830px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.pass {
+  position: absolute;
+  top: 350px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.passBox {
+  position: absolute;
+  top: 360px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.checkBox {
+  position: absolute;
+  top: 420px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.Login {
+  position: absolute;
+  top: 450px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.textSmall {
+  position: absolute;
+  top: 520px; /* Khoảng cách từ trên xuống */
+  left: 650px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  color:rgb(141, 142, 142);
+  text-size-adjust: 20px;
+}
+.Google {
+  position: absolute;
+  top: 580px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.imageGoogle {
+  position: absolute;
+  top: 590px; /* Khoảng cách từ trên xuống */
+  left: 650px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.already {
+  position: absolute;
+  top: 630px; /* Khoảng cách từ trên xuống */
+  left: 630px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+
+
+.text{
+  font-size: 15px;
+}
+.textAgree{
+  font-size: 12px;
+  color:rgb(102, 102, 102)
+}
+.textQuestion{
+  font-size: 15px;
+  color:rgb(102, 102, 102)
+}
