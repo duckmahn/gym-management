@@ -3,6 +3,7 @@ using GymManagement_API.Data;
 using GymManagement_API.Service.Implement;
 using GymManagement_API.Service.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -24,6 +25,7 @@ namespace GymManagement_API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSignalR();
 
             builder.Services.AddScoped<DbContext, DataContext>();
             builder.Services.AddScoped<ITokenService, TokenService>();
@@ -42,8 +44,6 @@ namespace GymManagement_API
                 options.UseSqlServer(connect);
             });
 
-            builder.Services.AddCors();
-
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
@@ -54,20 +54,32 @@ namespace GymManagement_API
                 });
             });
 
-            
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAll", builder =>
+            //    {
+            //        builder.AllowAnyOrigin()
+            //               .AllowAnyMethod()
+            //               .AllowAnyHeader()
+            //               .WithOrigins("http://localhost:3000");
+            //    });
+            //});
+
+
+
             builder.Services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
             {
-                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                {
-                    Description = "Please add jwt bearer token in",
-                    In = ParameterLocation.Header,
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    Scheme = "bearer"
-                });
-                options.OperationFilter<SecurityRequirementsOperationFilter>();
+                Description = "Please add jwt bearer token in",
+                In = ParameterLocation.Header,
+                Name = "Authorization",
+                Type = SecuritySchemeType.Http,
+                BearerFormat = "JWT",
+                Scheme = "bearer"
             });
+            options.OperationFilter<SecurityRequirementsOperationFilter>();
+        });
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -107,10 +119,17 @@ namespace GymManagement_API
             app.UseSwaggerUI();
             //}
             app.UseHttpsRedirection();
+            app.UseRouting();
+
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.MapControllers();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<signalHub>("/signalHub");
+            });
 
             app.Run();
         }
