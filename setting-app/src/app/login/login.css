@@ -1,0 +1,199 @@
+.logoContainer {
+  position: absolute;
+  top: 130px; /* Khoảng cách từ trên xuống */
+  left: 680px; 
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.colorGym{
+  color:rgb(210, 31, 88);
+  font-style: italic;
+  font-weight: bold;
+  font-size: 28px;
+}
+.colorForgot{
+  color:rgb(210, 31, 88);
+  font-style: italic;
+  font-weight: bold;
+  font-size: 15px;
+}
+.colorHuflit{
+  color:rgb(0, 0, 0);
+  font-style: italic;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.email {
+  top: 220px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  position: absolute;
+}
+.emailBox {
+  align-items: center;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  text-size-adjust: 30px;
+  padding-top: 5px;
+}
+.emailInput{
+  border: 2px solid rgb(201, 200, 200); 
+  padding: 10px; 
+  font-size: 12px; 
+  background-color: white;
+  width: 400px; /* Chiều rộng của trường nhập */
+  height:15px;
+}
+.pass {
+  top: 300px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  position: absolute;
+}
+.passForgot{
+  cursor:pointer;
+  color: rgb(210, 31, 88);
+  margin-left: 250px;
+}
+.passBox {
+  align-items: center;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  text-size-adjust: 30px;
+  padding-top: 5px;
+}
+.passInput{
+  border: 2px solid rgb(201, 200, 200); 
+  padding: 10px; 
+  font-size: 12px; 
+  background-color: white;
+  width: 400px; /* Chiều rộng của trường nhập */
+  height:15px;
+  background-image: url('/eye.jpg');
+  background-repeat: no-repeat;
+  background-position:95%;
+
+}
+.checkbox{
+  top: 390px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  position: absolute;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Ẩn checkbox mặc định */
+.checkbox-input {
+  display: none;
+}
+
+/* Tạo checkbox tùy chỉnh */
+.checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ba0542;
+  border-radius: 4px; /* Bo góc nhẹ */
+  margin-right: 8px;
+  display: inline-block;
+  position: relative;
+}
+
+/* Hiệu ứng khi checkbox được chọn */
+.checkbox-input:checked + .checkbox-custom {
+  background-color: #ba0542;
+}
+
+/* Tạo dấu tick khi chọn */
+.checkbox-input:checked + .checkbox-custom::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.signup {
+  position: absolute;
+  top: 430px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.buttonSignup{
+  padding: 10px 20px;
+  background-color: rgb(194, 41, 59);
+  color: #fff; 
+  border: none;
+  width: 390px;
+  height:20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.textSmall {
+  position: absolute;
+  top: 500px; /* Khoảng cách từ trên xuống */
+  left: 670px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  color:rgb(141, 142, 142);
+  text-size-adjust: 20px;
+}
+.Google {
+  position: absolute;
+  top: 540px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.buttonGoogle{
+  padding: 10px 20px;
+  background-color: #E4E7Eb;
+  color: #000000; 
+  border: none;
+  width: 390px;
+  height:20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  background-image: url('/Google.jpg');
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position:30%;
+}
+
+.create {
+  position: absolute;
+  top: 600px; /* Khoảng cách từ trên xuống */
+  left: 710px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+
+
+.text{
+  font-size: 15px;
+}
+.textQuestion{
+  font-size: 15px;
+  cursor:pointer;
+  color: rgb(210, 31, 88);
+  font-weight:bold;
+}

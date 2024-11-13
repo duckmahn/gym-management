@@ -1,14 +1,12 @@
 "use client";
-import Textbox from  './textboxcreate'
-import ClickButton from './buttonsignup'
-import ButtonG from './buttonsignupgoogle'
+import "./signup.css";
 import Image from 'next/image'
 
     export default function Register() {
   
       return (
         <div>
-        <div className="logo-container">
+        <div className="logoContainer">
         <span className="colorGym">GYM</span>
         <span className="colorHuflit">HUFLIT.</span>
         
@@ -19,20 +17,22 @@ import Image from 'next/image'
 
         <div className="name">
           <div className="text">Name</div>
+          <div className="nameBox"> 
+            <input  className="nameInput" placeholder=""/></div>
         </div>
-        <div className="nameBox"> <Textbox/> </div>
 
-        <div className="email"> 
+        <div className="email">
           <div className="text">Email Address</div>
+          <div className="emailBox"> 
+            <input  className="emailInput" placeholder=""/></div>
         </div>
-        <div className="emailBox">  <Textbox/></div>
         
-        <div className="pass"> 
+       
+        <div className="pass">
           <div className="text">Password</div>
-        </div>
-
-      
-        <div className="passBox">  <Textbox /></div>
+          <div className="passBox"> 
+            <input  className="passInput" placeholder=""/></div>
+        </div> 
 
         <div className="checkBox">
         <div className="textAgree">By continuing, you agree to our <span></span>
@@ -41,29 +41,23 @@ import Image from 'next/image'
                 style={{
                     cursor: 'pointer', // Hiển thị con trỏ tay khi di chuột
                     color: 'rgb(210, 31, 88)', // Màu chữ
-                    
                 }}
             >
                 terms of service.
             </a>
-        </div> </div>
-
-        <div className="Login"> <ClickButton label="Sign up" />
+        </div>
+         </div>
+        
+        <div className="signup">
+        <div className="buttonSignup"> Sign up</div>
         </div>
 
         <div className="textSmall"> --------- or sign in with---------
         </div>
  
         
-        <div className="Google"> <ButtonG label="Continue with Google"/>
-        </div>
-        <div className="imageGoogle">
-        <Image
-                src="/gg.jpg" 
-                alt=""
-                width={20} // Độ rộng hình ảnh
-                height={20} // Độ cao hình ảnh
-        />
+        <div className="Google"> 
+        <div className="buttonGoogle">Continue with Google</div>
         </div>
 
         <div className="already">
