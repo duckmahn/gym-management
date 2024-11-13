@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-
+import "./details.css";
 export default function Setting() {
   return (
     
@@ -27,7 +27,7 @@ export default function Setting() {
 
       <div>
       <button className ="image-button4">
-  <img src="messages.jpg" alt="Button Image" />
+  <img src="messages2.jpg" alt="Button Image" />
       </button>
       </div>
 

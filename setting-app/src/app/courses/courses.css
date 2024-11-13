@@ -14,13 +14,7 @@ display:flex;
   background-color: white;
   padding:10px;
 }
-.background-small{
-  background-color: white;
-  margin-left:50px;
-  margin-top:0px;
-  height: 500px;
-  width: 1260px;
-}
+
 .image-button1 {
   background: none;
   border: none;
@@ -169,32 +163,18 @@ display:flex;
   object-fit: cover;  /* Đảm bảo ảnh không bị méo khi cắt */
   overflow: hidden;
 }
-.textBold{
-  font-size: 20px;
-  margin-left: 10px;
-  margin-top:30px;
-  font-weight:bold;
+.background-small{
+  background-color: white;
+  margin-left:50px;
+  margin-top:0px;
+  height: 500px;
+  width: 1260px;
 }
 .textkhoahoc{
   font-size: 25px;
   margin-left: 30px;
   padding-top:20px;
   
-}
-
-.textYoga{
-  color:rgb(147, 147, 147);
-  font-size: 15px;
-  margin-left: 0px;
-  margin-top:0px;
-  text-align: center;
- 
-}
-.textsmall{
-  color:rgb(147, 147, 147);
-  font-size: 11px;
-  margin-left: 10px;
-  margin-top:0px;
 }
 .yogaBox {
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);/* Bỏ đường viền */
@@ -207,12 +187,53 @@ display:flex;
   width: 300px; 
   height:250px;
 }
+.textTitle{
+  color:rgb(147, 147, 147);
+  font-size: 15px;
+  margin-left: 0px;
+  margin-top:0px;
+  text-align: center;
+}
+  .yogaImage{
+    width: 100%;
+    height: auto;
+    display:flex;
+    flex-direction: row;
+    
+  }
+  .yogaImageTrai{
+    width: 50%;
+    height:auto;
+    padding: 10px;
+  }
+  
+  .textBold{
+    font-size: 20px;
+    margin-left: 10px;
+    font-weight:bold;
+    margin-bottom: 10px;
+  }
+.textsmall{
+  color:rgb(147, 147, 147);
+  font-size: 11px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+.yogaImagePhai{
+  width: 50%;
+  height:auto;
+  padding: 30px;
+ 
+}.yogaImagePhai img{
+  width: 100%;
+  height: 100%;
+}
 .thongtinBox {
  border-radius: 5px;
   padding: 10px; /* Khoảng cách bên trong */
   margin-left: 90px;
-  margin-top:20px;
-  background-color: rgb(217, 9, 9);
+  margin-top:10px;
+  background-color: rgb(206, 19, 90);
   font-size: 16px; 
   padding-bottom: 20px;
   padding-left: 20px;
@@ -222,6 +243,10 @@ display:flex;
   background-image: url('/ArrowRight.jpg');
   background-repeat: no-repeat;
   background-size: 15px;
-  background-position:95%;
+  background-position:80%;
   cursor: pointer;
+}
+.buttonRight{
+  margin-left: 1200px;
+  cursor:pointer;
 }
