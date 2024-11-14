@@ -10,35 +10,33 @@ import { NEXT_PUBLIC_API_URL } from "../../apiconfig";
 import { Textarea } from "./ui/textarea";
 
 interface FormData {
-  title?: string;
-  content?: string;
+  title: string | null;
+  content: string | null;
 }
 
 export default function Header(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const [formData, setFormData] = useState<FormData>();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-  const sendNotification = (e) => {
-    e.preventDefault();
-    if (e.target.title.value && e.target.content.value) {
-      setFormData({
-        title: e.target.title.value,
-        content: e.target.description.value,
-      });
+  const sendNotification = () => {
+    if (!!content && !!title) {
+      sendNotiofication({ title, content });
+      setTitle("");
+      setContent("");
     }
-    if (formData) sendNotiofication(formData);
-
     setIsOpen(false);
   };
 
-  const sendNotiofication = async (request: FormData) => {
-    const res = await axios.post(
+  const sendNotiofication = (request: FormData) => {
+    const res = axios.post(
       `${NEXT_PUBLIC_API_URL}/api/Notification/notification`,
       request
     );
     console.log("🚀 ~ sendNotiofication ~ res:", res);
-    return res.statusText;
+    return res;
   };
+
   return (
     <header className="flex justify-between items-center mb-5 relative">
       <div className="flex items-center justify-center w-full relative">
@@ -69,9 +67,8 @@ export default function Header(): JSX.Element {
                   id="title"
                   placeholder="Title"
                   className="col-span-3"
-                  onChange={(e) =>
-                    setFormData({ ...formData, title: e.target.value })
-                  }
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
@@ -82,9 +79,7 @@ export default function Header(): JSX.Element {
                   id="content"
                   placeholder="Content"
                   className="col-span-3"
-                  onChange={(e) =>
-                    setFormData({ ...formData, content: e.target.value })
-                  }
+                  onChange={(e) => setContent(e.target.value)}
                 />
               </div>
             </div>
