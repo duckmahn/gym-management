@@ -1,0 +1,443 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.bg{
+display:flex;
+}
+.background-full{
+  background-color: rgb(222, 224, 224);
+  margin-left:0px;
+  height: 1300px;
+  width: 100%;
+  
+}
+.menu{
+  height:100vh;
+  width:100px;
+  background-color: white;
+  padding:10px;
+}
+
+.image-button1 {
+  background: none;
+  border: none;
+  margin-top: 150px;
+  padding: 20px;
+  padding-left: 10px;
+  height:auto;
+  width:100px;
+  cursor: pointer;
+}
+.image-button2 {
+  background: none;
+  border: none;
+  margin-top: 0px;
+  padding: 20px;
+  padding-left: 10px;
+  height:auto;
+  width:100px;
+  cursor: pointer;
+}
+.image-button3 {
+  background: none;
+  border: none;
+  margin-top: 0px;
+  padding: 20px;
+  padding-left: 10px;
+  height:auto;
+  width:100px;
+  cursor: pointer;
+}
+.image-button4 {
+  background: none;
+  border: none;
+  margin-top: 0px;
+  padding: 20px;
+  padding-left: 10px;
+  height:auto;
+  width:100px;
+  cursor: pointer;
+}
+.image-button5 {
+  background: none;
+  border: none;
+  margin-top: 0px;
+  padding: 20px;
+  padding-left: 10px;
+  height:auto;
+  width:100px;
+  cursor: pointer;
+}
+.image-button1:focus {
+  background-color: rgb(240, 74, 138); 
+}
+.image-button2:focus {
+  background-color: rgb(240, 74, 138);
+}
+.image-button3:focus {
+  background-color: rgb(240, 74, 138); 
+}
+.image-button4:focus {
+  background-color: rgb(240, 74, 138); 
+}
+.image-button5:focus {
+  background-color: rgb(240, 74, 138);
+}
+
+
+
+.textHead{
+  font-size: 20px;
+  margin-top: 20px;
+  margin-left: 50px;
+}
+.head{
+  margin-top: 30px;
+
+  display:flex;
+}
+.textDay{
+  font-size: 15px;
+  margin-left: 50px;
+  
+  color:rgb(147, 147, 147)
+}
+.search{
+  margin-left: 700px;
+}
+.searchBar {
+  padding-left: 200px;
+  margin-left: 590px;
+  align-items: center;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  text-size-adjust: 30px;
+}
+
+.search-input {
+  border: none; /* Bỏ đường viền */
+  padding: 10px; /* Khoảng cách bên trong */
+  padding-left: 40px;
+  background-image: url('/search-normal.jpg');
+  background-repeat: no-repeat;
+  background-position:5%;
+  font-size: 16px; 
+  outline: none; /* Bỏ đường viền khi có focus */
+  width: 250px; /* Chiều rộng của trường nhập */
+}
+.noticeButton {
+  background: none;
+  border: none;
+  margin-left: 10px;
+  align-items:center ;
+  cursor: pointer;
+}
+.meomeoButton {
+  background: none;
+  border: none;
+  margin-left: 10px;
+  align-items:center ;
+  cursor: pointer;
+}
+.red{
+  height:100px;
+  width:1260px;
+  border-radius: 10px;
+  margin-top:30px;
+  margin-left:50px;
+  background-color: rgb(194, 41, 59);
+  padding:10px;
+}
+.meomeo{
+  display:flex;
+  margin-left: 70px;
+}
+.meomeoImg{
+  
+  background-color: rgb(16, 33, 186);
+  border-radius: 50%;
+  margin-left: 0px;
+  height:100px;
+  background-position:50%;
+  width:100px;
+  margin-top:20px;
+  cursor: pointer;
+  object-fit: cover;  /* Đảm bảo ảnh không bị méo khi cắt */
+  overflow: hidden;
+}
+.background-small{
+  background-color: white;
+  margin-left:50px;
+  margin-top:0px;
+  height: 1000px;
+  width: 1260px;
+}
+.textkhoahoc{
+  font-size: 25px;
+  margin-left: 30px;
+  padding-top:20px;
+}
+
+.hang1{
+  display: flex;
+  margin-left:30px;
+  margin-top:-80px;
+}
+.jumpBox {
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);/* Bỏ đường viền */
+  padding: 10px; /* Khoảng cách bên trong */
+  margin-left: 30px;
+  margin-top:0px;
+  background-color: white;
+  font-size: 16px; 
+  outline: none; /* Bỏ đường viền khi có focus */
+  width: 300px; 
+  height:270px;
+}
+.textTitle{
+  color:rgb(147, 147, 147);
+  font-size: 15px;
+  margin-left: 0px;
+  margin-top:0px;
+  text-align: center;
+ 
+}
+.textBold{
+  font-size: 20px;
+  margin-left: 0px;
+  font-weight:bold;
+  margin-bottom: 0px;
+}
+.textsmall{
+  color:rgb(147, 147, 147);
+  font-size: 11px;
+  margin-left: 0px;
+  margin-bottom: 0px;
+}
+.tapBox {
+ border-radius: 5px;
+  padding: 7px; 
+  margin-left: 90px;
+  margin-top:10px;
+  background-color: rgb(206, 19, 90);
+  font-size: 16px; 
+  padding-left: 20px;
+  width: 100px; 
+  height:40px;
+  color:white;
+  background-image: url('/ArrowRight.jpg');
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position:70%;
+  cursor: pointer;
+}
+.squatImage{
+  width: 100%;
+  height: auto;
+  display:flex;
+  flex-direction: row;
+  
+}
+.squatImageTrai{
+  width: 60%;
+  height:auto;
+  padding: 0px;
+}
+.squatImagePhai{
+  width: 40%;
+  height:auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+ 
+}
+.squatImagePhai img{
+  width: 100%;
+  height: 100%;
+}
+
+.frontBox {
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);/* Bỏ đường viền */
+  padding: 10px; /* Khoảng cách bên trong */
+  margin-left: 80px;
+  margin-top:0px;
+  background-color: white;
+  font-size: 16px; 
+  outline: none; /* Bỏ đường viền khi có focus */
+  width: 300px; 
+  height:270px;
+}
+.buttonRight{
+  margin-left: 40px;
+  margin-top: 120px;
+  cursor:pointer;
+}
+
+.calendar{
+  
+  margin-left: 100px;
+  
+}
+.textmonan{
+  font-size: 25px;
+  margin-left: 30px;
+  margin-top:400px;
+}
+.hang2{
+  display: flex;
+  margin-left:0px;
+  margin-top:350px;
+}
+.salahBox {
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);/* Bỏ đường viền */
+  padding: 10px; /* Khoảng cách bên trong */
+  margin-left: 30px;
+  margin-top:0px;
+  background-color: white;
+  font-size: 16px; 
+  outline: none; /* Bỏ đường viền khi có focus */
+  width: 300px; 
+  height:270px;
+}
+.huongdanBox {
+  border-radius: 5px;
+   padding: 7px; 
+   margin-left: 60px;
+   margin-top:10px;
+   background-color: rgb(206, 19, 90);
+   font-size: 16px; 
+   padding-left: 20px;
+   width: 150px; 
+   height:40px;
+   color:white;
+   background-image: url('/ArrowRight.jpg');
+   background-repeat: no-repeat;
+   background-size: 15px;
+   background-position:80%;
+   cursor: pointer;
+ }
+ .buttonRight1{
+  margin-left: 420px;
+  margin-top: 120px;
+  cursor:pointer;
+}
+.suckhoe{
+
+}
+.chayFull{
+  width: 100%;
+  height: auto;
+  display:flex;
+  flex-direction: row;
+}
+.chay1{
+  width: 20%;
+  height:auto;
+  padding: 0px;
+}
+.chay2{
+  width: 40%;
+  height:auto;
+ 
+}
+.chay3{
+  width: 30%;
+  height:auto;
+  
+}
+.chayBox {
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);/* Bỏ đường viền */
+  padding: 20px; /* Khoảng cách bên trong */
+  margin-left: 80px;
+  margin-top:0px;
+  background-color: white;
+  font-size: 16px; 
+  outline: none; /* Bỏ đường viền khi có focus */
+  width: 300px; 
+  height:160px;
+}
+.chay{
+  font-size: 20px;
+  margin-left: 0px;
+  font-weight:bold;
+  margin-bottom: 0px;
+}
+.text24{
+  font-size: 15px;
+  margin-left: 0px;
+  font-weight:bold;
+  color:rgb(147, 147, 147);
+  margin-bottom: 0px;
+}
+
+.km{
+  width: 100%;
+  margin-top: 10px;
+  height: auto;
+  display:flex;
+  flex-direction: row;
+}
+.km1{
+  width: 60%;
+  height:auto;
+  padding-left: 30px;
+}
+.km2{
+  width: 40%;
+  height:auto;
+}
+.textkm{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.healthBox{
+  display: flex;
+  margin-top:40px;
+  margin-left:80px;
+}
+.timBox {
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);/* Bỏ đường viền */
+  padding: 20px; /* Khoảng cách bên trong */
+  
+  background-color: white;
+  font-size: 16px; 
+  outline: none; /* Bỏ đường viền khi có focus */
+  width: 120px; 
+  height:120px;
+}
+.tim{
+  width: 100%;
+  margin-top: 0px;
+  height: auto;
+  display:flex;
+  flex-direction: row;
+}
+.tim1{
+  width: 50%;
+  height:auto;
+  padding-left: 0px;
+}
+.tim2{
+  width: 50%;
+  height:auto;
+}
+.day{
+  margin-top: 10px;
+}
+.cobapBox {
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);/* Bỏ đường viền */
+  padding: 20px; /* Khoảng cách bên trong */
+  margin-left: 20px;
+  background-color: white;
+  font-size: 16px; 
+  outline: none; /* Bỏ đường viền khi có focus */
+  width: 120px; 
+  height:120px;
+}
+.textcobap{
+  margin-left: 20px;
+}
+.ta{
+  margin-left: 10px;
+}
