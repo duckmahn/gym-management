@@ -1,7 +1,7 @@
 "use client";
 import Image from 'next/image';
 import { useState } from 'react';
-import axios from 'axios';
+import axios, {AxiosError}from 'axios';
 import { FormEvent } from 'react'; 
 import { useRouter } from 'next/navigation';
 import { NEXT_PUBLIC_API_URL } from '../../../apiconfig'; // Đảm bảo rằng đường dẫn này đúng
@@ -32,15 +32,21 @@ export default function LoginPage() {
   
       // Gán token vào header Authorization
       localStorage.setItem('token', token);
+      localStorage.setItem('username', username);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   
       console.log('Đăng nhập thành công!', token);
   
       // Chuyển hướng
       router.push('/dashboard');
-    } catch (error) {
-      setError('Đăng nhập thất bại, vui lòng thử lại.');
-      console.error(error);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.response) {
+        setError(error.response.data.message || 'Đăng nhập thất bại, vui lòng thử lại.');
+      } else {
+        setError('Đăng nhập thất bại, vui lòng thử lại.');
+      }
+      setPassword('');  // Xóa mật khẩu sau khi lỗi
+      console.error('Lỗi đăng nhập:', error);
     }
   };
   
@@ -50,7 +56,7 @@ export default function LoginPage() {
       className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: "url('/backgradmin.png')",
-        backgroundSize: '100% 100%',
+        backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',

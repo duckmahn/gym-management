@@ -1,7 +1,11 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/sidebar';
 import Header from '../../components/header';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import axios from 'axios';
+import { NEXT_PUBLIC_API_URL } from '../../../apiconfig';
 
 interface Equipment {
   id: number;
@@ -16,43 +20,51 @@ export default function CSVCVaThietBi(): JSX.Element {
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const router = useRouter();
 
-  // Fetch thiết bị từ API
+  // Fetch equipment from the API
   useEffect(() => {
     fetchEquipments();
   }, []);
 
   const fetchEquipments = async () => {
     try {
-      const response = await fetch('https://api.nosteable.works/api/facilities');
-      const data = await response.json();
-      setEquipments(data);
+      const response = await axios.get(`${NEXT_PUBLIC_API_URL}/api/facilities`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add token to header
+          'Content-Type': 'application/json',
+        }
+      });
+      setEquipments(response.data);
     } catch (error) {
-      console.error("Lỗi khi tải dữ liệu thiết bị:", error);
+      console.error("Error loading equipment data:", error);
     }
   };
 
   const addEquipmentAPI = async () => {
     try {
-      await fetch('https://api.nosteable.works/api/facilities', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newEquipment),
+      await axios.post(`${NEXT_PUBLIC_API_URL}/api/facilities`, newEquipment, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add token to header
+          'Content-Type': 'application/json',
+        }
       });
       fetchEquipments();
       setNewEquipment({ id: 0, name: '', type: '', price: 0 });
       setIsAdding(false);
     } catch (error) {
-      console.error("Lỗi khi thêm thiết bị:", error);
+      console.error("Error adding equipment:", error);
     }
   };
 
   const updateEquipmentAPI = async () => {
     try {
-      await fetch(`https://api.nosteable.works/api/facilities/${editingId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newEquipment),
+      await axios.put(`${NEXT_PUBLIC_API_URL}/api/facilities/${editingId}`, newEquipment, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add token to header
+          'Content-Type': 'application/json',
+        }
       });
       fetchEquipments();
       setNewEquipment({ id: 0, name: '', type: '', price: 0 });
@@ -60,18 +72,20 @@ export default function CSVCVaThietBi(): JSX.Element {
       setIsEditing(false);
       setEditingId(null);
     } catch (error) {
-      console.error("Lỗi khi cập nhật thiết bị:", error);
+      console.error("Error updating equipment:", error);
     }
   };
 
   const deleteEquipmentAPI = async (id: number) => {
     try {
-      await fetch(`https://api.nosteable.works/api/facilities/${id}`, {
-        method: 'DELETE',
+      await axios.delete(`${NEXT_PUBLIC_API_URL}/api/facilities/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add token to header
+        }
       });
       fetchEquipments();
     } catch (error) {
-      console.error("Lỗi khi xóa thiết bị:", error);
+      console.error("Error deleting equipment:", error);
     }
   };
 
@@ -83,7 +97,7 @@ export default function CSVCVaThietBi(): JSX.Element {
     }
   };
 
-  // Các hàm xử lý giao diện và sự kiện chỉnh sửa/xóa
+  // Handle edit equipment
   const editEquipment = (id: number) => {
     const equipmentToEdit = equipments.find(equipment => equipment.id === id);
     if (equipmentToEdit) {
@@ -94,23 +108,36 @@ export default function CSVCVaThietBi(): JSX.Element {
     }
   };
 
+  // Handle delete equipment
   const deleteEquipment = (id: number) => {
-    if (confirm('Bạn có chắc muốn xóa thiết bị này?')) {
+    if (confirm('Are you sure you want to delete this equipment?')) {
       deleteEquipmentAPI(id);
     }
   };
 
+  // Redirect handling
+  const handlePush = (id: number) => {
+    router.push(`/cosovatchat/${id}`);
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar active="csvc-va-thiet-bi" />
-      <main className="flex-grow p-5">
+      <Sidebar active="csvc-va-thiet-bi" onToggle={setIsSidebarOpen} />
+      <main className={`flex-grow p-5 transition-all duration-300 ${
+          isSidebarOpen ? 'ml-[250px]' : 'ml-0'
+        }`}>
         <Header />
         <div className="p-5 bg-white rounded-lg shadow-md">
           <div className="flex justify-between items-center mb-5">
             <h2 className="text-2xl font-semibold text-gray-800">Danh sách thiết bị và CSVC</h2>
-            <button onClick={() => { setIsAdding(true); setIsEditing(false); setNewEquipment({ id: 0, name: '', type: '', price: 0 }); }} className="px-5 py-2 bg-red-600 text-white rounded-lg">
-              Thêm CSVC và thiết bị
-            </button>
+            <div className="flex gap-3">
+              <button onClick={() => { setIsAdding(true); setIsEditing(false); setNewEquipment({ id: 0, name: '', type: '', price: 0 }); }} className="px-5 py-2 bg-red-600 text-white rounded-lg">
+                Thêm CSVC và thiết bị
+              </button>
+              <button onClick={() => handlePush(newEquipment.id)} className="px-5 py-2 bg-red-600 text-white rounded-lg">
+                Redirect
+              </button>
+            </div>
           </div>
 
           {isAdding && (
@@ -132,7 +159,9 @@ export default function CSVCVaThietBi(): JSX.Element {
                 <p className="text-base text-black mb-1">{equipment.type}</p>
                 <p className="text-base text-black">Giá: {equipment.price}₫</p>
                 <div className="flex justify-between items-center mt-3">
-                  <button className="px-3 py-1 bg-red-600 text-white rounded-lg">Chi Tiết</button>
+                  <Link href={`/csvc/${equipment.id}`}>
+                    <button className="px-3 py-1 bg-red-600 text-white rounded-lg">Chi Tiết</button>
+                  </Link>
                   <div className="flex items-center">
                     <i className="fas fa-edit text-red-600 cursor-pointer mr-2" onClick={() => editEquipment(equipment.id)}></i>
                     <i className="fas fa-trash text-red-600 cursor-pointer" onClick={() => deleteEquipment(equipment.id)}></i>

@@ -4,8 +4,8 @@ import Sidebar from '../../components/sidebar';
 import Header from '../../components/header';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { NEXT_PUBLIC_API_URL } from '../../../apiconfig';
 
 interface Trainer {
   id: number;
@@ -28,21 +28,29 @@ export default function HuanLuyenVien(): JSX.Element {
   });
   const [showForm, setShowForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Thêm trạng thái sidebar
+  const router = useRouter();
 
-  const router = useRouter()
-
-  // Lấy danh sách huấn luyện viên từ API khi tải trang
+  // Kiểm tra và thiết lập token
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      router.push('/dashboard');
+      return;
+    }
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+    // Lấy danh sách huấn luyện viên từ API
     const fetchTrainers = async () => {
       try {
-        const response = await axios.get('https://api.nosteable.works/api/Trainers');
-        setTrainers(response.data);   
+        const response = await axios.get(`${NEXT_PUBLIC_API_URL}api/Trainers`);
+        setTrainers(response.data);
       } catch (error) {
-        console.error('Lỗi  ', error);
+        console.error('Lỗi khi lấy danh sách huấn luyện viên:', error);
       }
     };
     fetchTrainers();
-  }, []);
+  }, [router]);
 
   // Xử lý thay đổi dữ liệu form
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,12 +62,10 @@ export default function HuanLuyenVien(): JSX.Element {
   const addTrainer = async () => {
     try {
       if (isEditing) {
-        // Gọi API cập nhật huấn luyện viên
-        await axios.put(`https://api.nosteable.works/api/Trainers/${newTrainer.id}`, newTrainer);
+        await axios.put(`${NEXT_PUBLIC_API_URL}api/Trainers/${newTrainer.id}`, newTrainer);
         setTrainers(trainers.map(trainer => (trainer.id === newTrainer.id ? newTrainer : trainer)));
       } else {
-        // Gọi API thêm huấn luyện viên mới
-        const response = await axios.post('https://api.nosteable.works/api/Trainers', newTrainer);
+        const response = await axios.post(`${NEXT_PUBLIC_API_URL}api/Trainers`, newTrainer);
         setTrainers([...trainers, response.data]);
       }
       setNewTrainer({ id: 0, name: '', email: '', phone: '', code: '', joinDate: '' });
@@ -79,16 +85,12 @@ export default function HuanLuyenVien(): JSX.Element {
       setIsEditing(true);
     }
   };
-  const handlePush = () => {
-    console.log('push');
-    const slugId= '3fa85f64-5717-4562-b3fc-2c963f66afa6'
-    router.push(`/huanluyenvien/${slugId}`)
-  }
+
   // Hàm xóa huấn luyện viên
   const deleteTrainer = async (id: number) => {
     if (confirm('Bạn có chắc muốn xóa huấn luyện viên này?')) {
       try {
-        await axios.delete(`https://api.nosteable.works/api/Trainers/${id}`);
+        await axios.delete(`${NEXT_PUBLIC_API_URL}api/Trainers/${id}`);
         setTrainers(trainers.filter(trainer => trainer.id !== id));
       } catch (error) {
         console.error('Lỗi khi xóa huấn luyện viên:', error);
@@ -98,16 +100,25 @@ export default function HuanLuyenVien(): JSX.Element {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar active="huan-luyen-vien" />
-      <main className="flex-grow p-5">
+      <Sidebar active="huanluyenvien" onToggle={setIsSidebarOpen} />
+      <main
+        className={`flex-grow p-5 transition-all duration-300 ${
+          isSidebarOpen ? 'ml-[250px]' : 'ml-0'
+        }`}
+      >
         <Header />
         <div className="p-5 bg-white rounded-lg shadow-md">
           <div className="flex justify-between items-center mb-5">
             <h2 className="text-2xl font-semibold text-gray-800">Danh sách HLV</h2>
-            <button onClick={() => { setShowForm(true); setIsEditing(false); }} className="px-5 py-2 bg-red-600 text-white rounded-lg">
+            <button
+              onClick={() => {
+                setShowForm(true);
+                setIsEditing(false);
+              }}
+              className="px-5 py-2 bg-red-600 text-white rounded-lg"
+            >
               Thêm huấn luyện viên
             </button>
-           <button onClick={handlePush}>redirect</button>
           </div>
 
           {showForm && (
@@ -153,10 +164,12 @@ export default function HuanLuyenVien(): JSX.Element {
                   name="joinDate"
                   value={newTrainer.joinDate}
                   onChange={handleInputChange}
-                  placeholder="Ngày gia nhập"
                   className="p-2 border rounded-lg text-black"
                 />
-                <button onClick={addTrainer} className="mt-3 px-5 py-2 bg-green-600 text-white rounded-lg">
+                <button
+                  onClick={addTrainer}
+                  className="mt-3 px-5 py-2 bg-green-600 text-white rounded-lg"
+                >
                   {isEditing ? 'Cập nhật' : 'Lưu'}
                 </button>
               </div>
@@ -177,10 +190,7 @@ export default function HuanLuyenVien(): JSX.Element {
             <tbody>
               {trainers.map(trainer => (
                 <tr key={trainer.id} className="border-b">
-                  <td className="flex items-center text-gray-800">
-                    <i className="fas fa-user-circle text-gray-500 text-3xl mr-2"></i>
-                    {trainer.name}
-                  </td>
+                  <td className="text-gray-800">{trainer.name}</td>
                   <td className="text-gray-800">{trainer.email}</td>
                   <td className="text-gray-800">{trainer.phone}</td>
                   <td className="text-gray-800">{trainer.code}</td>
