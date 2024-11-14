@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogFooter, DialogHeader } from "./ui/dialog";
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
@@ -10,8 +10,8 @@ import { NEXT_PUBLIC_API_URL } from "../../apiconfig";
 import { Textarea } from "./ui/textarea";
 
 interface FormData {
-  title?: string | undefined;
-  content?: string | undefined;
+  title?: string;
+  content?: string;
 }
 
 export default function Header(): JSX.Element {
@@ -27,6 +27,7 @@ export default function Header(): JSX.Element {
       });
     }
     if (formData) sendNotiofication(formData);
+
     setIsOpen(false);
   };
 
@@ -35,6 +36,7 @@ export default function Header(): JSX.Element {
       `${NEXT_PUBLIC_API_URL}/api/Notification/notification`,
       request
     );
+    console.log("🚀 ~ sendNotiofication ~ res:", res);
     return res.statusText;
   };
   return (
@@ -56,7 +58,8 @@ export default function Header(): JSX.Element {
 
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogContent>
-            <DialogHeader className="font-bold">Send Notification</DialogHeader>
+            <DialogTitle>Send Notification</DialogTitle>
+
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="name" className="text-right font-bold">
