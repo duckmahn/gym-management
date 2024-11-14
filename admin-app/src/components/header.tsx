@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogFooter, DialogHeader } from "./ui/dialog";
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import axios from "axios";
-import { NEXT_PUBLIC_API_URL } from "../../apiconfig";
 import { Textarea } from "./ui/textarea";
 
 interface FormData {
@@ -32,7 +31,7 @@ export default function Header(): JSX.Element {
 
   const sendNotificationRequest = async (request: FormData) => {
     const res = await axios.post(
-      `${NEXT_PUBLIC_API_URL}/api/Notification/notification`,
+      `https://api.nosteable.works/api/Notification`,
       request
     );
     return res.statusText;
@@ -57,7 +56,7 @@ export default function Header(): JSX.Element {
 
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogContent>
-            <DialogHeader className="font-bold">Send Notification</DialogHeader>
+            <DialogTitle className="font-bold">Send Notification</DialogTitle>
             <form onSubmit={sendNotification}>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-4">
