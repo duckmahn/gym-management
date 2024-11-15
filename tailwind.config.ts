@@ -52,7 +52,9 @@ const config: Config = {
   			},
 			brown: {
 				500: '#C70039',
-			}			
+			},
+			'orangered': '#FF4500',		
+			'grey': '#808080',		
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
