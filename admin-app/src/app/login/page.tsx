@@ -1,20 +1,22 @@
-"use client";
+'use client';
 import Image from 'next/image';
 import { useState } from 'react';
 import axios, {AxiosError}from 'axios';
 import { FormEvent } from 'react'; 
 import { useRouter } from 'next/navigation';
-import { NEXT_PUBLIC_API_URL } from '../../../apiconfig'; // Đảm bảo rằng đường dẫn này đúng
+import { NEXT_PUBLIC_API_URL } from '../../../apiconfig'; 
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
+ 
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-  
+    
+   
     try {
       const response = await axios.post(`${NEXT_PUBLIC_API_URL}Login`, {  
         email: username,
@@ -23,21 +25,23 @@ export default function LoginPage() {
       
       console.log('Phản hồi từ API:', response.data);
   
-      // Kiểm tra xem phản hồi có phải là chuỗi token không
-      const token = typeof response.data === 'string' ? response.data : response.data.token || response.data.id;
-  
+      
+      const token = response.data?.token || response.data;
+      
+
       if (!token) {
-        throw new Error('Token không tồn tại trong phản hồi');
+        throw new Error('Thiếu token trong phản hồi');
       }
   
-      // Gán token vào header Authorization
+      
       localStorage.setItem('token', token);
       localStorage.setItem('username', username);
+      
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   
       console.log('Đăng nhập thành công!', token);
   
-      // Chuyển hướng
+      
       router.push('/dashboard');
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
@@ -45,7 +49,7 @@ export default function LoginPage() {
       } else {
         setError('Đăng nhập thất bại, vui lòng thử lại.');
       }
-      setPassword('');  // Xóa mật khẩu sau khi lỗi
+      setPassword('');  
       console.error('Lỗi đăng nhập:', error);
     }
   };

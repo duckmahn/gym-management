@@ -28,14 +28,14 @@ export default function HuanLuyenVien(): JSX.Element {
   });
   const [showForm, setShowForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Thêm trạng thái sidebar
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const router = useRouter();
 
   // Kiểm tra và thiết lập token
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      router.push('/dashboard');
+      router.push('/login');
       return;
     }
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -51,6 +51,11 @@ export default function HuanLuyenVien(): JSX.Element {
     };
     fetchTrainers();
   }, [router]);
+
+  const handleSidebarToggle = (isOpen: boolean) => {
+    setIsSidebarOpen(isOpen);
+    console.log('Sidebar is now', isOpen ? 'open' : 'closed');
+  };
 
   // Xử lý thay đổi dữ liệu form
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,11 +105,10 @@ export default function HuanLuyenVien(): JSX.Element {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar active="huanluyenvien" onToggle={setIsSidebarOpen} />
+      <Sidebar active="huanluyenvien" onToggle={handleSidebarToggle} />
       <main
-        className={`flex-grow p-5 transition-all duration-300 ${
-          isSidebarOpen ? 'ml-[250px]' : 'ml-0'
-        }`}
+        className={`flex-grow p-5 transition-all duration-300 ${isSidebarOpen ? 'ml-[250px]' : 'ml-0'
+          }`}
       >
         <Header />
         <div className="p-5 bg-white rounded-lg shadow-md">
@@ -172,6 +176,12 @@ export default function HuanLuyenVien(): JSX.Element {
                 >
                   {isEditing ? 'Cập nhật' : 'Lưu'}
                 </button>
+                <button
+                  onClick={() => setShowForm(false)}
+                  className="mt-3 px-5 py-2 bg-gray-500 text-white rounded-lg"
+                >
+                  Hủy
+                </button>
               </div>
             </div>
           )}
@@ -184,7 +194,7 @@ export default function HuanLuyenVien(): JSX.Element {
                 <th className="text-red-600 font-semibold">SDT</th>
                 <th className="text-red-600 font-semibold">Mã HLV</th>
                 <th className="text-red-600 font-semibold">Ngày gia nhập</th>
-                <th className="text-red-600 font-semibold">Hành động</th>
+
               </tr>
             </thead>
             <tbody>

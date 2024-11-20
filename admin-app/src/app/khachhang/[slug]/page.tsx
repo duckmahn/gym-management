@@ -23,10 +23,11 @@ interface Customer {
 export default function CustomerProfilePage({ params }: PageProps) {
   const { slug } = params;
   console.log(params.slug)
+  const router = useRouter();
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
+  
 
   useEffect(() => {
     // Lấy token từ localStorage

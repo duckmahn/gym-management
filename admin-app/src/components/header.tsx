@@ -3,20 +3,22 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import NotificationModal from './notification';
 
 
 export default function Header(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const router = useRouter();
+  const [showNotificationModal, setShowNotificationModal] = useState(false);
 
-  // Hàm kiểm tra token và chuyển hướng nếu chưa đăng nhập
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
     const storedUsername = localStorage.getItem('username');
     if (token && storedUsername) {
       setIsLoggedIn(true);
-      setUsername(storedUsername); // Lấy tên người dùng từ localStorage
+      setUsername(storedUsername); 
     } else {
       setIsLoggedIn(false);
       setUsername('');
@@ -27,10 +29,14 @@ export default function Header(): JSX.Element {
     <header className="flex justify-between items-center mb-5 relative">
       <div className="flex items-center justify-center w-full relative">
         <div className="text-2xl mr-2.5">
-          <i className="fas fa-bell text-[#c21f37]"></i>
+          <i className="fas fa-bell text-[#c21f37]"
+          onClick={() => setShowNotificationModal(true)}></i>
         </div>
+        {showNotificationModal && (
+        <NotificationModal onClose={() => setShowNotificationModal(false)} />
+      )}
         <input
-          className="w-[400px] p-2.5 rounded-full border border-gray-300 pl-10 bg-no-repeat bg-center bg-[url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22%23666%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.92.92l.27.28v.79l5 4.99L20.49 19l-4.99-5zM10 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8z%22/%3E%3C/svg%3E')]"
+          className="w-[400px] p-2.5 text-gray-800 rounded-full border border-gray-300 pl-10 bg-no-repeat bg-center bg-[url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22%23666%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.92.92l.27.28v.79l5 4.99L20.49 19l-4.99-5zM10 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8z%22/%3E%3C/svg%3E')]"
           type="text"
           placeholder="Search here"
         />

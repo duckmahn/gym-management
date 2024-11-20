@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';  // Đảm bảo useState được import từ React
-import { format } from 'date-fns';
+import React, { useState } from 'react';
+import { format, addMonths, subMonths, getDaysInMonth } from 'date-fns'; // Import getDaysInMonth để lấy số ngày
 import Sidebar from '../../components/sidebar';
 import Header from '../../components/header';
 
@@ -14,13 +14,32 @@ export default function ManagementPage(): JSX.Element {
   ];
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [selectedDate, setSelectedDate] = useState<number | null>(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
-  const currentMonth = format(new Date(), 'MMMM yyyy');
+  const handleSidebarToggle = (isOpen: boolean) => {
+    setIsSidebarOpen(isOpen);
+    console.log('Sidebar is now', isOpen ? 'open' : 'closed');
+  };
+  const handleDateClick = (day: number) => {
+    setSelectedDate(day);
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(addMonths(currentDate, 1));
+  };
+
+  const handlePreviousMonth = () => {
+    setCurrentDate(subMonths(currentDate, 1));
+  };
+
+  const currentMonth = format(currentDate, 'MMMM yyyy');
+  const daysInMonth = getDaysInMonth(currentDate); // Lấy số ngày chính xác trong tháng
 
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
-      <Sidebar active="quan-ly" onToggle={setIsSidebarOpen} />
+      <Sidebar active="quan-ly" onToggle={handleSidebarToggle} />
 
       {/* Main content */}
       <main className={`flex-1 p-6 bg-gray-50 transition-all duration-300 ${isSidebarOpen ? 'ml-[250px]' : 'ml-0'}`}>
@@ -31,7 +50,7 @@ export default function ManagementPage(): JSX.Element {
         <div className="flex space-x-6 mt-6">
           {/* Thông báo */}
           <div className="flex-1 bg-white shadow-lg rounded-lg p-6">
-            <h2 className="text-2xl font-semibold mb-4">Thông báo</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">Thông báo</h2>
             <table className="w-full text-left text-gray-700">
               <thead>
                 <tr>
@@ -52,33 +71,42 @@ export default function ManagementPage(): JSX.Element {
                 ))}
               </tbody>
             </table>
-            <div className="mt-4">
-              <span className="text-blue-500">Approved</span>
-              <span className="text-red-500 ml-2">Rejected</span>
-              <span className="text-yellow-500 ml-2">Pending</span>
-            </div>
           </div>
 
           {/* Lịch */}
-          <div className="w-72 bg-white shadow-lg rounded-lg p-6">
-            <h2 className="text-2xl font-semibold mb-4">{currentMonth}</h2>
-            <div className="grid grid-cols-7 gap-2">
-              <div className="text-center text-sm font-semibold">SUN</div>
-              <div className="text-center text-sm font-semibold">MON</div>
-              <div className="text-center text-sm font-semibold">TUE</div>
-              <div className="text-center text-sm font-semibold">WED</div>
-              <div className="text-center text-sm font-semibold">THU</div>
-              <div className="text-center text-sm font-semibold">FRI</div>
-              <div className="text-center text-sm font-semibold">SAT</div>
+          <div className="w-[400px] bg-white shadow-lg rounded-lg p-6">
+            <div className="flex justify-between items-center mb-4">
+              <button className="text-gray-800 font-bold" onClick={handlePreviousMonth}>
+                Previous &lt;
+              </button>
+              <h2 className="text-2xl font-bold text-gray-800">{currentMonth}</h2>
+              <button className="text-gray-800 font-bold" onClick={handleNextMonth}>
+                Next &gt;
+              </button>
+            </div>
+            <div className="grid grid-cols-7 gap-4 text-gray-800">
+              <div className="text-center text-base font-bold">SUN</div>
+              <div className="text-center text-base font-bold">MON</div>
+              <div className="text-center text-base font-bold">TUE</div>
+              <div className="text-center text-base font-bold">WED</div>
+              <div className="text-center text-base font-bold">THU</div>
+              <div className="text-center text-base font-bold">FRI</div>
+              <div className="text-center text-base font-bold">SAT</div>
               {/* Lịch ngày */}
-              {[...Array(30)].map((_, index) => (
-                <div
-                  key={index}
-                  className={`text-center p-2 ${index % 2 === 0 ? 'bg-red-200' : ''} rounded cursor-pointer`}
-                >
-                  {index + 1}
-                </div>
-              ))}
+              {[...Array(daysInMonth)].map((_, index) => {
+                const day = index + 1;
+                return (
+                  <div
+                    key={index}
+                    className={`text-center p-2 rounded cursor-pointer text-base font-bold ${
+                      selectedDate === day ? 'bg-blue-300' : ''
+                    }`}
+                    onClick={() => handleDateClick(day)}
+                  >
+                    {day}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

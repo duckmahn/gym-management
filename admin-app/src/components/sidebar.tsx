@@ -4,10 +4,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 interface SidebarProps {
   active: string;
-  onToggle: (isOpen: boolean) => void;
+  onToggle?: (isOpen: boolean) => void;
 }
 
 interface SidebarItem {
@@ -15,10 +17,12 @@ interface SidebarItem {
   path: string;
 }
 
-export default function Sidebar({ active, onToggle }: SidebarProps) {
+export default function Sidebar({ active, onToggle = () => {} }: SidebarProps) {
   const [activeItem, setActiveItem] = useState<string>(active);
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  
   const router = useRouter();
+
 
   const handleItemClick = (item: string) => {
     setActiveItem(item);
@@ -27,7 +31,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
   const toggleSidebar = () => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
-    onToggle(newIsOpen); // Gọi hàm onToggle để cập nhật trạng thái sidebar
+    onToggle(newIsOpen); 
   };
 
   const handleLogout = () => {
@@ -43,13 +47,13 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
           isOpen ? 'w-[250px] translate-x-0' : 'w-0 -translate-x-full'
         }`}
       >
-        {/* Nút mở/đóng bên trong sidebar */}
+        
         <button
           onClick={toggleSidebar}
-          className="absolute top-5 left-5 p-1 bg-[#282828] text-white rounded-full z-50"
+          className="absolute top-0 right-[-35px] p-1 bg-[#282828] text-white rounded-full z-50"
           style={{ width: '30px', height: '30px' }}
         >
-          {isOpen ? '←' : '→'}
+          <FontAwesomeIcon icon={faBars} />
         </button>
 
         {isOpen && (
@@ -64,7 +68,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
                   { name: 'Quản Lý', path: 'quanly' },
                   { name: 'Lịch Tập', path: 'lichtap' },
                   { name: 'Huấn Luyện Viên', path: 'huanluyenvien' },
-                  { name: 'Tài Chính', path: 'taichinh' },
+                  { name: 'Hội Viên', path: 'hoivien' },
                   { name: 'Cơ Sở Vật Chất', path: 'cosovatchat' },
                   { name: 'Khách Hàng', path: 'khachhang' },
                   { name: 'Cài Đặt', path: 'caidat' },
@@ -84,7 +88,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
               </ul>
             </nav>
 
-            {/* Nút Đăng xuất */}
+            
             <button
               onClick={handleLogout}
               className="w-full py-2.5 bg-[#c21f37] border-none text-white cursor-pointer rounded-lg text-lg"
