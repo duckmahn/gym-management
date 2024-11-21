@@ -26,7 +26,7 @@ export default function LoginPage() {
       console.log('Phản hồi từ API:', response.data);
   
       
-      const token = response.data?.token || response.data;
+      const token = typeof response.data === 'string' ? response.data : response.data.token || response.data.id;
       
 
       if (!token) {

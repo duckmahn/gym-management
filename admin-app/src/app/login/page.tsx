@@ -1,3 +1,4 @@
+
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -11,12 +12,15 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
- 
+
+
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     
    
+
+
     try {
       const response = await axios.post(`${NEXT_PUBLIC_API_URL}Login`, {  
         email: username,
@@ -25,8 +29,9 @@ export default function LoginPage() {
       
       console.log('Phản hồi từ API:', response.data);
   
+
       
-      const token = response.data?.token || response.data;
+      const token = typeof response.data === 'string' ? response.data : response.data.token || response.data.id;
       
 
       if (!token) {
@@ -35,12 +40,13 @@ export default function LoginPage() {
   
       
       localStorage.setItem('token', token);
-      localStorage.setItem('username', username);
-      
+      localStorage.setItem('username', username);    
+
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  
+
       console.log('Đăng nhập thành công!', token);
   
+
       
       router.push('/dashboard');
     } catch (error: unknown) {
@@ -60,7 +66,9 @@ export default function LoginPage() {
       className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: "url('/backgradmin.png')",
+
         backgroundSize: 'cover',
+
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',

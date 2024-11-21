@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { NEXT_PUBLIC_API_URL } from '../../../apiconfig';
 
+
 interface Trainer {
   id: number;
   name: string;
@@ -28,6 +29,7 @@ export default function HuanLuyenVien(): JSX.Element {
   });
   const [showForm, setShowForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const router = useRouter();
 
@@ -91,11 +93,14 @@ export default function HuanLuyenVien(): JSX.Element {
     }
   };
 
+
   // Hàm xóa huấn luyện viên
   const deleteTrainer = async (id: number) => {
     if (confirm('Bạn có chắc muốn xóa huấn luyện viên này?')) {
       try {
+
         await axios.delete(`${NEXT_PUBLIC_API_URL}api/Trainers/${id}`);
+
         setTrainers(trainers.filter(trainer => trainer.id !== id));
       } catch (error) {
         console.error('Lỗi khi xóa huấn luyện viên:', error);
@@ -121,8 +126,9 @@ export default function HuanLuyenVien(): JSX.Element {
               }}
               className="px-5 py-2 bg-red-600 text-white rounded-lg"
             >
+
               Thêm huấn luyện viên
-            </button>
+            </button>         
           </div>
 
           {showForm && (
@@ -168,6 +174,7 @@ export default function HuanLuyenVien(): JSX.Element {
                   name="joinDate"
                   value={newTrainer.joinDate}
                   onChange={handleInputChange}
+
                   className="p-2 border rounded-lg text-black"
                 />
                 <button
@@ -194,12 +201,12 @@ export default function HuanLuyenVien(): JSX.Element {
                 <th className="text-red-600 font-semibold">SDT</th>
                 <th className="text-red-600 font-semibold">Mã HLV</th>
                 <th className="text-red-600 font-semibold">Ngày gia nhập</th>
-
               </tr>
             </thead>
             <tbody>
               {trainers.map(trainer => (
                 <tr key={trainer.id} className="border-b">
+
                   <td className="text-gray-800">{trainer.name}</td>
                   <td className="text-gray-800">{trainer.email}</td>
                   <td className="text-gray-800">{trainer.phone}</td>

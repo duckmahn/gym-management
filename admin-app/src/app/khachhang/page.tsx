@@ -112,8 +112,7 @@ export default function KhachHang(): JSX.Element {
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar active="khach-hang" onToggle={handleSidebarToggle} />
-      <main className={`flex-grow p-5 transition-all duration-300 ${
-          isSidebarOpen ? 'ml-[250px]' : 'ml-0'
+      <main className={`flex-grow p-5 transition-all duration-300 ${isSidebarOpen ? 'ml-[250px]' : 'ml-0'
         }`}>
         <Header />
         <div className="p-5 bg-white rounded-lg shadow-md">
@@ -193,17 +192,20 @@ export default function KhachHang(): JSX.Element {
               </div>
             </div>
           )}
-
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-gray-100 text-left border-b">
                 <th className="text-red-600 font-semibold">Tên</th>
                 <th className="text-red-600 font-semibold">Email</th>
                 <th className="text-red-600 font-semibold">SDT</th>
-                <th className="text-red-600 font-semibold">Mã người dùng</th>
+
+                <th className="text-red-600 font-semibold">Mã KH</th>
+
                 <th className="text-red-600 font-semibold">Ngày gia nhập</th>
               </tr>
             </thead>
+
+
             <tbody>
               {users.map((user) => (
                 <tr key={user.id} className="border-b">
@@ -229,6 +231,7 @@ export default function KhachHang(): JSX.Element {
               ))}
             </tbody>
           </table>
+
         </div>
       </main>
     </div>

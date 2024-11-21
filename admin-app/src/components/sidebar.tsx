@@ -40,6 +40,7 @@ export default function Sidebar({ active, onToggle = () => {} }: SidebarProps) {
   };
 
   return (
+
     <div className="relative flex">
       {/* Sidebar */}
       <aside
@@ -99,5 +100,6 @@ export default function Sidebar({ active, onToggle = () => {} }: SidebarProps) {
         )}
       </aside>
     </div>
+
   );
 }

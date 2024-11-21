@@ -1,4 +1,8 @@
+
 'use client';
+
+
+
 
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/sidebar';
@@ -14,7 +18,7 @@ interface Equipment {
   price: number;
 }
 
-export default function ThietBi(): JSX.Element {
+export default function CSVCVaThietBi(): JSX.Element {
   const [equipments, setEquipments] = useState<Equipment[]>([]);
   const [newEquipment, setNewEquipment] = useState<Equipment>({
     id: 0,
@@ -101,6 +105,7 @@ export default function ThietBi(): JSX.Element {
     }
   };
 
+
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar active="csvc-va-thiet-bi" onToggle={handleSidebarToggle} />
@@ -112,6 +117,7 @@ export default function ThietBi(): JSX.Element {
         <Header />
         <div className="p-5 bg-white rounded-lg shadow-md">
           <div className="flex justify-between items-center mb-5">
+
             <h2 className="text-2xl font-semibold text-gray-800">Danh sách thiết bị</h2>
             <button
               onClick={() => {
