@@ -1,9 +1,9 @@
 // Dashboard.tsx
-'use client';
+"use client";
 
-import React from 'react';
-import Sidebar from '@/components/sidebar';
-import Header from '@/components/header';
+import React from "react";
+import Sidebar from "@/components/sidebar";
+import Header from "@/components/header";
 
 export default function dashboard(): JSX.Element {
   return (
@@ -18,4 +18,3 @@ export default function dashboard(): JSX.Element {
     </div>
   );
 }
-
