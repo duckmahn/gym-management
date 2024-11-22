@@ -1,0 +1,85 @@
+{
+  "dashboard": {
+    "title": "Welcome to Dashboard!"
+  },
+  "Sidebar": {
+    "schedule": "Schedule",
+    "trainer": "Trainers",
+    "manager": "Manager",
+    "facilities": "Facilities",
+    "customer": "Customers",
+    "membership": "Membership",
+    "setting": "Settings",
+    "logout": "Log Out",
+    "theme": "Dark Mode",
+    "language": "Languages"
+  },
+  "Header": {
+    "search": "Search Here "
+  },
+
+  "CSVCVaThietBi": {
+    "listofdevices": "List Of Devices And Facilities",
+    "addlistofdevices": "Add Devices And Facilities",
+    "addnewdevice": "Add New Device",
+    "updatedevice": "Update Device",
+    "name": "Name",
+    "type": "Type",
+    "add": "Add",
+    "update": "Update",
+    "cancel": "Cancel",
+    "delete" : "Delete"
+  },
+  "HuanLuyenVien": {
+    "listtrainer": "List Of Trainers",
+    "addtrainer": "Add Trainers",
+    "addnewtrainer": "Add New Trainers",
+    "updatetrainer": "Update Trainers",
+    "name": "Name",
+    "phone": "Phone",
+    "idtrainer": "Trainers Id",
+    "dmy": "dd/mm/yy",
+    "save": "Save",
+    "action": "Action",
+    "joindate": "Joining Date",
+    "update": "Update",
+    "trainer": "Trainers",
+    "cancel": "Cancel"
+  },
+  "ManagementPage": {
+    "notify": "Notification",
+    "date": "Date",
+    "trainer": "Trainer",
+    "location": "Location",
+    "room": "Gym Room"
+  },
+  "MembershipPage": {
+    "listofmembership": "Membership List",
+    "addmembership": "Add Membership",
+    "addnewmembership": "Add New Membership",
+    "updatemembership": "Update Membership",
+    "type": "Type",
+    "description": "Description",
+    "add": "Add",
+    "update": "Update",
+    "cancel": "Cancel",
+    "startdate": "Start Date",
+    "enddate": "End Date",
+    "price": "Price"
+  },
+  "KhachHang": {
+    "listuser": "Customer List",
+    "adduser": "Add Customer",
+    "addnewuser": "Add New Customer",
+    "updateuser": "Edit Customer",
+    "name": "Name",
+    "phone": "Phone Number",
+    "iduser": "Customer ID",
+    "save": "Save",
+    "action": "Action",
+    "joindate": "Join Date",
+    "update": "Update",
+    "user": "Customer",
+    "cancel": "Cancel"
+  }
+}
