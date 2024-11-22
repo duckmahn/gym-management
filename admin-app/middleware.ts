@@ -1,17 +1,12 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 
-export function middleware(req: NextRequest) {
-  const token = req.cookies.get('token');
+import createMiddleware from 'next-intl/middleware'
 
-  
-  if (!token) {
-    return NextResponse.redirect(new URL('/login', req.url));
-  }
-
-  return NextResponse.next();
-}
+export default createMiddleware({
+    locales: ['en', 'vi'],
+    defaultLocale: 'vi'
+});
 
 export const config = {
-  matcher: ['/cosovatchat', '/huanluyenvien', '/khachhang', '/dashboard', '/quanly'],
-};
+    matcher: ['/', '/(de|en)/:path*']
+}
+

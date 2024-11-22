@@ -1,0 +1,86 @@
+{
+  "dashboard": {
+    "title": "Chào mừng đến với Dashboard!"
+  },
+  "Sidebar": {
+    "schedule": "Lịch tập",
+    "trainer": "Huấn Luyện Viên",
+    "manager": "Quản Lý",
+    "facilities": "Cơ Sở Vật Chất",
+    "customer": "Khách Hàng",
+    "membership": "Gói Thành Viên",
+    "setting": "Cài Đặt",
+    "logout": "Đăng xuất",
+    "theme": "Đổi Theme",
+    "language" : "Ngôn Ngữ"
+    
+
+  },
+  "Header": {
+    "search": "Tìm Kiếm"
+  },
+  "CSVCVaThietBi": {
+    "listofdevices": "Danh Sách Thiết Bị và CSVC",
+    "addlistofdevices": "Thêm Thiết Bị Và CSVC",
+    "addnewdevice": "Thêm Thiết Bị Mới",
+    "updatedevice": "Chỉnh Sửa Thiết Bị",
+    "name": "Tên",
+    "type": "Loại",
+    "add": "Thêm",
+    "update": "Cập Nhật",
+    "cancel": "Hủy",
+    "delete" : "Xóa"
+  },
+  "HuanLuyenVien": {
+    "listtrainer": "Danh Sách HVL",
+    "addtrainer": "Thêm Huấn Luyện Viên",
+    "addnewtrainer": "Thêm Mới Huấn Luyện Viên",
+    "updatetrainer": "Chỉnh Sửa Huấn Luyện Viên",
+    "name": "Tên",
+    "phone": "Số điện thoại",
+    "idtrainer": "Mã HLV",
+    "dmy": "ngày/tháng/năm",
+    "save": "Lưu",
+    "action": "Hành Động",
+    "joindate": "Ngày Gia Nhập",
+    "update": "Cập Nhật",
+    "trainer": "Huấn Luyện Viên",
+    "cancel" :"Hủy"
+  },
+  "ManagementPage": {
+    "notify": "Thông Báo",
+    "date": "Ngày",
+    "trainer": "Huấn Luyện Viên",
+    "location": "Địa Điểm",
+    "room": "Phòng Tập"
+  },
+  "MembershipPage": {
+    "listofmembership": "Danh Sách Gói Thành Viên",
+    "addmembership": "Thêm Gói Thành Viên",
+    "addnewmembership": "Thêm Gói Thành Viên Mới",
+    "updatemembership": "Chỉnh Sửa Gói Thành Viên",
+    "type": "Loại",
+    "description": "Mô Tả",
+    "add": "Thêm",
+    "update": "Cập Nhật",
+    "cancel": "Hủy",
+    "startdate": "Ngày Bắt Đầu",
+    "enddate": "Ngày Kết Thúc",
+    "price": "Giá"
+  },
+  "KhachHang": {
+    "listuser": "Danh Sách Khách Hàng",
+    "adduser": "Thêm Khách Hàng",
+    "addnewuser": "Thêm Mới Khách Hàng",
+    "updateuser": "Chỉnh Sửa Khách Hàng",
+    "name": "Tên",
+    "phone": "Số điện thoại",
+    "iduser": "Mã Khách Hàng",
+    "save": "Lưu",
+    "action": "Hành Động",
+    "joindate": "Ngày Gia Nhập",
+    "update": "Cập Nhật",
+    "user": "Khách Hàng",
+    "cancel" : "Hủy"
+  }
+}

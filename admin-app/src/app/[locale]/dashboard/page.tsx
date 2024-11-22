@@ -1,3 +1,4 @@
+<<<<<<< HEAD:admin-app/src/app/page.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -34,8 +35,17 @@ export default function ManagementPage(): JSX.Element {
       getSchedule(new Date(searchDate));
     }
   }, [searchDate, getSchedule]);
+=======
+// Dashboard.tsx
+"use client";
+
+import React from "react";
+import Sidebar from "@/app/[locale]/components/sidebar";
+import Header from "@/app/[locale]/components/header";
+>>>>>>> 6c1563cba99a8a45f749f9192a58d540a44bd354:admin-app/src/app/[locale]/dashboard/page.tsx
 
   return (
+<<<<<<< HEAD:admin-app/src/app/page.tsx
     <div className="flex h-screen overflow-hidden">
       <Sidebar active="quan-ly" onToggle={setIsSidebarOpen} />
       <main
@@ -43,6 +53,11 @@ export default function ManagementPage(): JSX.Element {
           isSidebarOpen ? "ml-[250px]" : "ml-0"
         }`}
       >
+=======
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar active="dashboard" onToggle={() => {}} />
+      <main className="flex-grow p-5">
+>>>>>>> 6c1563cba99a8a45f749f9192a58d540a44bd354:admin-app/src/app/[locale]/dashboard/page.tsx
         <Header />
 
         <div className="flex space-x-6 mt-6">
@@ -89,4 +104,8 @@ export default function ManagementPage(): JSX.Element {
       </main>
     </div>
   );
+<<<<<<< HEAD:admin-app/src/app/page.tsx
 }
+=======
+}
+>>>>>>> 6c1563cba99a8a45f749f9192a58d540a44bd354:admin-app/src/app/[locale]/dashboard/page.tsx

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { NEXT_PUBLIC_API_URL } from '../../apiconfig';
+import { NEXT_PUBLIC_API_URL } from '../../../../apiconfig';
 
 export default function NotificationModal({ onClose }: { onClose: () => void }) {
   const [title, setTitle] = useState('');

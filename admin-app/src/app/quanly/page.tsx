@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../../components/sidebar";
 import Header from "../../components/header";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/app/[locale]/components/ui/calendar";
 import { useSchedule } from "@/hooks/useSchedule";
 
 export default function ManagementPage(): JSX.Element {

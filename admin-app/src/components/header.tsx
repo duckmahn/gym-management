@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from "./ui/dialog";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Button } from "./ui/button";
-import { Textarea } from "./ui/textarea";
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from "@/app/[locale]/components/ui/dialog";
+import { Input } from "@/app/[locale]/components/ui/input";
+import { Label } from "@/app/[locale]/components/ui/label";
+import { Button } from "@/app/[locale]/components/ui/button";
+import { Textarea } from "@/app/[locale]/components/ui/textarea";
 import Cookies from "js-cookie";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import axios from "axios";
