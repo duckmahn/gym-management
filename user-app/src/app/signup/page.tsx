@@ -14,7 +14,7 @@ export interface SignUp {
 }
 
 export default function SignUpComponent() {
-  const url = `${NEXT_PUBLIC_API_URL}/Register`;
+  const url = `${NEXT_PUBLIC_API_URL}Register`;
   const [data, setData] = useState<SignUp>({
     email: "",
     username: "",

@@ -56,17 +56,15 @@ export default function LandingPage() {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
-  const urlMembership = `${NEXT_PUBLIC_API_URL}/api/Membership`;
-  const urlTrainer = `${NEXT_PUBLIC_API_URL}/api/Trainers`;
+  const urlMembership = `${NEXT_PUBLIC_API_URL}api/Membership`;
+  const urlTrainer = `${NEXT_PUBLIC_API_URL}api/Trainers`;
 
   useEffect(() => {
     const readMembership = async () => {
       const response = await axios.get(urlMembership);
       try {
-        if (response.status === 200) {
-          setMemberships(response.data);
-          setSuccess("OK");
-        }
+        setMemberships(response.data);
+        setSuccess("OK");
       } catch (error) {
         if (response.status === 401) {
           setError("Unauthorized");
@@ -75,11 +73,12 @@ export default function LandingPage() {
         }
       }
     };
+    readMembership();
   }, []);
 
   useEffect(() => {
     const readTrainer = async () => {
-      const response = await axios.get(urlTrainer);
+      const response = await axios.get(urlMembership);
       try {
         if (response.status === 200) {
           setTrainers(response.data);
@@ -93,6 +92,7 @@ export default function LandingPage() {
         }
       }
     };
+    readTrainer();
   }, []);
 
   return (
@@ -416,171 +416,54 @@ export default function LandingPage() {
           Coaches Guide You Every Step Of The Way
         </div>
         <div className="w-full mt-[5px] flex flex-wrap">
-          {/*{memberships.map((membership) => (*/}
-          <div className="w-[30%] mr-[10px] mb-[10px] border-[3px] border-orangered rounded p-[10px] flex flex-col items-center">
-            <div className="mb-[10px] text-orangered">Package</div>
-            <div className="mb-[10px] font-extrabold text-[30px] text-white">
-              {/*{membership.type}*/}PRO PLAN
-            </div>
-            <div className="mb-[10px] text-orangered">Description</div>
-            <div className="mb-[10px] text-white">
-              {/*{membership.description}*/}
-              Our Pro Plan Offers Advanced Workouts And Persionalized Nutrition
-              Coaching To Help You Reach Your Goals Faster. Sign Up Right Now!
-            </div>
-            <div className="mb-[10px] text-[10px] text-orangered">Features</div>
-            <div className="mb-[10px]">
-              <ul className="list-disc">
-                <li className="text-white">
-                  Access To All Of Our Exercise Videos
-                </li>
-                <li className="text-white">Progress Tracking</li>
-                <li className="text-white">Supportive Online Community</li>
-                <li className="text-white">
-                  Advanced, Personalized Workout Plans
-                </li>
-                <li className="text-white">Comprehensive Nutrition Coaching</li>
-                <li className="text-white">
-                  Access To Advanced Workout Programs
-                </li>
-                <li className="text-white">Body Composition Analysis</li>
-              </ul>
-            </div>
-            <div className="mb-[10px]">
-              <div className="inline-block font-extrabold text-3xl text-white">
-                {/*{membership.price}$*/}99$
+          {memberships.map((membership) => (
+            <div
+              key={membership.id}
+              className="w-[30%] mr-[10px] mb-[10px] border-[3px] border-orangered rounded p-[10px] flex flex-col items-center"
+            >
+              <div className="mb-[10px] text-orangered">Package</div>
+              <div className="mb-[10px] font-extrabold text-[30px] text-white">
+                {membership.type}
               </div>
-              <div className="inline-block font-light text-grey">/USD</div>
-            </div>
-            <div className="w-full">
-              <button className="w-full bg-orangered rounded-[20px] py-[10px] text-white hover:opacity-50">
-                Choose This Plan
-              </button>
-            </div>
-          </div>
-          <div className="w-[30%] mr-[10px] mb-[10px] border-[3px] border-orangered rounded p-[10px] flex flex-col items-center">
-            <div className="mb-[10px] text-orangered">Package</div>
-            <div className="mb-[10px] font-extrabold text-[30px] text-white">
-              {/*{membership.type}*/}CUSTOM PLAN
-            </div>
-            <div className="mb-[10px] text-orangered">Description</div>
-            <div className="mb-[10px] text-white">
-              {/*{membership.description}*/}
-              Exparience A Fully Tailored Fitness Experience With Our Custom
-              Plan. Work One-On-One With A Dedicated Trainer To Achieve Your
-              Goals
-            </div>
-            <div className="mb-[10px] text-[10px] text-orangered">Features</div>
-            <div className="mb-[10px]">
-              <ul className="list-disc">
-                <li className="text-white">
-                  Access To All Of Our Exercise Videos
-                </li>
-                <li className="text-white">Progress Tracking</li>
-                <li className="text-white">Supportive Online Community</li>
-                <li className="text-white">
-                  Advanced, Personalized Workout Plans
-                </li>
-                <li className="text-white">Comprehensive Nutrition Coaching</li>
-                <li className="text-white">
-                  Access To Advanced Workout Programs
-                </li>
-                <li className="text-white">Body Composition Analysis</li>
-              </ul>
-            </div>
-            <div className="mb-[10px]">
-              <div className="inline-block font-extrabold text-3xl text-white">
-                {/*{membership.price}$*/}149$
+              <div className="mb-[10px] text-orangered">Description</div>
+              <div className="mb-[10px] text-white">
+                {membership.description}
               </div>
-              <div className="inline-block font-light text-grey">/USD</div>
-            </div>
-            <div className="w-full">
-              <button className="w-full bg-orangered rounded-[20px] py-[10px] text-white hover:opacity-50">
-                Choose This Plan
-              </button>
-            </div>
-          </div>
-          <div className="w-[30%] mr-[10px] mb-[10px] border-[3px] border-orangered rounded p-[10px] flex flex-col items-center">
-            <div className="mb-[10px] text-orangered">Package</div>
-            <div className="mb-[10px] font-extrabold text-[30px] text-white">
-              {/*{membership.type}*/}BEGINNER PLAN
-            </div>
-            <div className="mb-[10px] text-orangered">Description</div>
-            <div className="mb-[10px] text-white">
-              {/*{membership.description}*/}
-              Start Your Fitness Journey With Our Beginner Plan. Build A Strong
-              Foundation With Basic Workouts And Essential Nutrition Guidance.
-            </div>
-            <div className="mb-[10px] text-[10px] text-orangered">Features</div>
-            <div className="mb-[10px]">
-              <ul className="list-disc">
-                <li className="text-white">
-                  Access To All Of Our Exercise Videos
-                </li>
-                <li className="text-white">Progress Tracking</li>
-                <li className="text-white">Supportive Online Community</li>
-                <li className="text-white">
-                  Advanced, Personalized Workout Plans
-                </li>
-                <li className="text-white">Comprehensive Nutrition Coaching</li>
-                <li className="text-white">
-                  Access To Advanced Workout Programs
-                </li>
-                <li className="text-white">Body Composition Analysis</li>
-              </ul>
-            </div>
-            <div className="mb-[10px]">
-              <div className="inline-block font-extrabold text-3xl text-white">
-                {/*{membership.price}$*/}49$
+              <div className="mb-[10px] text-[10px] text-orangered">
+                Features
               </div>
-              <div className="inline-block font-light text-grey">/USD</div>
-            </div>
-            <div className="w-full">
-              <button className="w-full bg-orangered rounded-[20px] py-[10px] text-white hover:opacity-50">
-                Choose This Plan
-              </button>
-            </div>
-          </div>
-          <div className="w-[30%] mr-[10px] mb-[10px] border-[3px] border-orangered rounded p-[10px] flex flex-col items-center">
-            <div className="mb-[10px] text-orangered">Package</div>
-            <div className="mb-[10px] font-extrabold text-[30px] text-white">
-              {/*{membership.type}*/}
-            </div>
-            <div className="mb-[10px] text-orangered">Description</div>
-            <div className="mb-[10px] text-white">
-              {/*{membership.description}*/}
-            </div>
-            <div className="mb-[10px] text-[10px] text-orangered">Features</div>
-            <div className="mb-[10px]">
-              <ul className="list-disc">
-                <li className="text-white">
-                  Access To All Of Our Exercise Videos
-                </li>
-                <li className="text-white">Progress Tracking</li>
-                <li className="text-white">Supportive Online Community</li>
-                <li className="text-white">
-                  Advanced, Personalized Workout Plans
-                </li>
-                <li className="text-white">Comprehensive Nutrition Coaching</li>
-                <li className="text-white">
-                  Access To Advanced Workout Programs
-                </li>
-                <li className="text-white">Body Composition Analysis</li>
-              </ul>
-            </div>
-            <div className="mb-[10px]">
-              <div className="inline-block font-extrabold text-3xl text-white">
-                {/*{membership.price}$*/}
+              <div className="mb-[10px]">
+                <ul className="list-disc">
+                  <li className="text-white">
+                    Access To All Of Our Exercise Videos
+                  </li>
+                  <li className="text-white">Progress Tracking</li>
+                  <li className="text-white">Supportive Online Community</li>
+                  <li className="text-white">
+                    Advanced, Personalized Workout Plans
+                  </li>
+                  <li className="text-white">
+                    Comprehensive Nutrition Coaching
+                  </li>
+                  <li className="text-white">
+                    Access To Advanced Workout Programs
+                  </li>
+                  <li className="text-white">Body Composition Analysis</li>
+                </ul>
               </div>
-              <div className="inline-block font-light text-grey">/USD</div>
+              <div className="mb-[10px]">
+                <div className="inline-block font-extrabold text-3xl text-white">
+                  {membership.price}$
+                </div>
+                <div className="inline-block font-light text-grey">/USD</div>
+              </div>
+              <div className="w-full">
+                <button className="w-full bg-orangered rounded-[20px] py-[10px] text-white hover:opacity-50">
+                  Choose This Plan
+                </button>
+              </div>
             </div>
-            <div className="w-full">
-              <button className="w-full bg-orangered rounded-[20px] py-[10px] text-white hover:opacity-50">
-                Choose This Plan
-              </button>
-            </div>
-          </div>
-          {/*))}*/}
+          ))}
         </div>
       </div>
 
@@ -728,120 +611,36 @@ export default function LandingPage() {
           At This Part You Can See Few Of The Many Positive Of Our Customer
         </div>
         <div className="w-full mt-[5px] flex flex-wrap">
-          {/*{trainers.map((trainer) => (*/}
-          <div className="w-[20%] mr-[10px] mb-[10px]">
-            <div className="static">
-              <img
-                className="w-full h-full rounded-[5px]"
-                src="/images/eight/image1.png"
-              />
-            </div>
-            <div className="relative left-[0px] bottom-[0px] flex flex-col">
-              <div className="mb-[5px]">
-                <p className="font-[700] text-[20px] text-white">
-                  {/*{trainer.name}*/}Sam Cole
-                </p>
-                <p className="text-grey">Personal Trainer</p>
-              </div>
-              <div className="mt-[5px]">
-                <a
-                  className="inline-block list-none font-light text-white hover:opacity-50"
-                  href="#"
-                >
-                  Learn More
-                </a>
+          {trainers.map((trainer) => (
+            <div key={trainer.id} className="w-[20%] mr-[10px] mb-[10px]">
+              <div className="static">
                 <img
-                  className="inline-block ml-[5px]"
-                  src="/images/arrow.png"
+                  className="w-full h-full rounded-[5px]"
+                  src={trainer.avatar}
                 />
               </div>
-            </div>
-          </div>
-          <div className="w-[20%] mr-[10px] mb-[10px]">
-            <div className="static">
-              <img
-                className="w-full h-full rounded-[5px]"
-                src="/images/eight/image2.png"
-              />
-            </div>
-            <div className="relative left-[0px] bottom-[0px] flex flex-col">
-              <div className="mb-[5px]">
-                <p className="font-[700] text-[20px] text-white">
-                  {/*{trainer.name}*/}Michael Harris
-                </p>
-                <p className="text-grey">Personal Trainer</p>
-              </div>
-              <div className="mt-[5px]">
-                <a
-                  className="inline-block list-none font-light text-white hover:opacity-50"
-                  href="#"
-                >
-                  Learn More
-                </a>
-                <img
-                  className="inline-block ml-[5px]"
-                  src="/images/arrow.png"
-                />
+              <div className="relative left-[0px] bottom-[0px] flex flex-col">
+                <div className="mb-[5px]">
+                  <p className="font-[700] text-[20px] text-white">
+                    {trainer.name}
+                  </p>
+                  <p className="text-grey">Personal Trainer</p>
+                </div>
+                <div className="mt-[5px]">
+                  <a
+                    className="inline-block list-none font-light text-white hover:opacity-50"
+                    href="#"
+                  >
+                    Learn More
+                  </a>
+                  <img
+                    className="inline-block ml-[5px]"
+                    src="/images/arrow.png"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="w-[20%] mr-[10px] mb-[10px]">
-            <div className="static">
-              <img
-                className="w-full h-full rounded-[5px]"
-                src="/images/eight/image3.png"
-              />
-            </div>
-            <div className="relative left-[0px] bottom-[0px] flex flex-col">
-              <div className="mb-[5px]">
-                <p className="font-[700] text-[20px] text-white">
-                  {/*{trainer.name}*/}John Anderson
-                </p>
-                <p className="text-grey">Personal Trainer</p>
-              </div>
-              <div className="mt-[5px]">
-                <a
-                  className="inline-block list-none font-light text-white hover:opacity-50"
-                  href="#"
-                >
-                  Learn More
-                </a>
-                <img
-                  className="inline-block ml-[5px]"
-                  src="/images/arrow.png"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="w-[20%] mr-[10px] mb-[10px]">
-            <div className="static">
-              <img
-                className="w-full h-full rounded-[5px]"
-                src="/images/eight/image4.png"
-              />
-            </div>
-            <div className="relative left-[0px] bottom-[0px] flex flex-col">
-              <div className="mb-[5px]">
-                <p className="font-[700] text-[20px] text-white">
-                  {/*{trainer.name}*/}Tom Blake
-                </p>
-                <p className="text-grey">Personal Trainer</p>
-              </div>
-              <div className="mt-[5px]">
-                <a
-                  className="inline-block list-none font-light text-white hover:opacity-50"
-                  href="#"
-                >
-                  Learn More
-                </a>
-                <img
-                  className="inline-block ml-[5px]"
-                  src="/images/arrow.png"
-                />
-              </div>
-            </div>
-          </div>
-          {/*))}*/}
+          ))}
         </div>
       </div>
 

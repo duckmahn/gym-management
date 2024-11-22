@@ -14,6 +14,7 @@ export default {
         'brown': '#C70039',
         'orangered': '#FF4500',		
 			  'grey': '#808080',	
+        'gray': '#BEBEBE',
       },
     },
   },
