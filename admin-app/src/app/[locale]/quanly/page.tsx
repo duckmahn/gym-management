@@ -58,7 +58,6 @@ export default function ManagementPage(): JSX.Element {
         theme === "dark" ? "bg-gray-900" : "bg-gray-100"
       }`}
     >
-      {/* Sidebar */}
       <Sidebar active="quan-ly" onToggle={setIsSidebarOpen} />
       <main
         className={`flex-1 p-6 transition-all duration-300 ${
@@ -67,12 +66,8 @@ export default function ManagementPage(): JSX.Element {
           theme === "dark" ? "bg-gray-800 text-white" : "bg-gray-50 text-black"
         }`}
       >
-        {/* Header */}
         <Header />
-
-        {/* Main Content */}
         <div className="flex space-x-6 mt-6">
-          {/* Notifications Section */}
           <div
             className={`flex-1 shadow-lg rounded-lg p-6 ${
               theme === "dark"
@@ -121,7 +116,6 @@ export default function ManagementPage(): JSX.Element {
             </table>
           </div>
 
-          {/* Calendar Section */}
           <div
             className={`w-72 shadow-lg rounded-lg p-6 ${
               theme === "dark"
