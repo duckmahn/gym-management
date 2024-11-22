@@ -6,6 +6,7 @@ import { NEXT_PUBLIC_API_URL } from '../../../apiconfig';
 import Sidebar from '../../components/sidebar';
 import Header from '../../components/header';
 import { useRouter } from 'next/navigation';
+import Cookies from "js-cookie";
 
 interface User {
     id: number;
@@ -24,7 +25,7 @@ export default function Members(): JSX.Element {
     const router = useRouter();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = Cookies.get('token');
         if (!token) {
             router.push('/login');
             return;

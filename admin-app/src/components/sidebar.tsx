@@ -67,7 +67,7 @@ export default function Sidebar({ active, onToggle = () => {} }: SidebarProps) {
               <ul className="list-none p-0 w-full flex flex-col items-center">
                 {[
                   { name: 'Quản Lý', path: 'quanly' },
-                  { name: 'Lịch Tập', path: 'lichtap' },
+                  { name: 'Sức Khỏe', path: 'suckhoe' },
                   { name: 'Huấn Luyện Viên', path: 'huanluyenvien' },
                   { name: 'Hội Viên', path: 'hoivien' },
                   { name: 'Cơ Sở Vật Chất', path: 'cosovatchat' },

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { format, addMonths, subMonths, getDaysInMonth } from 'date-fns'; // Import getDaysInMonth để lấy số ngày
+import { format, addMonths, subMonths, getDaysInMonth } from 'date-fns'; 
 import Sidebar from '../../components/sidebar';
 import Header from '../../components/header';
 
@@ -34,21 +34,21 @@ export default function ManagementPage(): JSX.Element {
   };
 
   const currentMonth = format(currentDate, 'MMMM yyyy');
-  const daysInMonth = getDaysInMonth(currentDate); // Lấy số ngày chính xác trong tháng
+  const daysInMonth = getDaysInMonth(currentDate); 
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Sidebar */}
+      
       <Sidebar active="quan-ly" onToggle={handleSidebarToggle} />
 
-      {/* Main content */}
+   
       <main className={`flex-1 p-6 bg-gray-50 transition-all duration-300 ${isSidebarOpen ? 'ml-[250px]' : 'ml-0'}`}>
-        {/* Header */}
+        
         <Header />
 
-        {/* Main content layout */}
+        
         <div className="flex space-x-6 mt-6">
-          {/* Thông báo */}
+          
           <div className="flex-1 bg-white shadow-lg rounded-lg p-6">
             <h2 className="text-2xl font-semibold mb-4 text-gray-800">Thông báo</h2>
             <table className="w-full text-left text-gray-700">
@@ -73,7 +73,7 @@ export default function ManagementPage(): JSX.Element {
             </table>
           </div>
 
-          {/* Lịch */}
+          
           <div className="w-[400px] bg-white shadow-lg rounded-lg p-6">
             <div className="flex justify-between items-center mb-4">
               <button className="text-gray-800 font-bold" onClick={handlePreviousMonth}>
@@ -92,7 +92,7 @@ export default function ManagementPage(): JSX.Element {
               <div className="text-center text-base font-bold">THU</div>
               <div className="text-center text-base font-bold">FRI</div>
               <div className="text-center text-base font-bold">SAT</div>
-              {/* Lịch ngày */}
+              
               {[...Array(daysInMonth)].map((_, index) => {
                 const day = index + 1;
                 return (

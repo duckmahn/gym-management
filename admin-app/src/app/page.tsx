@@ -1,46 +1,45 @@
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
-import axios, {AxiosError}from 'axios';
-import { FormEvent } from 'react'; 
+import axios, { AxiosError } from 'axios';
+import { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { NEXT_PUBLIC_API_URL } from '../../apiconfig'; 
+import { NEXT_PUBLIC_API_URL } from '../../apiconfig';
+import Cookies from 'js-cookie'; 
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
- 
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-    
-   
+
     try {
-      const response = await axios.post(`${NEXT_PUBLIC_API_URL}Login`, {  
+      const response = await axios.post(`${NEXT_PUBLIC_API_URL}Login`, {
         email: username,
-        password: password
+        password: password,
       });
-      
+
       console.log('Phản hồi từ API:', response.data);
-  
+
       
       const token = typeof response.data === 'string' ? response.data : response.data.token || response.data.id;
-      
 
       if (!token) {
         throw new Error('Thiếu token trong phản hồi');
       }
-  
+
       
-      localStorage.setItem('token', token);
-      localStorage.setItem('username', username);
+      Cookies.set('token', token, { expires: 2 }); 
+      Cookies.set('username', username, { expires: 2 });
+
       
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  
+
       console.log('Đăng nhập thành công!', token);
-  
+
       
       router.push('/dashboard');
     } catch (error: unknown) {
@@ -49,11 +48,10 @@ export default function LoginPage() {
       } else {
         setError('Đăng nhập thất bại, vui lòng thử lại.');
       }
-      setPassword('');  
+      setPassword('');
       console.error('Lỗi đăng nhập:', error);
     }
   };
-  
 
   return (
     <div
@@ -68,13 +66,7 @@ export default function LoginPage() {
     >
       <div className="relative z-10 flex flex-col items-center space-y-8 p-8 rounded-lg pt-40">
         <div className="w-32 h-32">
-          <Image
-            src="/logo.png"
-            alt="Logo"
-            width={128}
-            height={128}
-            priority
-          />
+          <Image src="/logo.png" alt="Logo" width={128} height={128} priority />
         </div>
 
         <form className="flex flex-col space-y-4 w-72" onSubmit={handleLogin}>
@@ -83,8 +75,8 @@ export default function LoginPage() {
               <i className="fas fa-user text-white"></i>
             </span>
             <input
-              type="text"
-              placeholder="USERNAME"
+              type="email"
+              placeholder="email"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white focus:outline-none"
@@ -97,7 +89,7 @@ export default function LoginPage() {
             </span>
             <input
               type="password"
-              placeholder="PASSWORD"
+              placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white focus:outline-none"
@@ -114,4 +106,3 @@ export default function LoginPage() {
     </div>
   );
 }
-  
