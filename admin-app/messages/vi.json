@@ -28,7 +28,8 @@
     "type": "Loại",
     "add": "Thêm",
     "update": "Cập Nhật",
-    "cancel": "Hủy"
+    "cancel": "Hủy",
+    "delete" : "Xóa"
   },
   "HuanLuyenVien": {
     "listtrainer": "Danh Sách HVL",

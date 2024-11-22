@@ -75,7 +75,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
             : "bg-gray-50 text-gray-900"
         } flex flex-col justify-between items-center z-40 ${
           isOpen ? "w-[250px] translate-x-0" : "w-[80px] -translate-x-full"
-        }`}
+        } p-6`}
       >
         {/* Toggle button */}
         <button

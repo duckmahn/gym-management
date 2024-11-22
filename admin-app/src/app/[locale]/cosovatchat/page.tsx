@@ -259,7 +259,7 @@ export default function CSVCVaThietBi(): JSX.Element {
                     variant="outline"
                     onClick={() => openEditDialog(equipment)}
                   >
-                    {t("edit")}
+                    {t("update")}
                   </Button>
                   <Button
                     variant="destructive"

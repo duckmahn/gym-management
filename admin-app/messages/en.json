@@ -27,7 +27,8 @@
     "type": "Type",
     "add": "Add",
     "update": "Update",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "delete" : "Delete"
   },
   "HuanLuyenVien": {
     "listtrainer": "List Of Trainers",
