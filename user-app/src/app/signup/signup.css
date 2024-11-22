@@ -1,0 +1,201 @@
+.logoContainer {
+  position: absolute;
+  top: 70px; /* Khoảng cách từ trên xuống */
+  left: 680px; 
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.colorGym{
+  color:rgb(210, 31, 88);
+  font-style: italic;
+  font-weight: bold;
+  font-size: 28px;
+}
+.colorForgot{
+  color:rgb(210, 31, 88);
+  font-style: italic;
+  font-weight: bold;
+  font-size: 15px;
+}
+.colorHuflit{
+  color:rgb(0, 0, 0);
+  font-style: italic;
+  font-weight: bold;
+  font-size: 28px;
+}
+.titleText{
+  font-size: 28px;
+  font-weight: bold;
+}
+.title {
+  position: absolute;
+  top: 140px; /* Khoảng cách từ trên xuống */
+  left: 650px; 
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.name {
+  top: 220px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  position: absolute;
+}
+.nameBox {
+  align-items: center;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  text-size-adjust: 30px;
+  
+}
+.nameInput{
+  border: 2px solid rgb(201, 200, 200); 
+  padding: 10px; 
+  font-size: 12px; 
+  background-color: white;
+  width: 400px; /* Chiều rộng của trường nhập */
+  height:15px;
+}
+.email {
+  top: 290px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  position: absolute;
+}
+.emailBox {
+  align-items: center;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  text-size-adjust: 30px;
+  
+}
+.emailInput{
+  border: 2px solid rgb(201, 200, 200); 
+  padding: 10px; 
+  font-size: 12px; 
+  background-color: white;
+  width: 400px; /* Chiều rộng của trường nhập */
+  height:15px;
+}
+.pass {
+  top: 360px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  position: absolute;
+}
+.passBox {
+  align-items: center;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  text-size-adjust: 30px;
+  
+  
+}
+.passInput{
+  border: 2px solid rgb(201, 200, 200); 
+  padding: 10px; 
+  font-size: 12px; 
+  background-color: white;
+  width: 400px; /* Chiều rộng của trường nhập */
+  height:15px;
+  background-image: url('/eye.jpg');
+  background-repeat: no-repeat;
+  background-position:95%;
+
+}
+.checkBox {
+  position: absolute;
+  top: 450px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+
+.textBox{
+  width: 200%;
+  padding: 8px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.signup {
+  position: absolute;
+  top: 480px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.buttonSignup{
+  padding: 10px 20px;
+  background-color: rgb(194, 41, 59);
+  color: #fff; 
+  border: none;
+  width: 390px;
+  height:20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.textSmall {
+  position: absolute;
+  top: 540px; /* Khoảng cách từ trên xuống */
+  left: 670px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  color:rgb(141, 142, 142);
+  text-size-adjust: 20px;
+}
+.Google {
+  position: absolute;
+  top: 580px; /* Khoảng cách từ trên xuống */
+  left: 550px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+.buttonGoogle{
+  padding: 10px 20px;
+  background-color: #E4E7Eb;
+  color: #000000; 
+  border: none;
+  width: 390px;
+  height:20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  background-image: url('/Google.jpg');
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position:30%;
+}
+
+.already {
+  position: absolute;
+  top: 630px; /* Khoảng cách từ trên xuống */
+  left: 630px; 
+  display:flex;
+  align-items: center;
+  text-align: center;
+  text-size-adjust: 20px;
+}
+
+
+.text{
+  font-size: 15px;
+}
+.textAgree{
+  font-size: 15px;
+  color:rgb(102, 102, 102)
+}
+.textQuestion{
+  font-size: 15px;
+  color:rgb(102, 102, 102)
+}
