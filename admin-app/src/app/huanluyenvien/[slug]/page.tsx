@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -89,4 +90,18 @@ export default function Page() {
             </div>
         </div>
     );
+=======
+'use client'
+
+import React from 'react'
+
+export default function Page({ params}) {
+    const {slug } = params
+    console.log("🚀 ~ page ~ params:", slug)
+    return (
+        <div>
+            {slug}
+        </div>
+    )
+>>>>>>> adabf4dc840a779b0ada42e6a310dd532e39b132
 }
