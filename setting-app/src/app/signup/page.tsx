@@ -24,15 +24,15 @@ import Image from 'next/image'
         <div className="email">
           <div className="text">Email Address</div>
           <div className="emailBox"> 
-            <input  className="emailInput" placeholder=""/></div>
+            <input className="emailInput" placeholder=""/></div>
         </div>
         
        
         <div className="pass">
           <div className="text">Password</div>
           <div className="passBox"> 
-            <input   type="password" className="passInput" placeholder=""/></div>
-        </div> 
+            <input type="password" className="passInput" placeholder=""/></div>
+
 
         <div className="checkBox">
         <div className="textAgree">By continuing, you agree to our <span></span>

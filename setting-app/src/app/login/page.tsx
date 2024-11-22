@@ -28,7 +28,10 @@ import "./login.css";
           <span className="passForgot"> Forgot Password ?</span>
             </div>
           <div className="passBox"> 
+
             <input  type="password"className="passInput" placeholder=""/></div>
+
+          
         </div> 
 
         <div className="checkbox">
