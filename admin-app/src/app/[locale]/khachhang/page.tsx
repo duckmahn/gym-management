@@ -133,7 +133,7 @@ export default function KhachHang(): JSX.Element {
   };
 
   if (!isThemeLoaded) {
-    return null;
+    return <></>;
   }
 
   return (

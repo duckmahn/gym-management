@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Sidebar from "@/app/[locale]/components/sidebar";
-import Header from "@/app/[locale]/components/header";
-import { Calendar } from "@/app/[locale]/components/ui/calendar";
-import { useSchedule } from "@/hooks/useSchedule";
+
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
 import Cookies from "js-cookie";
+import { useSchedule } from "../../../hooks/useSchedule";
+
+import { Calendar } from "../components/ui/calendar";
+import Sidebar from "../components/sidebar";
+import Header from "../components/header";
 
 export default function ManagementPage(): JSX.Element {
   const t = useTranslations("ManagementPage");
@@ -49,7 +51,7 @@ export default function ManagementPage(): JSX.Element {
   }, [theme]);
 
   if (!isThemeLoaded) {
-    return null;
+    return <></>;
   }
 
   return (

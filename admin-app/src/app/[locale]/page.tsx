@@ -28,7 +28,7 @@ export default function Dashboard(): JSX.Element {
   }, [setTheme]);
 
   if (!isThemeLoaded) {
-    return null; // Không render gì cho đến khi theme được xác định
+    return <></>; // Không render gì cho đến khi theme được xác định
   }
 
   return (
