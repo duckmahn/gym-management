@@ -1,108 +1,92 @@
-'use client';
-import Image from 'next/image';
-import { useState } from 'react';
-import axios, { AxiosError } from 'axios';
-import { FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
-import { NEXT_PUBLIC_API_URL } from '../../apiconfig';
-import Cookies from 'js-cookie'; 
+"use client";
 
-export default function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+import React, { useState, useEffect } from "react";
+import Sidebar from "../components/sidebar";
+import Header from "../components/header";
+import { Calendar } from "@/components/ui/calendar";
+import { useSchedule } from "@/hooks/useSchedule";
+import { useRouter } from "next/navigation";
+
+export default function ManagementPage(): JSX.Element {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [token, setToken] = useState<string | null>(null);
+  const [searchDate, setSearchDate] = useState<Date | undefined>(new Date());
+  const { schedule, getSchedule } = useSchedule(token);
   const router = useRouter();
 
-  const handleLogin = async (e: FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(`${NEXT_PUBLIC_API_URL}Login`, {
-        email: username,
-        password: password,
-      });
-
-      console.log('Phản hồi từ API:', response.data);
-
-      
-      const token = typeof response.data === 'string' ? response.data : response.data.token || response.data.id;
-
-      if (!token) {
-        throw new Error('Thiếu token trong phản hồi');
-      }
-
-      
-      Cookies.set('token', token, { expires: 2 }); 
-      Cookies.set('username', username, { expires: 2 });
-
-      
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-      console.log('Đăng nhập thành công!', token);
-
-      
-      router.push('/dashboard');
-    } catch (error: unknown) {
-      if (error instanceof AxiosError && error.response) {
-        setError(error.response.data.message || 'Đăng nhập thất bại, vui lòng thử lại.');
-      } else {
-        setError('Đăng nhập thất bại, vui lòng thử lại.');
-      }
-      setPassword('');
-      console.error('Lỗi đăng nhập:', error);
-    }
+  const handleDayClick = async (date: Date) => {
+    const dateData = date;
+    setSearchDate(new Date(dateData.setDate(dateData.getDate())));
+    await getSchedule(dateData);
   };
 
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+  if (!storedToken) {
+    router.push("/login");
+  } else {
+    setToken(storedToken);
+  }
+  }, []);
+
+  useEffect(() => {
+    if (searchDate) {
+      getSchedule(new Date(searchDate));
+    }
+  }, [searchDate, getSchedule]);
+
   return (
-    <div
-      className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/backgradmin.png')",
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-      }}
-    >
-      <div className="relative z-10 flex flex-col items-center space-y-8 p-8 rounded-lg pt-40">
-        <div className="w-32 h-32">
-          <Image src="/logo.png" alt="Logo" width={128} height={128} priority />
+    <div className="flex h-screen overflow-hidden">
+      <Sidebar active="quan-ly" onToggle={setIsSidebarOpen} />
+      <main
+        className={`flex-1 p-6 bg-gray-50 transition-all duration-300 ${
+          isSidebarOpen ? "ml-[250px]" : "ml-0"
+        }`}
+      >
+        <Header />
+
+        <div className="flex space-x-6 mt-6">
+          <div className="flex-1 bg-white shadow-lg rounded-lg p-6">
+            <h2 className="text-2xl font-semibold mb-4">Thông báo</h2>
+            <table className="w-full text-left text-gray-700">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2">Ngày</th>
+                  <th className="px-4 py-2">Trainer</th>
+                  <th className="px-4 py-2">Location</th>
+                  <th className="px-4 py-2">Room</th>
+                </tr>
+              </thead>
+              <tbody>
+                {schedule &&
+                  schedule?.map((item, index) => (
+                    <tr key={index}>
+                      <td className="px-4 py-2">
+                        {new Date(item.date).toLocaleDateString("vi-VN", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </td>
+                      <td className="px-4 py-2">{item.trainerId}</td>
+                      <td className="px-4 py-2">{item.location}</td>
+                      <td className="px-4 py-2">{item.roomId}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="w-72 bg-white shadow-lg rounded-lg p-6">
+            <Calendar
+              mode="single"
+              selected={searchDate}
+              onSelect={(date) => handleDayClick(date || new Date())}
+              className="rounded-md border"
+            />
+          </div>
         </div>
-
-        <form className="flex flex-col space-y-4 w-72" onSubmit={handleLogin}>
-          <div className="relative">
-            <span className="absolute inset-y-0 left-3 flex items-center">
-              <i className="fas fa-user text-white"></i>
-            </span>
-            <input
-              type="email"
-              placeholder="email"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white focus:outline-none"
-            />
-          </div>
-
-          <div className="relative">
-            <span className="absolute inset-y-0 left-3 flex items-center">
-              <i className="fas fa-lock text-white"></i>
-            </span>
-            <input
-              type="password"
-              placeholder="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white focus:outline-none"
-            />
-          </div>
-
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-
-          <button className="w-full py-2 rounded-lg bg-white text-red-600 font-bold">
-            LOGIN
-          </button>
-        </form>
-      </div>
+      </main>
     </div>
   );
 }

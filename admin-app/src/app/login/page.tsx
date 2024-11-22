@@ -17,7 +17,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${NEXT_PUBLIC_API_URL}Login`, {
+      const response = await axios.post(`${NEXT_PUBLIC_API_URL}/Login`, {
         email: username,
         password: password,
       });

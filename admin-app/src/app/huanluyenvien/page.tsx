@@ -41,7 +41,7 @@ export default function HuanLuyenVien(): JSX.Element {
   useEffect(() => {
     const token = Cookies.get("token");
     if (!token) {
-      router.push('/login');
+      router.push('');
       return;
     }
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -49,7 +49,7 @@ export default function HuanLuyenVien(): JSX.Element {
     const fetchTrainers = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${NEXT_PUBLIC_API_URL}api/Trainers`);
+        const response = await axios.get(`${NEXT_PUBLIC_API_URL}/api/Trainers`);
         setTrainers(response.data);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách huấn luyện viên:", error);
@@ -76,7 +76,7 @@ export default function HuanLuyenVien(): JSX.Element {
     try {
       if (isEditing) {
         await axios.put(
-          `${NEXT_PUBLIC_API_URL}api/Trainers/${newTrainer.id}`,
+          `${NEXT_PUBLIC_API_URL}/api/Trainers/${newTrainer.id}`,
           newTrainer
         );
         setTrainers(
@@ -86,7 +86,7 @@ export default function HuanLuyenVien(): JSX.Element {
         );
       } else {
         const response = await axios.post(
-          `${NEXT_PUBLIC_API_URL}api/Trainers`,
+          `${NEXT_PUBLIC_API_URL}/api/Trainers`,
           newTrainer
         );
         setTrainers([...trainers, response.data]);
@@ -122,7 +122,7 @@ export default function HuanLuyenVien(): JSX.Element {
   const deleteTrainer = async (id: string) => {
     if (confirm("Bạn có chắc muốn xóa huấn luyện viên này?")) {
       try {
-        await axios.delete(`${NEXT_PUBLIC_API_URL}api/Trainers/${id}`);
+        await axios.delete(`${NEXT_PUBLIC_API_URL}/api/Trainers/${id}`);
         setTrainers(trainers.filter(trainer => trainer.id !== id));
       } catch (error) {
         console.error("Lỗi khi xóa huấn luyện viên:", error);

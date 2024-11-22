@@ -37,7 +37,7 @@ export default function Healinfo(): JSX.Element {
   useEffect(() => {
     const token = Cookies.get('token');
     if (!token) {
-      router.push('/login');
+      router.push('');
     }
 
     const fetchHealinfo = async () => {
