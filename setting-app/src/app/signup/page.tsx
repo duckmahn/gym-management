@@ -24,14 +24,14 @@ import Image from 'next/image'
         <div className="email">
           <div className="text">Email Address</div>
           <div className="emailBox"> 
-            <input type="password" className="emailInput" placeholder=""/></div>
+            <input className="emailInput" placeholder=""/></div>
         </div>
         
        
         <div className="pass">
           <div className="text">Password</div>
           <div className="passBox"> 
-            <input  className="passInput" placeholder=""/></div>
+            <input type="password" className="passInput" placeholder=""/></div>
         </div> 
 
         <div className="checkBox">
