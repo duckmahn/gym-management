@@ -4,7 +4,8 @@ import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { NEXT_PUBLIC_API_URL } from "../../../../apiconfig"; // Đảm bảo rằng đường dẫn này đúng
+import { NEXT_PUBLIC_API_URL } from "../../../../apiconfig";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -29,17 +30,17 @@ export default function LoginPage() {
           : response.data.token || response.data.id;
 
       if (!token) {
-        throw new Error("Token không tồn tại trong phản hồi");
+        throw new Error("Thiếu token trong phản hồi");
       }
 
-      // Gán token vào header Authorization
-      localStorage.setItem("token", token);
-      localStorage.setItem("username", username);
+      Cookies.set("token", token, { expires: 2 });
+      Cookies.set("username", username, { expires: 2 });
+
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       console.log("Đăng nhập thành công!", token);
 
-      router.push("/");
+      router.push("/quanly");
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
         setError(
@@ -48,7 +49,7 @@ export default function LoginPage() {
       } else {
         setError("Đăng nhập thất bại, vui lòng thử lại.");
       }
-      setPassword(""); // Xóa mật khẩu sau khi lỗi
+      setPassword("");
       console.error("Lỗi đăng nhập:", error);
     }
   };
@@ -79,7 +80,7 @@ export default function LoginPage() {
               placeholder="email"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white placeholder:opacity-50 focus:outline-none"
+              className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white focus:outline-none"
             />
           </div>
 
@@ -92,7 +93,7 @@ export default function LoginPage() {
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white placeholder:opacity-50 focus:outline-none"
+              className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white focus:outline-none"
             />
           </div>
 

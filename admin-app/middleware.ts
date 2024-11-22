@@ -1,3 +1,4 @@
+
 import createMiddleware from 'next-intl/middleware'
 
 export default createMiddleware({
@@ -8,3 +9,4 @@ export default createMiddleware({
 export const config = {
     matcher: ['/', '/(de|en)/:path*']
 }
+

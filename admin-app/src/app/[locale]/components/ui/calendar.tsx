@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -8,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/app/[locale]/components/ui/button";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
+
 
 function Calendar({
   className,
@@ -70,3 +72,4 @@ function Calendar({
 Calendar.displayName = "Calendar";
 
 export { Calendar };
+

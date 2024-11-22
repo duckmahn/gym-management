@@ -1,291 +1,317 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Sidebar from "@/app/[locale]/components/sidebar";
-import Header from "@/app/[locale]/components/header";
+
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
-import { NEXT_PUBLIC_API_URL } from "../../../../apiconfig";
-import { useTranslations } from "next-intl";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { NEXT_PUBLIC_API_URL } from "../../../../apiconfig";
+import Sidebar from "../components/sidebar";
+import Header from "../components/header";
 
-import { Button } from "@/app/[locale]/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/app/[locale]/components/ui/dialog";
-import { Input } from "@/app/[locale]/components/ui/input";
-import { Label } from "@/app/[locale]/components/ui/label";
-
-interface Customer {
-  id: number;
-  name: string;
+interface User {
+  id: string;
   email: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+  avatar: string;
   phone: string;
-  code: string;
-  joinDate: string;
+  password: string;
+  isAdmin: boolean;
+  membershipId: string;
+  courseId: string;
 }
 
 export default function KhachHang(): JSX.Element {
-  const t = useTranslations("KhachHang");
-  const [customers, setCustomers] = useState<Customer[]>([]);
-  const [newCustomer, setNewCustomer] = useState<Customer>({
-    id: 0,
-    name: "",
+  const [users, setUsers] = useState<User[]>([]);
+  const [newUser, setNewUser] = useState<User>({
+    id: "",
     email: "",
+    username: "",
+    firstname: "",
+    lastname: "",
+    avatar: "",
     phone: "",
-    code: "",
-    joinDate: "",
+    password: "",
+    isAdmin: false,
+    membershipId: "",
+    courseId: "",
   });
+  const [showForm, setShowForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
-  const { theme, setTheme } = useTheme();
-  const [isThemeLoaded, setIsThemeLoaded] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("");
+      return;
+    }
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    const fetchCustomers = async () => {
+    const fetchUsers = async () => {
+      setIsLoading(true);
       try {
-        const response = await axios.get(`${NEXT_PUBLIC_API_URL}api/Customers`);
-        setCustomers(response.data);
+        const response = await axios.get(`${NEXT_PUBLIC_API_URL}/api/Users`);
+        console.log("Danh sách người dùng:", response.data);
+        setUsers(response.data);
       } catch (error) {
-        console.error("Lỗi khi lấy danh sách khách hàng:", error);
+        console.error("Lỗi khi lấy danh sách người dùng:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchCustomers();
-  }, []);
+    fetchUsers();
+  }, [router]);
 
-  useEffect(() => {
-    const savedTheme = Cookies.get("theme");
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-    setIsThemeLoaded(true);
-  }, [setTheme]);
+  const handleSidebarToggle = (isOpen: boolean) => {
+    setIsSidebarOpen(isOpen);
+    console.log("Sidebar is now", isOpen ? "open" : "closed");
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewCustomer({ ...newCustomer, [name]: value });
+    setNewUser({ ...newUser, [name]: value });
   };
 
-  const addCustomer = async () => {
+  const addUser = async () => {
     try {
       if (isEditing) {
         await axios.put(
-          `${NEXT_PUBLIC_API_URL}api/Customers/${newCustomer.id}`,
-          newCustomer
+          `${NEXT_PUBLIC_API_URL}/api/Users/${newUser.id}`,
+          newUser
         );
-        setCustomers(
-          customers.map((customer) =>
-            customer.id === newCustomer.id ? newCustomer : customer
-          )
+        setUsers(
+          users.map((user) => (user.id === newUser.id ? newUser : user))
         );
       } else {
         const response = await axios.post(
-          `${NEXT_PUBLIC_API_URL}api/Customers`,
-          newCustomer
+          `${NEXT_PUBLIC_API_URL}/api/Users`,
+          newUser
         );
-        setCustomers([...customers, response.data]);
+        setUsers([...users, response.data]);
       }
-      setNewCustomer({
-        id: 0,
-        name: "",
+      setNewUser({
+        id: "",
         email: "",
+        username: "",
+        firstname: "",
+        lastname: "",
+        avatar: "",
         phone: "",
-        code: "",
-        joinDate: "",
+        password: "",
+        isAdmin: false,
+        membershipId: "",
+        courseId: "",
       });
+      setShowForm(false);
       setIsEditing(false);
-      setIsDialogOpen(false);
     } catch (error) {
-      console.error("Lỗi khi thêm hoặc cập nhật khách hàng:", error);
+      console.error("Lỗi khi thêm hoặc cập nhật người dùng:", error);
     }
   };
 
-  const editCustomer = (id: number) => {
-    const customerToEdit = customers.find((customer) => customer.id === id);
-    if (customerToEdit) {
-      setNewCustomer(customerToEdit);
+  const editUser = (id: string) => {
+    const userToEdit = users.find((user) => user.id === id);
+    if (userToEdit) {
+      setNewUser(userToEdit);
+      setShowForm(true);
       setIsEditing(true);
-      setIsDialogOpen(true);
     }
   };
 
-  const deleteCustomer = async (id: number) => {
-    if (confirm("Bạn có chắc muốn xóa khách hàng này?")) {
+  const deleteUser = async (id: string) => {
+    if (confirm("Bạn có chắc muốn xóa người dùng này?")) {
       try {
-        await axios.delete(`${NEXT_PUBLIC_API_URL}api/Customers/${id}`);
-        setCustomers(customers.filter((customer) => customer.id !== id));
+        await axios.delete(`${NEXT_PUBLIC_API_URL}/api/Users/${id}`);
+        setUsers(users.filter((user) => user.id !== id));
       } catch (error) {
-        console.error("Lỗi khi xóa khách hàng:", error);
+        console.error("Lỗi khi xóa người dùng:", error);
       }
     }
   };
-
-  if (!isThemeLoaded) {
-    return <></>;
-  }
 
   return (
-    <div
-      className={`flex h-screen ${
-        theme === "dark" ? "bg-gray-900" : "bg-gray-100"
-      }`}
-    >
-      <Sidebar active="khach-hang" />
-      <main className="flex-grow p-5">
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar active="khach-hang" onToggle={handleSidebarToggle} />
+      <main
+        className={`flex-grow p-5 transition-all duration-300 ${
+          isSidebarOpen ? "ml-[250px]" : "ml-0"
+        }`}
+      >
         <Header />
-        <div
-          className={`p-5 rounded-lg shadow-md ${
-            theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"
-          }`}
-        >
+        <div className="p-5 bg-white rounded-lg shadow-md">
           <div className="flex justify-between items-center mb-5">
-            <h2 className="text-2xl font-semibold">{t("listuser")}</h2>
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-              <DialogTrigger asChild>
-                <Button
-                  onClick={() => {
-                    setIsEditing(false);
-                    setIsDialogOpen(true);
-                  }}
-                >
-                  {t("adduser")}
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>
-                    {isEditing ? t("updateuser") : t("addnewuser")}
-                  </DialogTitle>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="name" className="text-right">
-                      {t("name")}
-                    </Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={newCustomer.name}
+            <h2 className="text-2xl font-semibold text-gray-800">
+              Danh sách người dùng
+            </h2>
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowForm(true);
+                  setIsEditing(false);
+                }}
+                className="px-5 py-2 bg-red-600 text-white rounded-lg"
+              >
+                Thêm người dùng
+              </button>
+            </div>
+          </div>
+          {isLoading ? (
+            <div className="text-center">
+              <p className="text-lg text-gray-600">Đang tải dữ liệu...</p>
+            </div>
+          ) : (
+            <>
+              {showForm && (
+                <div className="mb-5 p-4 bg-gray-100 rounded-lg">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                    {isEditing ? "Chỉnh sửa Người Dùng" : "Thêm Người Dùng Mới"}
+                  </h3>
+                  <div className="flex flex-col gap-3">
+                    <input
+                      type="text"
+                      name="username"
+                      value={newUser.username}
                       onChange={handleInputChange}
-                      className="col-span-3"
+                      placeholder="Tên đăng nhập"
+                      className="p-2 border rounded-lg text-black"
                     />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="email" className="text-right">
-                      Email
-                    </Label>
-                    <Input
-                      id="email"
+                    <input
+                      type="text"
+                      name="firstname"
+                      value={newUser.firstname}
+                      onChange={handleInputChange}
+                      placeholder="Họ"
+                      className="p-2 border rounded-lg text-black"
+                    />
+                    <input
+                      type="text"
+                      name="lastname"
+                      value={newUser.lastname}
+                      onChange={handleInputChange}
+                      placeholder="Tên"
+                      className="p-2 border rounded-lg text-black"
+                    />
+                    <input
+                      type="email"
                       name="email"
-                      value={newCustomer.email}
+                      value={newUser.email}
                       onChange={handleInputChange}
-                      className="col-span-3"
+                      placeholder="Email"
+                      className="p-2 border rounded-lg text-black"
                     />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="phone" className="text-right">
-                      {t("phone")}
-                    </Label>
-                    <Input
-                      id="phone"
+                    <input
+                      type="text"
                       name="phone"
-                      value={newCustomer.phone}
+                      value={newUser.phone}
                       onChange={handleInputChange}
-                      className="col-span-3"
+                      placeholder="Số điện thoại"
+                      className="p-2 border rounded-lg text-black"
                     />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="code" className="text-right">
-                      {t("iduser")}
-                    </Label>
-                    <Input
-                      id="code"
-                      name="code"
-                      value={newCustomer.code}
+                    <input
+                      type="password"
+                      name="password"
+                      value={newUser.password}
                       onChange={handleInputChange}
-                      className="col-span-3"
+                      placeholder="Mật khẩu"
+                      className="p-2 border rounded-lg text-black"
                     />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="joinDate" className="text-right">
-                      {t("joindate")}
-                    </Label>
-                    <Input
-                      id="joinDate"
-                      type="date"
-                      name="joinDate"
-                      value={newCustomer.joinDate}
+                    <input
+                      type="text"
+                      name="membershipId"
+                      value={newUser.membershipId}
                       onChange={handleInputChange}
-                      className="col-span-3"
+                      placeholder="Mã hội viên"
+                      className="p-2 border rounded-lg text-black"
                     />
+                    <input
+                      type="text"
+                      name="courseId"
+                      value={newUser.courseId}
+                      onChange={handleInputChange}
+                      placeholder="Mã khóa học"
+                      className="p-2 border rounded-lg text-black"
+                    />
+                    <button
+                      onClick={addUser}
+                      className="mt-3 px-5 py-2 bg-green-600 text-white rounded-lg"
+                    >
+                      {isEditing ? "Cập nhật" : "Lưu"}
+                    </button>
+                    <button
+                      onClick={() => setShowForm(false)}
+                      className="mt-3 px-5 py-2 bg-gray-500 text-white rounded-lg"
+                    >
+                      Hủy
+                    </button>
                   </div>
                 </div>
-                <DialogFooter>
-                  <Button onClick={addCustomer}>
-                    {isEditing ? t("update") : t("save")}
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={() => setIsDialogOpen(false)}
-                  >
-                    {t("cancel")}
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </div>
+              )}
 
-          <table className="w-full border-collapse">
-            <thead>
-              <tr
-                className={`border-b ${
-                  theme === "dark"
-                    ? "bg-gray-700 text-white"
-                    : "bg-gray-100 text-black"
-                }`}
-              >
-                <th>{t("name")}</th>
-                <th>Email</th>
-                <th>{t("phone")}</th>
-                <th>{t("iduser")}</th>
-                <th>{t("joindate")}</th>
-                <th>{t("action")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {customers.map((customer) => (
-                <tr key={customer.id} className="border-b">
-                  <td>{customer.name}</td>
-                  <td>{customer.email}</td>
-                  <td>{customer.phone}</td>
-                  <td>{customer.code}</td>
-                  <td>{customer.joinDate}</td>
-                  <td className="flex gap-2">
-                    <i
-                      className="fas fa-edit text-red-600 cursor-pointer"
-                      onClick={() => editCustomer(customer.id)}
-                    ></i>
-                    <i
-                      className="fas fa-trash text-red-600 cursor-pointer"
-                      onClick={() => deleteCustomer(customer.id)}
-                    ></i>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-100 text-left border-b">
+                    <th className="text-red-600 font-semibold">Avatar</th>
+                    <th className="text-red-600 font-semibold">
+                      Tên Đăng Nhập
+                    </th>
+                    <th className="text-red-600 font-semibold">Họ</th>
+                    <th className="text-red-600 font-semibold">Tên</th>
+                    <th className="text-red-600 font-semibold">Email</th>
+                    <th className="text-red-600 font-semibold">SDT</th>
+                    <th className="text-red-600 font-semibold">Mật Khẩu</th>
+                    <th className="text-red-600 font-semibold">Mã Hội Viên</th>
+                    <th className="text-red-600 font-semibold">Mã Khóa Học</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {users.map((user) => (
+                    <tr key={user.id} className="border-b">
+                      <td className="text-gray-800">
+                        {user.avatar ? (
+                          <Image
+                            src="/"
+                            alt="Avatar"
+                            className="w-10 h-10 rounded-full object-cover"
+                            width={40}
+                            height={40}
+                          />
+                        ) : (
+                          <i className="fas fa-user-circle text-gray-500 text-3xl"></i>
+                        )}
+                      </td>
+                      <td className="text-gray-800">{user.username}</td>
+                      <td className="text-gray-800">{user.firstname}</td>
+                      <td className="text-gray-800">{user.lastname}</td>
+                      <td className="text-gray-800">{user.email}</td>
+                      <td className="text-gray-800">{user.phone}</td>
+                      <td className="text-gray-800">{user.password}</td>
+                      <td className="text-gray-800">{user.membershipId}</td>
+                      <td className="text-gray-800">{user.courseId}</td>
+                      <td className="flex gap-2">
+                        <i
+                          className="fas fa-edit text-red-600 cursor-pointer"
+                          onClick={() => editUser(user.id)}
+                        ></i>
+                        <i
+                          className="fas fa-trash text-red-600 cursor-pointer"
+                          onClick={() => deleteUser(user.id)}
+                        ></i>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
       </main>
     </div>

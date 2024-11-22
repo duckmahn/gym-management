@@ -101,10 +101,11 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
         <nav className="flex-1 w-full">
           <ul className="list-none p-0">
             {[
-              { name: t("trainer"), path: "/huanluyenvien" },
               { name: t("manager"), path: "/quanly" },
+              { name: t("trainer"), path: "/huanluyenvien" },
               { name: t("facilities"), path: "/cosovatchat" },
               { name: t("customer"), path: "/khachhang" },
+              { name: t("suckhoe"), path: "/suckhoe" },
               { name: t("membership"), path: "/membership" },
             ].map((item: SidebarItem) => (
               <li key={item.name} className="w-full">
