@@ -119,7 +119,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
                   }`}
                   onClick={() => handleItemClick(item.name)}
                 >
-                  {item.name}
+                  {isOpen ? item.name : null}
                 </Link>
               </li>
             ))}

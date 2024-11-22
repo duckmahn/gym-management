@@ -240,23 +240,23 @@ export default function HuanLuyenVien(): JSX.Element {
                     : "bg-gray-100 text-black"
                 }`}
               >
-                <th>{t("name")}</th>
-                <th>Email</th>
-                <th>{t("phone")}</th>
-                <th>{t("idtrainer")}</th>
-                <th>{t("joindate")}</th>
-                <th>{t("action")}</th>
+                <th className="p-4">{t("name")}</th>
+                <th className="p-4">Email</th>
+                <th className="p-4">{t("phone")}</th>
+                <th className="p-4">{t("idtrainer")}</th>
+                <th className="p-4">{t("joindate")}</th>
+                <th className="p-4">{t("action")}</th>
               </tr>
             </thead>
             <tbody>
               {trainers.map((trainer) => (
                 <tr key={trainer.id} className="border-b">
-                  <td>{trainer.name}</td>
-                  <td>{trainer.email}</td>
-                  <td>{trainer.phone}</td>
-                  <td>{trainer.code}</td>
-                  <td>{trainer.joinDate}</td>
-                  <td className="flex gap-2">
+                  <td className="p-4">{trainer.name}</td>
+                  <td className="p-4">{trainer.email}</td>
+                  <td className="p-4">{trainer.phone}</td>
+                  <td className="p-4">{trainer.code}</td>
+                  <td className="p-4">{trainer.joinDate}</td>
+                  <td className="flex gap-2 p-4">
                     <i
                       className="fas fa-edit text-red-600 cursor-pointer"
                       onClick={() => editTrainer(trainer)}
