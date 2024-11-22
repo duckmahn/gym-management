@@ -12,7 +12,8 @@
     "setting": "Settings",
     "logout": "Log Out",
     "theme": "Dark Mode",
-    "language": "Languages"
+    "language": "Languages",
+    "suckhoe": "Health"
   },
   "Header": {
     "search": "Search Here "
@@ -28,7 +29,7 @@
     "add": "Add",
     "update": "Update",
     "cancel": "Cancel",
-    "delete" : "Delete"
+    "delete": "Delete"
   },
   "HuanLuyenVien": {
     "listtrainer": "List Of Trainers",

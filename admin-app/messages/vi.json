@@ -12,9 +12,8 @@
     "setting": "Cài Đặt",
     "logout": "Đăng xuất",
     "theme": "Đổi Theme",
-    "language" : "Ngôn Ngữ"
-    
-
+    "language": "Ngôn Ngữ",
+    "suckhoe": "Sức Khỏe"
   },
   "Header": {
     "search": "Tìm Kiếm"
@@ -29,7 +28,7 @@
     "add": "Thêm",
     "update": "Cập Nhật",
     "cancel": "Hủy",
-    "delete" : "Xóa"
+    "delete": "Xóa"
   },
   "HuanLuyenVien": {
     "listtrainer": "Danh Sách HVL",
@@ -45,7 +44,7 @@
     "joindate": "Ngày Gia Nhập",
     "update": "Cập Nhật",
     "trainer": "Huấn Luyện Viên",
-    "cancel" :"Hủy"
+    "cancel": "Hủy"
   },
   "ManagementPage": {
     "notify": "Thông Báo",
@@ -81,6 +80,6 @@
     "joindate": "Ngày Gia Nhập",
     "update": "Cập Nhật",
     "user": "Khách Hàng",
-    "cancel" : "Hủy"
+    "cancel": "Hủy"
   }
 }

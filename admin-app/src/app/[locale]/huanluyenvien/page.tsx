@@ -13,7 +13,6 @@ import { Button } from "@/app/[locale]/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -46,7 +45,6 @@ export default function HuanLuyenVien(): JSX.Element {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [isThemeLoaded, setIsThemeLoaded] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchTrainers = async () => {

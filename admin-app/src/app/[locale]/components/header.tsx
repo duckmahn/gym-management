@@ -1,18 +1,32 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from "@/app/[locale]/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTitle,
+} from "@/app/[locale]/components/ui/dialog";
 import { Input } from "@/app/[locale]/components/ui/input";
 import { Label } from "@/app/[locale]/components/ui/label";
 import { Button } from "@/app/[locale]/components/ui/button";
 import { Textarea } from "@/app/[locale]/components/ui/textarea";
 import Cookies from "js-cookie";
-import { Avatar, AvatarFallback, AvatarImage } from "@/app/[locale]/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/app/[locale]/components/ui/avatar";
 import axios from "axios";
 
 interface FormData {
   title: string;
   content: string;
+}
+
+interface UserData {
+  avatar: string;
+  username: string;
 }
 
 export default function Header(): JSX.Element {
@@ -33,9 +47,18 @@ export default function Header(): JSX.Element {
       setIsLoggedIn(true);
       setUsername(storedUsername);
 
+      const fetchUserData = async () => {
+        try {
+          const response = await axios.get<UserData>(
+            "https://api.nosteable.works/api/Users/d5035bf9-6911-4868-8b2d-011dac827f10"
+          );
+          setAvatar(response.data.avatar);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      };
 
-      const avatarUrl = "http://api.nosteable.works/uploads/d5035bf9-6911-4868-8b2d-011dac827f10.PNG";
-      setAvatar(avatarUrl);
+      fetchUserData();
     }
   }, []);
 
@@ -54,6 +77,40 @@ export default function Header(): JSX.Element {
       request
     );
     return res.statusText;
+  };
+
+  const handleAvatarClick = () => {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.onchange = async (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.files && target.files[0]) {
+        const formData = new FormData();
+        formData.append("file", target.files[0]);
+
+        try {
+          await axios.put(
+            "https://api.nosteable.works/api/Users/Avatar/d5035bf9-6911-4868-8b2d-011dac827f10",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+
+          // Refresh avatar by fetching user data again
+          const response = await axios.get<UserData>(
+            "https://api.nosteable.works/api/Users/d5035bf9-6911-4868-8b2d-011dac827f10"
+          );
+          setAvatar(response.data.avatar);
+        } catch (error) {
+          console.error("Error uploading avatar:", error);
+        }
+      }
+    };
+    fileInput.click();
   };
 
   return (
@@ -77,7 +134,10 @@ export default function Header(): JSX.Element {
 
       {isLoggedIn && (
         <div className="absolute right-4 flex items-center space-x-2">
-          <Avatar>
+          <Avatar
+            className="cursor-pointer hover:opacity-80"
+            onClick={handleAvatarClick}
+          >
             {avatar ? (
               <AvatarImage src={avatar} alt={`${username}'s avatar`} />
             ) : (
