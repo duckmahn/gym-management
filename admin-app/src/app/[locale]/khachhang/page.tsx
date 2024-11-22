@@ -243,7 +243,7 @@ export default function KhachHang(): JSX.Element {
                 }`}
               >
                 <th>{t("name")}</th>
-                <th>{t("email")}</th>
+                <th>Email</th>
                 <th>{t("phone")}</th>
                 <th>{t("iduser")}</th>
                 <th>{t("joindate")}</th>
