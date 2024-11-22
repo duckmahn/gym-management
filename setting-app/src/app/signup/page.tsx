@@ -24,7 +24,7 @@ import Image from 'next/image'
         <div className="email">
           <div className="text">Email Address</div>
           <div className="emailBox"> 
-            <input  className="emailInput" placeholder=""/></div>
+            <input type="password" className="emailInput" placeholder=""/></div>
         </div>
         
        
