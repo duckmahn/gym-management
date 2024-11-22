@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Sidebar from "../../components/sidebar";
-import Header from "../../components/header";
+import Sidebar from "../../../components/sidebar";
+import Header from "../../../components/header";
 import { Calendar } from "@/app/[locale]/components/ui/calendar";
 import { useSchedule } from "@/hooks/useSchedule";
 

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { NEXT_PUBLIC_API_URL } from '../../apiconfig';
+import { NEXT_PUBLIC_API_URL } from '../../../../apiconfig';
 import Cookies from 'js-cookie'; 
 
 export default function LoginPage() {
@@ -17,7 +17,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${NEXT_PUBLIC_API_URL}Login`, {
+      const response = await axios.post(`${NEXT_PUBLIC_API_URL}/Login`, {
         email: username,
         password: password,
       });
@@ -41,7 +41,7 @@ export default function LoginPage() {
       console.log('Đăng nhập thành công!', token);
 
       
-      router.push('/dashboard');
+      router.push('/quanly');
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
         setError(error.response.data.message || 'Đăng nhập thất bại, vui lòng thử lại.');

@@ -34,14 +34,14 @@ export default function CSVCVaThietBi(): JSX.Element {
   useEffect(() => {
     const token = Cookies.get('token');
     if (!token) {
-      router.push('/login');
+      router.push('');
     }
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
     const fetchFacilities = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${NEXT_PUBLIC_API_URL}api/Facilities`);
+        const response = await axios.get(`${NEXT_PUBLIC_API_URL}/api/Facilities`);
         setFacilities(response.data);
       } catch (error) {
         console.error('Lỗi khi lấy danh sách cơ sở vật chất:', error);
@@ -65,14 +65,14 @@ export default function CSVCVaThietBi(): JSX.Element {
   const saveFacility = async () => {
     try {
       if (isEditing) {
-        await axios.put(`${NEXT_PUBLIC_API_URL}api/Facilities/${newFacility.id}`, newFacility);
+        await axios.put(`${NEXT_PUBLIC_API_URL}/api/Facilities/${newFacility.id}`, newFacility);
         setFacilities(
           facilities.map((facility) =>
             facility.id === newFacility.id ? newFacility : facility
           )
         );
       } else {
-        const response = await axios.post(`${NEXT_PUBLIC_API_URL}api/Facilities`, newFacility);
+        const response = await axios.post(`${NEXT_PUBLIC_API_URL}/api/Facilities`, newFacility);
         setFacilities([...facilities, response.data]);
       }
       resetForm();
@@ -99,7 +99,7 @@ export default function CSVCVaThietBi(): JSX.Element {
   const deleteFacility = async (id: string) => {
     if (confirm('Bạn có chắc muốn xóa cơ sở vật chất này?')) {
       try {
-        await axios.delete(`${NEXT_PUBLIC_API_URL}api/Facilities/${id}`);
+        await axios.delete(`${NEXT_PUBLIC_API_URL}/api/Facilities/${id}`);
         setFacilities(facilities.filter((facility) => facility.id !== id));
       } catch (error) {
         console.error('Lỗi khi xóa cơ sở vật chất:', error);

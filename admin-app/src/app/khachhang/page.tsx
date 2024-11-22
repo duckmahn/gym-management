@@ -48,7 +48,7 @@ export default function KhachHang(): JSX.Element {
   useEffect(() => {
     const token = Cookies.get('token');
     if (!token) {
-      router.push('/login');
+      router.push('');
       return;
     }
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -56,7 +56,7 @@ export default function KhachHang(): JSX.Element {
     const fetchUsers = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${NEXT_PUBLIC_API_URL}api/Users`);
+        const response = await axios.get(`${NEXT_PUBLIC_API_URL}/api/Users`);
         console.log('Danh sách người dùng:', response.data);
         setUsers(response.data);
       } catch (error) {
@@ -82,14 +82,14 @@ export default function KhachHang(): JSX.Element {
   const addUser = async () => {
     try {
       if (isEditing) {
-        await axios.put(`${NEXT_PUBLIC_API_URL}api/Users/${newUser.id}`, newUser);
+        await axios.put(`${NEXT_PUBLIC_API_URL}/api/Users/${newUser.id}`, newUser);
         setUsers(
           users.map((user) =>
             user.id === newUser.id ? newUser : user
           )
         );
       } else {
-        const response = await axios.post(`${NEXT_PUBLIC_API_URL}api/Users`, newUser);
+        const response = await axios.post(`${NEXT_PUBLIC_API_URL}/api/Users`, newUser);
         setUsers([...users, response.data]);
       }
       setNewUser({
@@ -124,7 +124,7 @@ export default function KhachHang(): JSX.Element {
   const deleteUser = async (id: string) => {
     if (confirm('Bạn có chắc muốn xóa người dùng này?')) {
       try {
-        await axios.delete(`${NEXT_PUBLIC_API_URL}api/Users/${id}`);
+        await axios.delete(`${NEXT_PUBLIC_API_URL}/api/Users/${id}`);
         setUsers(users.filter((user) => user.id !== id));
       } catch (error) {
         console.error('Lỗi khi xóa người dùng:', error);
