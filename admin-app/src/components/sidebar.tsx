@@ -1,9 +1,9 @@
 // Sidebar.tsx
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface SidebarProps {
   active: string;
@@ -31,8 +31,8 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    router.push('/login');
+    localStorage.removeItem("token");
+    router.push("/login");
   };
 
   return (
@@ -40,16 +40,16 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
       {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 h-full transition-transform duration-300 bg-[#141414] text-white flex flex-col justify-between items-center z-40 ${
-          isOpen ? 'w-[250px] translate-x-0' : 'w-0 -translate-x-full'
+          isOpen ? "w-[250px] translate-x-0" : "w-0 -translate-x-full"
         }`}
       >
         {/* Nút mở/đóng bên trong sidebar */}
         <button
           onClick={toggleSidebar}
           className="absolute top-5 left-5 p-1 bg-[#282828] text-white rounded-full z-50"
-          style={{ width: '30px', height: '30px' }}
+          style={{ width: "30px", height: "30px" }}
         >
-          {isOpen ? '←' : '→'}
+          {isOpen ? "←" : "→"}
         </button>
 
         {isOpen && (
@@ -61,19 +61,21 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
             <nav className="flex-1 w-full mt-5">
               <ul className="list-none p-0 w-full flex flex-col items-center">
                 {[
-                  { name: 'Quản Lý', path: 'quanly' },
-                  { name: 'Lịch Tập', path: 'lichtap' },
-                  { name: 'Huấn Luyện Viên', path: 'huanluyenvien' },
-                  { name: 'Tài Chính', path: 'taichinh' },
-                  { name: 'Cơ Sở Vật Chất', path: 'cosovatchat' },
-                  { name: 'Khách Hàng', path: 'khachhang' },
-                  { name: 'Cài Đặt', path: 'caidat' },
+                  { name: "Quản Lý", path: "quanly" },
+                  { name: "Lịch Tập", path: "lichtap" },
+                  { name: "Huấn Luyện Viên", path: "huanluyenvien" },
+                  { name: "Tài Chính", path: "taichinh" },
+                  { name: "Cơ Sở Vật Chất", path: "cosovatchat" },
+                  { name: "Khách Hàng", path: "khachhang" },
+                  { name: "Cài Đặt", path: "caidat" },
                 ].map((item: SidebarItem) => (
                   <li key={item.name} className="text-left w-full">
                     <Link
                       href={`/${item.path}`}
                       className={`block mb-5 text-white text-lg py-2.5 px-4 rounded-lg transition duration-300 ${
-                        activeItem === item.name ? 'bg-[#c21f37]' : 'hover:bg-gray-700'
+                        activeItem === item.name
+                          ? "bg-[#c21f37]"
+                          : "hover:bg-gray-700"
                       }`}
                       onClick={() => handleItemClick(item.name)}
                     >
