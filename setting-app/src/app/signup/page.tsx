@@ -31,7 +31,7 @@ import Image from 'next/image'
         <div className="pass">
           <div className="text">Password</div>
           <div className="passBox"> 
-            <input  className="passInput" placeholder=""/></div>
+            <input   type="password" className="passInput" placeholder=""/></div>
         </div> 
 
         <div className="checkBox">

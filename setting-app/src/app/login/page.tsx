@@ -1,10 +1,15 @@
 "use client";
 import "./login.css";
-import Image from 'next/image'
+
+
+
 
     export default function Register() {
+     
   
+    
       return (
+        
         <div>
         <div className="logoContainer">
         <span className="colorGym">GYM</span>
@@ -23,7 +28,7 @@ import Image from 'next/image'
           <span className="passForgot"> Forgot Password ?</span>
             </div>
           <div className="passBox"> 
-            <input  className="passInput" placeholder=""/></div>
+            <input  type="password"className="passInput" placeholder=""/></div>
         </div> 
 
         <div className="checkbox">
