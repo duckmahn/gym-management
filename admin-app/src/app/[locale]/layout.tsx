@@ -28,6 +28,7 @@ export default async function RootLayout({
 }>) {
   const messages = await getMessages();
   const locale = await getLocale();
+
   return (
     <html lang={locale}>
       <NextIntlClientProvider messages={messages}>
@@ -40,9 +41,11 @@ export default async function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          {/* Configure ThemeProvider */}
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            storageKey="theme" // Key used for saving theme (dark or light)
+            defaultTheme="system" // Default system theme
             enableSystem
             disableTransitionOnChange
           >

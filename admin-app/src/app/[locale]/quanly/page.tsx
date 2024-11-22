@@ -7,6 +7,7 @@ import { Calendar } from "@/app/[locale]/components/ui/calendar";
 import { useSchedule } from "@/hooks/useSchedule";
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
+import Cookies from "js-cookie";
 
 export default function ManagementPage(): JSX.Element {
   const t = useTranslations("ManagementPage");
@@ -14,7 +15,8 @@ export default function ManagementPage(): JSX.Element {
   const [token, setToken] = useState<string | null>(null);
   const [searchDate, setSearchDate] = useState<Date | undefined>(new Date());
   const { schedule, getSchedule } = useSchedule(token);
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const [isThemeLoaded, setIsThemeLoaded] = useState(false);
 
   const handleDayClick = async (date: Date) => {
     const dateData = date;
@@ -31,6 +33,24 @@ export default function ManagementPage(): JSX.Element {
       getSchedule(new Date(searchDate));
     }
   }, [searchDate, getSchedule]);
+
+  useEffect(() => {
+    const savedTheme = Cookies.get("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+    setIsThemeLoaded(true);
+  }, [setTheme]);
+
+  useEffect(() => {
+    if (theme) {
+      Cookies.set("theme", theme);
+    }
+  }, [theme]);
+
+  if (!isThemeLoaded) {
+    return null;
+  }
 
   return (
     <div

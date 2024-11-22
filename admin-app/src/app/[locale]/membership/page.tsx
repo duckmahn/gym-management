@@ -16,6 +16,7 @@ import {
 } from "@/app/[locale]/components/ui/dialog";
 import { Input } from "@/app/[locale]/components/ui/input";
 import { Label } from "@/app/[locale]/components/ui/label";
+import Cookies from "js-cookie";
 
 interface Membership {
   id: number;
@@ -39,7 +40,16 @@ export default function MembershipPage(): JSX.Element {
   });
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const [isThemeLoaded, setIsThemeLoaded] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = Cookies.get("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+    setIsThemeLoaded(true);
+  }, [setTheme]);
 
   useEffect(() => {
     fetchMemberships();
@@ -65,14 +75,7 @@ export default function MembershipPage(): JSX.Element {
         body: JSON.stringify(newMembership),
       });
       fetchMemberships();
-      setNewMembership({
-        id: 0,
-        type: "",
-        price: 0,
-        description: "",
-        startDate: "",
-        endDate: "",
-      });
+      resetDialog();
     } catch (error) {
       console.error("Lỗi khi thêm membership:", error);
     }
@@ -86,16 +89,7 @@ export default function MembershipPage(): JSX.Element {
         body: JSON.stringify(newMembership),
       });
       fetchMemberships();
-      setNewMembership({
-        id: 0,
-        type: "",
-        price: 0,
-        description: "",
-        startDate: "",
-        endDate: "",
-      });
-      setIsEditing(false);
-      setEditingId(null);
+      resetDialog();
     } catch (error) {
       console.error("Lỗi khi cập nhật membership:", error);
     }
@@ -138,6 +132,10 @@ export default function MembershipPage(): JSX.Element {
     setIsEditing(false);
     setEditingId(null);
   };
+
+  if (!isThemeLoaded) {
+    return null;
+  }
 
   return (
     <div

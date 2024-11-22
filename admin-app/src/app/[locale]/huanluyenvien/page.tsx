@@ -7,6 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
+import Cookies from "js-cookie";
 
 import { Button } from "@/app/[locale]/components/ui/button";
 import {
@@ -43,8 +44,8 @@ export default function HuanLuyenVien(): JSX.Element {
   });
   const [isEditing, setIsEditing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const [isThemeLoaded, setIsThemeLoaded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -60,6 +61,14 @@ export default function HuanLuyenVien(): JSX.Element {
     };
     fetchTrainers();
   }, []);
+
+  useEffect(() => {
+    const savedTheme = Cookies.get("theme");
+    if (savedTheme) {
+      setTheme(savedTheme); // Đọc theme từ cookie
+    }
+    setIsThemeLoaded(true); // Đánh dấu rằng theme đã được tải
+  }, [setTheme]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -120,6 +129,10 @@ export default function HuanLuyenVien(): JSX.Element {
       }
     }
   };
+
+  if (!isThemeLoaded) {
+    return null; // Không render gì cho đến khi theme được xác định
+  }
 
   return (
     <div

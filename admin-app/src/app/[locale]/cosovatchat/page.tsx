@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/app/[locale]/components/sidebar";
 import Header from "@/app/[locale]/components/header";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useTheme } from "next-themes";
+import Cookies from "js-cookie";
 import { NEXT_PUBLIC_API_URL } from "../../../../apiconfig";
 import { useTranslations } from "next-intl";
 
@@ -12,7 +12,6 @@ import { Button } from "@/app/[locale]/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -41,8 +40,22 @@ export default function CSVCVaThietBi(): JSX.Element {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const router = useRouter();
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const [isThemeLoaded, setIsThemeLoaded] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = Cookies.get("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+    setIsThemeLoaded(true);
+  }, [setTheme]);
+
+  useEffect(() => {
+    if (theme) {
+      Cookies.set("theme", theme);
+    }
+  }, [theme]);
 
   useEffect(() => {
     fetchEquipments();
@@ -126,6 +139,10 @@ export default function CSVCVaThietBi(): JSX.Element {
     setEditingId(null);
     setIsDialogOpen(false);
   };
+
+  if (!isThemeLoaded) {
+    return null;
+  }
 
   return (
     <div

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Cookies from "js-cookie";
 import { useTheme } from "next-themes";
 import { useRouter, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -15,7 +16,6 @@ interface SidebarItem {
   name: string;
   path: string;
 }
-
 export default function Sidebar({ active, onToggle }: SidebarProps) {
   const t = useTranslations("Sidebar");
   const [activeItem, setActiveItem] = useState<string>(active);
@@ -25,6 +25,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
   const { theme, setTheme } = useTheme();
+  const [isThemeLoaded, setIsThemeLoaded] = useState(false);
 
   const handleItemClick = (item: string) => {
     setActiveItem(item);
@@ -45,7 +46,20 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
+    Cookies.set("theme", newTheme, { expires: 30 });
   };
+
+  useEffect(() => {
+    const savedTheme = Cookies.get("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+    setIsThemeLoaded(true);
+  }, [setTheme]);
+
+  if (!isThemeLoaded) {
+    return null;
+  }
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -84,11 +98,9 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
           )}
         </div>
 
-        {/* Navigation */}
         <nav className="flex-1 w-full">
           <ul className="list-none p-0">
             {[
-              { name: t("schedule"), path: "" },
               { name: t("trainer"), path: "/huanluyenvien" },
               { name: t("manager"), path: "/quanly" },
               { name: t("facilities"), path: "/cosovatchat" },
@@ -111,8 +123,6 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
                 </Link>
               </li>
             ))}
-
-            {/* Dropdown - Setting */}
             <li className="w-full">
               <button
                 className={`flex items-center justify-between px-6 py-3 w-full transition-colors rounded-md ${

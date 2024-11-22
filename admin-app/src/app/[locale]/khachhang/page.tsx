@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { NEXT_PUBLIC_API_URL } from "../../../../apiconfig";
 import { useTranslations } from "next-intl";
+import Cookies from "js-cookie";
 
 import { Button } from "@/app/[locale]/components/ui/button";
 import {
@@ -45,7 +46,8 @@ export default function KhachHang(): JSX.Element {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const router = useRouter();
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const [isThemeLoaded, setIsThemeLoaded] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -62,6 +64,14 @@ export default function KhachHang(): JSX.Element {
 
     fetchCustomers();
   }, []);
+
+  useEffect(() => {
+    const savedTheme = Cookies.get("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+    setIsThemeLoaded(true);
+  }, [setTheme]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -122,6 +132,10 @@ export default function KhachHang(): JSX.Element {
     }
   };
 
+  if (!isThemeLoaded) {
+    return null;
+  }
+
   return (
     <div
       className={`flex h-screen ${
@@ -162,7 +176,7 @@ export default function KhachHang(): JSX.Element {
                     </Label>
                     <Input
                       id="name"
-                      name={t("name")}
+                      name="name"
                       value={newCustomer.name}
                       onChange={handleInputChange}
                       className="col-span-3"
