@@ -1,175 +1,216 @@
-"use client";
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/sidebar';
 import Header from '../../components/header';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import axios from 'axios';
+import Cookies from 'js-cookie'; 
 import { NEXT_PUBLIC_API_URL } from '../../../apiconfig';
+import { useRouter } from 'next/navigation';
 
-interface Equipment {
-  id: number;
+interface Facility {
+  id: string;
   name: string;
-  type: string;
-  price: number;
+  description: string;
+  status: string;
+  lastMaintenanceDate: string;
 }
 
 export default function CSVCVaThietBi(): JSX.Element {
-  const [equipments, setEquipments] = useState<Equipment[]>([]);
-  const [newEquipment, setNewEquipment] = useState<Equipment>({ id: 0, name: '', type: '', price: 0 });
-  const [isAdding, setIsAdding] = useState(false);
+  const [facilities, setFacilities] = useState<Facility[]>([]);
+  const [newFacility, setNewFacility] = useState<Facility>({
+    id: '',
+    name: '',
+    description: '',
+    status: '',
+    lastMaintenanceDate: '',
+  });
+  const [showForm, setShowForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [editingId, setEditingId] = useState<number | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  // Fetch equipment from the API
   useEffect(() => {
-    fetchEquipments();
-  }, []);
+    const token = Cookies.get('token');
+    if (!token) {
+      router.push('/login');
+    }
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-  const fetchEquipments = async () => {
+    const fetchFacilities = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`${NEXT_PUBLIC_API_URL}api/Facilities`);
+        setFacilities(response.data);
+      } catch (error) {
+        console.error('Lỗi khi lấy danh sách cơ sở vật chất:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchFacilities();
+  }, [router]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewFacility({ ...newFacility, [name]: value });
+  };
+
+  const handleSidebarToggle = (isOpen: boolean) => {
+    setIsSidebarOpen(isOpen);
+  };
+
+  const saveFacility = async () => {
     try {
-      const response = await axios.get(`${NEXT_PUBLIC_API_URL}/api/facilities`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add token to header
-          'Content-Type': 'application/json',
-        }
-      });
-      setEquipments(response.data);
+      if (isEditing) {
+        await axios.put(`${NEXT_PUBLIC_API_URL}api/Facilities/${newFacility.id}`, newFacility);
+        setFacilities(
+          facilities.map((facility) =>
+            facility.id === newFacility.id ? newFacility : facility
+          )
+        );
+      } else {
+        const response = await axios.post(`${NEXT_PUBLIC_API_URL}api/Facilities`, newFacility);
+        setFacilities([...facilities, response.data]);
+      }
+      resetForm();
     } catch (error) {
-      console.error("Error loading equipment data:", error);
+      console.error('Lỗi khi thêm hoặc cập nhật cơ sở vật chất:', error);
     }
   };
 
-  const addEquipmentAPI = async () => {
-    try {
-      await axios.post(`${NEXT_PUBLIC_API_URL}/api/facilities`, newEquipment, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add token to header
-          'Content-Type': 'application/json',
-        }
-      });
-      fetchEquipments();
-      setNewEquipment({ id: 0, name: '', type: '', price: 0 });
-      setIsAdding(false);
-    } catch (error) {
-      console.error("Error adding equipment:", error);
-    }
+  const resetForm = () => {
+    setNewFacility({ id: '', name: '', description: '', status: '', lastMaintenanceDate: '' });
+    setShowForm(false);
+    setIsEditing(false);
   };
 
-  const updateEquipmentAPI = async () => {
-    try {
-      await axios.put(`${NEXT_PUBLIC_API_URL}/api/facilities/${editingId}`, newEquipment, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add token to header
-          'Content-Type': 'application/json',
-        }
-      });
-      fetchEquipments();
-      setNewEquipment({ id: 0, name: '', type: '', price: 0 });
-      setIsAdding(false);
-      setIsEditing(false);
-      setEditingId(null);
-    } catch (error) {
-      console.error("Error updating equipment:", error);
-    }
-  };
-
-  const deleteEquipmentAPI = async (id: number) => {
-    try {
-      await axios.delete(`${NEXT_PUBLIC_API_URL}/api/facilities/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add token to header
-        }
-      });
-      fetchEquipments();
-    } catch (error) {
-      console.error("Error deleting equipment:", error);
-    }
-  };
-
-  const handleSaveEquipment = () => {
-    if (isEditing) {
-      updateEquipmentAPI();
-    } else {
-      addEquipmentAPI();
-    }
-  };
-
-  // Handle edit equipment
-  const editEquipment = (id: number) => {
-    const equipmentToEdit = equipments.find(equipment => equipment.id === id);
-    if (equipmentToEdit) {
-      setNewEquipment(equipmentToEdit);
+  const editFacility = (id: string) => {
+    const facilityToEdit = facilities.find((facility) => facility.id === id);
+    if (facilityToEdit) {
+      setNewFacility(facilityToEdit);
+      setShowForm(true);
       setIsEditing(true);
-      setEditingId(id);
-      setIsAdding(true);
     }
   };
 
-  // Handle delete equipment
-  const deleteEquipment = (id: number) => {
-    if (confirm('Are you sure you want to delete this equipment?')) {
-      deleteEquipmentAPI(id);
+  const deleteFacility = async (id: string) => {
+    if (confirm('Bạn có chắc muốn xóa cơ sở vật chất này?')) {
+      try {
+        await axios.delete(`${NEXT_PUBLIC_API_URL}api/Facilities/${id}`);
+        setFacilities(facilities.filter((facility) => facility.id !== id));
+      } catch (error) {
+        console.error('Lỗi khi xóa cơ sở vật chất:', error);
+      }
     }
-  };
-
-  // Redirect handling
-  const handlePush = (id: number) => {
-    router.push(`/cosovatchat/${id}`);
   };
 
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar active="csvc-va-thiet-bi" onToggle={setIsSidebarOpen} />
-      <main className={`flex-grow p-5 transition-all duration-300 ${
+      <Sidebar active="csvc-va-thiet-bi" onToggle={handleSidebarToggle} />
+      <main
+        className={`flex-grow p-5 transition-all duration-300 ${
           isSidebarOpen ? 'ml-[250px]' : 'ml-0'
-        }`}>
+        }`}
+      >
         <Header />
         <div className="p-5 bg-white rounded-lg shadow-md">
-          <div className="flex justify-between items-center mb-5">
-            <h2 className="text-2xl font-semibold text-gray-800">Danh sách thiết bị và CSVC</h2>
-            <div className="flex gap-3">
-              <button onClick={() => { setIsAdding(true); setIsEditing(false); setNewEquipment({ id: 0, name: '', type: '', price: 0 }); }} className="px-5 py-2 bg-red-600 text-white rounded-lg">
-                Thêm CSVC và thiết bị
-              </button>
-              <button onClick={() => handlePush(newEquipment.id)} className="px-5 py-2 bg-red-600 text-white rounded-lg">
-                Redirect
-              </button>
+          {isLoading ? (
+            <div className="text-center">
+              <p className="text-lg font-semibold text-gray-600">Đang tải dữ liệu...</p>
             </div>
-          </div>
+          ) : (
+            <>
+              <div className="flex justify-between items-center mb-5">
+                <h2 className="text-2xl font-semibold text-gray-800">Danh sách cơ sở vật chất</h2>
+                <button
+                  onClick={() => {
+                    setShowForm(true);
+                    setIsEditing(false);
+                  }}
+                  className="px-5 py-2 bg-red-600 text-white rounded-lg"
+                >
+                  Thêm cơ sở vật chất
+                </button>
+              </div>
 
-          {isAdding && (
-            <div className="mb-5 p-5 bg-gray-100 rounded-lg">
-              <h3 className="text-lg font-semibold text-black mb-2">{isEditing ? 'Chỉnh sửa Thiết Bị' : 'Thêm Thiết Bị Mới'}</h3>
-              <input type="text" placeholder="Tên" value={newEquipment.name} onChange={(e) => setNewEquipment({ ...newEquipment, name: e.target.value })} className="border rounded w-full px-3 py-2 mb-2 text-black placeholder:text-black" />
-              <input type="text" placeholder="Loại" value={newEquipment.type} onChange={(e) => setNewEquipment({ ...newEquipment, type: e.target.value })} className="border rounded w-full px-3 py-2 mb-2 text-black placeholder:text-black" />
-              <input type="number" placeholder="Giá" value={newEquipment.price} onChange={(e) => setNewEquipment({ ...newEquipment, price: Number(e.target.value) })} className="border rounded w-full px-3 py-2 mb-2 text-black placeholder:text-black" />
-              <button onClick={handleSaveEquipment} className="px-5 py-2 bg-green-600 text-white rounded-lg">{isEditing ? 'Cập nhật' : 'Thêm'}</button>
-              <button onClick={() => setIsAdding(false)} className="px-5 py-2 bg-gray-400 text-white rounded-lg ml-2">Hủy</button>
-            </div>
-          )}
-
-          <div className="flex gap-5 flex-wrap">
-            {equipments.map(equipment => (
-              <div key={equipment.id} className="bg-white p-5 rounded-lg shadow-md text-left min-w-[250px]">
-                <h3 className="text-lg font-semibold text-gray-600 mb-2">{equipment.name}</h3>
-                <hr className="border-t border-gray-300 my-2" />
-                <p className="text-base text-black mb-1">{equipment.type}</p>
-                <p className="text-base text-black">Giá: {equipment.price}₫</p>
-                <div className="flex justify-between items-center mt-3">
-                  <Link href={`/csvc/${equipment.id}`}>
-                    <button className="px-3 py-1 bg-red-600 text-white rounded-lg">Chi Tiết</button>
-                  </Link>
-                  <div className="flex items-center">
-                    <i className="fas fa-edit text-red-600 cursor-pointer mr-2" onClick={() => editEquipment(equipment.id)}></i>
-                    <i className="fas fa-trash text-red-600 cursor-pointer" onClick={() => deleteEquipment(equipment.id)}></i>
+              {showForm && (
+                <div className="mb-5 p-4 bg-gray-100 rounded-lg">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                    {isEditing ? 'Chỉnh sửa cơ sở vật chất' : 'Thêm cơ sở vật chất mới'}
+                  </h3>
+                  <div className="flex flex-col gap-3">
+                    <input
+                      type="text"
+                      name="name"
+                      value={newFacility.name}
+                      onChange={handleInputChange}
+                      placeholder="Tên cơ sở vật chất"
+                      className="p-2 border rounded-lg text-black"
+                    />
+                    <input
+                      type="text"
+                      name="description"
+                      value={newFacility.description}
+                      onChange={handleInputChange}
+                      placeholder="Mô tả"
+                      className="p-2 border rounded-lg text-black"
+                    />
+                    <input
+                      type="text"
+                      name="status"
+                      value={newFacility.status}
+                      onChange={handleInputChange}
+                      placeholder="Trạng thái"
+                      className="p-2 border rounded-lg text-black"
+                    />
+                    <input
+                      type="datetime-local"
+                      name="lastMaintenanceDate"
+                      value={newFacility.lastMaintenanceDate}
+                      onChange={handleInputChange}
+                      className="p-2 border rounded-lg text-black"
+                    />
+                    <button
+                      onClick={saveFacility}
+                      className="mt-3 px-5 py-2 bg-green-600 text-white rounded-lg"
+                    >
+                      {isEditing ? 'Cập nhật' : 'Lưu'}
+                    </button>
+                    <button
+                      onClick={resetForm}
+                      className="mt-3 px-5 py-2 bg-gray-500 text-white rounded-lg"
+                    >
+                      Hủy
+                    </button>
                   </div>
                 </div>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {facilities.map((facility) => (
+                  <div key={facility.id} className="bg-white p-5 rounded-lg shadow-md">
+                    <h3 className="text-xl font-semibold text-gray-800">{facility.name}</h3>
+                    <p className="text-gray-600 font-bold">Mô tả: {facility.description}</p>
+                    <p className="text-gray-600 font-bold">Trạng thái: {facility.status}</p>
+                    <p className="text-gray-600 font-bold">Ngày bảo trì: {facility.lastMaintenanceDate}</p>
+                    <td className="flex gap-2">
+                        <i
+                          className="fas fa-edit text-red-600 cursor-pointer"
+                          onClick={() => editFacility(facility.id)}
+                        ></i>
+                        <i
+                          className="fas fa-trash text-red-600 cursor-pointer"
+                          onClick={() => deleteFacility(facility.id)}
+                        ></i>
+                      </td>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
         </div>
       </main>
     </div>
