@@ -41,7 +41,7 @@ export default function LoginPage() {
       console.log('Đăng nhập thành công!', token);
 
       
-      router.push('/dashboard');
+      router.push('/quanly');
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
         setError(error.response.data.message || 'Đăng nhập thất bại, vui lòng thử lại.');
