@@ -42,7 +42,7 @@ export default function Healinfo(): JSX.Element {
 
     const fetchHealinfo = async () => {
       try {
-        const response = await axios.get(`${NEXT_PUBLIC_API_URL}api/Healinfo`, {
+        const response = await axios.get(`${NEXT_PUBLIC_API_URL}/api/Healinfo`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
