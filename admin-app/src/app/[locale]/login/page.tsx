@@ -1,15 +1,16 @@
-"use client";
-import Image from "next/image";
-import { useState } from "react";
-import axios, { AxiosError } from "axios";
-import { FormEvent } from "react";
-import { useRouter } from "next/navigation";
-import { NEXT_PUBLIC_API_URL } from "../../../../apiconfig"; // Đảm bảo rằng đường dẫn này đúng
+'use client';
+import Image from 'next/image';
+import { useState } from 'react';
+import axios, { AxiosError } from 'axios';
+import { FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
+import { NEXT_PUBLIC_API_URL } from '../../../../apiconfig';
+import Cookies from 'js-cookie'; 
 
 export default function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleLogin = async (e: FormEvent) => {
@@ -21,35 +22,34 @@ export default function LoginPage() {
         password: password,
       });
 
-      console.log("Phản hồi từ API:", response.data);
+      console.log('Phản hồi từ API:', response.data);
 
-      const token =
-        typeof response.data === "string"
-          ? response.data
-          : response.data.token || response.data.id;
+      
+      const token = typeof response.data === 'string' ? response.data : response.data.token || response.data.id;
 
       if (!token) {
-        throw new Error("Token không tồn tại trong phản hồi");
+        throw new Error('Thiếu token trong phản hồi');
       }
 
       
-      localStorage.setItem("token", token);
-      localStorage.setItem("username", username);
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      Cookies.set('token', token, { expires: 2 }); 
+      Cookies.set('username', username, { expires: 2 });
 
-      console.log("Đăng nhập thành công!", token);
+      
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      router.push("/");
+      console.log('Đăng nhập thành công!', token);
+
+      
+      router.push('/quanly');
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
-        setError(
-          error.response.data.message || "Đăng nhập thất bại, vui lòng thử lại."
-        );
+        setError(error.response.data.message || 'Đăng nhập thất bại, vui lòng thử lại.');
       } else {
-        setError("Đăng nhập thất bại, vui lòng thử lại.");
+        setError('Đăng nhập thất bại, vui lòng thử lại.');
       }
-      setPassword(""); 
-      console.error("Lỗi đăng nhập:", error);
+      setPassword('');
+      console.error('Lỗi đăng nhập:', error);
     }
   };
 
@@ -58,10 +58,10 @@ export default function LoginPage() {
       className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: "url('/backgradmin.png')",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
       }}
     >
       <div className="relative z-10 flex flex-col items-center space-y-8 p-8 rounded-lg pt-40">
@@ -79,7 +79,7 @@ export default function LoginPage() {
               placeholder="email"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white placeholder:opacity-50 focus:outline-none"
+              className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white focus:outline-none"
             />
           </div>
 
@@ -92,7 +92,7 @@ export default function LoginPage() {
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white placeholder:opacity-50 focus:outline-none"
+              className="w-full pl-10 px-4 py-2 rounded-lg bg-transparent border border-white text-white placeholder-white focus:outline-none"
             />
           </div>
 

@@ -64,7 +64,7 @@ export default function CSVCVaThietBi(): JSX.Element {
   const fetchEquipments = async () => {
     try {
       const response = await axios.get(
-        `${NEXT_PUBLIC_API_URL}/api/facilities`,
+        `${NEXT_PUBLIC_API_URL}/api/Facilities`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -82,7 +82,7 @@ export default function CSVCVaThietBi(): JSX.Element {
     try {
       if (isEditing) {
         await axios.put(
-          `${NEXT_PUBLIC_API_URL}/api/facilities/${editingId}`,
+          `${NEXT_PUBLIC_API_URL}/api/Facilities/${editingId}`,
           newEquipment,
           {
             headers: {
@@ -115,7 +115,7 @@ export default function CSVCVaThietBi(): JSX.Element {
 
   const deleteEquipmentAPI = async (id: number) => {
     try {
-      await axios.delete(`${NEXT_PUBLIC_API_URL}/api/facilities/${id}`, {
+      await axios.delete(`${NEXT_PUBLIC_API_URL}/api/Facilities/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
