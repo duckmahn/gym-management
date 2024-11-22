@@ -134,7 +134,7 @@ export default function MembershipPage(): JSX.Element {
   };
 
   if (!isThemeLoaded) {
-    return null;
+    return <></>;
   }
 
   return (

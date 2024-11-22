@@ -1,19 +1,16 @@
-<<<<<<< HEAD:admin-app/src/app/page.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Sidebar from "../components/sidebar";
-import Header from "../components/header";
-import { Calendar } from "@/components/ui/calendar";
+import Sidebar from "../../../components/sidebar";
+import Header from "../../../components/header";
+import { Calendar } from "@/app/[locale]/components/ui/calendar";
 import { useSchedule } from "@/hooks/useSchedule";
-import { useRouter } from "next/navigation";
 
 export default function ManagementPage(): JSX.Element {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [token, setToken] = useState<string | null>(null);
   const [searchDate, setSearchDate] = useState<Date | undefined>(new Date());
   const { schedule, getSchedule } = useSchedule(token);
-  const router = useRouter();
 
   const handleDayClick = async (date: Date) => {
     const dateData = date;
@@ -22,12 +19,7 @@ export default function ManagementPage(): JSX.Element {
   };
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-  if (!storedToken) {
-    router.push("/login");
-  } else {
-    setToken(storedToken);
-  }
+    setToken(localStorage.getItem("token"));
   }, []);
 
   useEffect(() => {
@@ -35,17 +27,8 @@ export default function ManagementPage(): JSX.Element {
       getSchedule(new Date(searchDate));
     }
   }, [searchDate, getSchedule]);
-=======
-// Dashboard.tsx
-"use client";
-
-import React from "react";
-import Sidebar from "@/app/[locale]/components/sidebar";
-import Header from "@/app/[locale]/components/header";
->>>>>>> 6c1563cba99a8a45f749f9192a58d540a44bd354:admin-app/src/app/[locale]/dashboard/page.tsx
 
   return (
-<<<<<<< HEAD:admin-app/src/app/page.tsx
     <div className="flex h-screen overflow-hidden">
       <Sidebar active="quan-ly" onToggle={setIsSidebarOpen} />
       <main
@@ -53,11 +36,6 @@ import Header from "@/app/[locale]/components/header";
           isSidebarOpen ? "ml-[250px]" : "ml-0"
         }`}
       >
-=======
-    <div className="flex h-screen bg-gray-100">
-      <Sidebar active="dashboard" onToggle={() => {}} />
-      <main className="flex-grow p-5">
->>>>>>> 6c1563cba99a8a45f749f9192a58d540a44bd354:admin-app/src/app/[locale]/dashboard/page.tsx
         <Header />
 
         <div className="flex space-x-6 mt-6">
@@ -104,8 +82,4 @@ import Header from "@/app/[locale]/components/header";
       </main>
     </div>
   );
-<<<<<<< HEAD:admin-app/src/app/page.tsx
 }
-=======
-}
->>>>>>> 6c1563cba99a8a45f749f9192a58d540a44bd354:admin-app/src/app/[locale]/dashboard/page.tsx

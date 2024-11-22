@@ -129,9 +129,8 @@ export default function HuanLuyenVien(): JSX.Element {
       }
     }
   };
-
   if (!isThemeLoaded) {
-    return null; // Không render gì cho đến khi theme được xác định
+    return <div>Loading...</div>; // Return loading indicator while theme loads
   }
 
   return (

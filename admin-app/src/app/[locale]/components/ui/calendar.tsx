@@ -1,15 +1,4 @@
-<<<<<<< HEAD:admin-app/src/components/ui/calendar.tsx
-"use client"
 
-import * as React from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { DayPicker } from "react-day-picker"
-
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-
-export type CalendarProps = React.ComponentProps<typeof DayPicker>
-=======
 "use client";
 
 import * as React from "react";
@@ -20,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/app/[locale]/components/ui/button";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
->>>>>>> 6c1563cba99a8a45f749f9192a58d540a44bd354:admin-app/src/app/[locale]/components/ui/calendar.tsx
+
 
 function Calendar({
   className,
@@ -78,16 +67,9 @@ function Calendar({
       }}
       {...props}
     />
-<<<<<<< HEAD:admin-app/src/components/ui/calendar.tsx
-  )
-}
-Calendar.displayName = "Calendar"
-
-export { Calendar }
-=======
   );
 }
 Calendar.displayName = "Calendar";
 
 export { Calendar };
->>>>>>> 6c1563cba99a8a45f749f9192a58d540a44bd354:admin-app/src/app/[locale]/components/ui/calendar.tsx
+

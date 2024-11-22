@@ -139,9 +139,8 @@ export default function CSVCVaThietBi(): JSX.Element {
     setEditingId(null);
     setIsDialogOpen(false);
   };
-
   if (!isThemeLoaded) {
-    return null;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -166,10 +165,7 @@ export default function CSVCVaThietBi(): JSX.Element {
             <h2 className="text-2xl font-semibold">{t("listofdevices")}</h2>
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
-                <Button
-                  variant="outline"
-                  onClick={() => setIsDialogOpen(true)}
-                >
+                <Button variant="outline" onClick={() => setIsDialogOpen(true)}>
                   {t("addlistofdevices")}
                 </Button>
               </DialogTrigger>

@@ -7,7 +7,7 @@ import { Label } from "@/app/[locale]/components/ui/label";
 import { Button } from "@/app/[locale]/components/ui/button";
 import { Textarea } from "@/app/[locale]/components/ui/textarea";
 import Cookies from "js-cookie";
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/app/[locale]/components/ui/avatar";
 import axios from "axios";
 
 interface FormData {

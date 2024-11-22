@@ -32,7 +32,7 @@ export default function LoginPage() {
         throw new Error("Token không tồn tại trong phản hồi");
       }
 
-      // Gán token vào header Authorization
+      
       localStorage.setItem("token", token);
       localStorage.setItem("username", username);
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -48,7 +48,7 @@ export default function LoginPage() {
       } else {
         setError("Đăng nhập thất bại, vui lòng thử lại.");
       }
-      setPassword(""); // Xóa mật khẩu sau khi lỗi
+      setPassword(""); 
       console.error("Lỗi đăng nhập:", error);
     }
   };

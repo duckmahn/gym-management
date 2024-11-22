@@ -49,8 +49,4 @@ export const useSchedule = (token: string | null) => {
   );
 
   return { schedule, getSchedule };
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 6c1563cba99a8a45f749f9192a58d540a44bd354
