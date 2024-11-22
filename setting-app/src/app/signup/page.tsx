@@ -31,8 +31,10 @@ import Image from 'next/image'
         <div className="pass">
           <div className="text">Password</div>
           <div className="passBox"> 
+
             <input type="password" className="passInput" placeholder=""/></div>
 
+        </div> 
 
         <div className="checkBox">
         <div className="textAgree">By continuing, you agree to our <span></span>
