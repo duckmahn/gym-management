@@ -63,7 +63,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    router.push("/login");
+    router.push(`/${locale}/login`);
   };
 
   return (
